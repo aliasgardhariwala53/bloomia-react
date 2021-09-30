@@ -4,12 +4,50 @@
 }
 .profile-input{
         display: -webkit-inline-box;
-
-}
+        /* cursor: not-allowed; */
+        
+    }
+    .form-group{
+        text-align: left;
+    }
 .edit-button{
     background-color: blue;
     border-radius: 50%;
     width: 27px;
     height: 27px;
     margin-right: 20px;
+}
+.mystyle{
+    background-color: #e5e2e2!important;
+    cursor: auto;
+}
+.submitButton{
+    background-color: blue;
+    position: absolute;
+    top: -26px;
+    right: 49px !important;
+    right: 10px;
+    border-radius: 50%;
+    width: 27px;
+    height: 27px;
+    border: none;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.image-upload{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: -63px;
+    /* background: aliceblue; */
+    background-color: #ebebfc;
+    border-radius: 50%;
+    left: 136px;
+}
+.error-messege{
+    margin-top: -17px;
+    margin-bottom: 8px;
+  
+    color: red;
+    font-size: smaller;
 }

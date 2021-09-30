@@ -49,7 +49,7 @@ const handleChange = (e) =>{
         Please enter your address and password to login
         </p>
         <div className="form-group">
-          {/* <label for="exampleInputEmail1">Email address</label> */}
+          {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
           <input
             type="email"
             className="form-control authinput  authinput-email"
@@ -69,7 +69,7 @@ const handleChange = (e) =>{
         {errors.email && <p className="error-messege">{errors.email}</p>}
 
         <div className="form-group ">
-          {/* <label for="exampleInputPassword1">Password</label> */}
+          {/* <label htmlFor="exampleInputPassword1">Password</label> */}
           <input
             type="password"
             className="form-control authinput  authinput-email"

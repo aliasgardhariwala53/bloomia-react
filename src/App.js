@@ -9,12 +9,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Route path="/sign-up">
-          <Signup/>
-        </Route> 
          <Route path="/login">
           <Login/>
         </Route>
+        <Route path="/sign-up">
+          <Signup/>
+        </Route> 
          <Route path="/home">
           <Home/>
         </Route>

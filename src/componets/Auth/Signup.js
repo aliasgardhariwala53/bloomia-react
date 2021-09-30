@@ -40,7 +40,7 @@ const Signup = () => {
           Please enter your details to create your account.
         </p>
         <div className="form-group">
-          {/* <label for="exampleInputFirstName">First Name</label> */}
+          {/* <label htmlFor="exampleInputFirstName">First Name</label> */}
           <input
             type="text"
             className="form-control authinput"
@@ -58,7 +58,7 @@ const Signup = () => {
         </div>
         {errors.firstname && <p className="error-messege">{errors.firstname}</p>}
         <div className="form-group">
-          {/* <label for="exampleInputLastName"></label> */}
+          {/* <label htmlFor="exampleInputLastName"></label> */}
           <input
             type="text"
             className="form-control authinput"
@@ -76,7 +76,7 @@ const Signup = () => {
         </div>
             {errors.lastname && <p className="error-messege">{errors.lastname}</p>}
         <div className="form-group">
-          {/* <label for="exampleInputEmail1">Email address</label> */}
+          {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
           <input
             type="email"
             className="form-control authinput authinput-email"
@@ -96,7 +96,7 @@ const Signup = () => {
             {errors.email && <p className="error-messege">{errors.email}</p>}
 
         <div className="form-group ">
-          {/* <label for="exampleInputPassword1">Password</label> */}
+          {/* <label htmlFor="exampleInputPassword1">Password</label> */}
           <input
             type="password"
             className="form-control authinput authinput-email"

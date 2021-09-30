@@ -19,7 +19,7 @@ const Header = () => {
           </span>
         </div>
         <div className="col-2">
-          <div class="dropdown show">
+          <div className="dropdown show">
             <div
               className="btn  dropdown-toggle"
               role="button"

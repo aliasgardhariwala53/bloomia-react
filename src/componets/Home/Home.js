@@ -1,6 +1,8 @@
 import React from "react";
 import Play from "./Play";
 import Profile from "./Profile";
+import Formtest from "./formtest"
+
 import "./Home.css";
 
 const Home = () => {
@@ -12,7 +14,9 @@ const Home = () => {
           <Play />
         </div>
         <div className="col-4 m-0 p-0 action-container">
+          <Formtest />
           <Profile />
+        
         </div>
       </div>
     </div>

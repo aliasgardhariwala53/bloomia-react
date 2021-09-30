@@ -8,7 +8,7 @@ import LightMode from '../../video/LightMode.mp4'
 const Play = () => {
     return (
         <div className="play-container">
-            <video autoplay loop muted controls id="myVideo">
+            <video autoPlay loop muted controls id="myVideo">
                 <source src={LightMode} type="video/mp4"/>
                     Your browser does not support HTML5 video.
                     </video>
