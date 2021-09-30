@@ -1,0 +1,15 @@
+.profile-container{
+    /* background-color: #2f45c5; */
+    height: 100%;
+}
+.profile-input{
+        display: -webkit-inline-box;
+
+}
+.edit-button{
+    background-color: blue;
+    border-radius: 50%;
+    width: 27px;
+    height: 27px;
+    margin-right: 20px;
+}

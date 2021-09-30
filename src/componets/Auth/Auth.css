@@ -1,0 +1,69 @@
+.sign-form-container{
+    width: 400px;
+    margin: auto;
+}
+.image-container{
+    height: 200px;
+}
+.image-container>img{
+    margin-top: 67px;
+}
+.para-create-account{
+    color: #979797;
+}
+.form-group{
+    display: -webkit-box;
+}
+.input-icon{
+    
+    position: relative;
+    top: 5px;
+    left: -25px;
+}
+
+.welcome{
+    font-family: Riffic!important;
+
+}
+.authinput{
+    background-color: #ebebeb;
+    font-weight: 600!important;
+    font-family: Gilroy!important;
+    color: black !important;
+    border-radius: .5rem!important;
+    border: none!important;
+    
+}
+.authinput-email{
+    background-color: #e8f0fe;
+
+}
+.signbtn{
+    background-color: #2f45c5;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: .9;
+    border-radius: 8px;
+}
+.error-messege{
+    margin-top: -17px;
+    margin-bottom: 8px;
+  
+    color: red;
+    font-size: smaller;
+}
+.googlebtn{
+    border: 1px solid #000;
+    border-radius: 12px;
+    padding: 16px 64px;
+    font-size: 14px;
+    color: #000;
+    background-color: white;
+    font-weight: 500;
+    cursor: pointer;
+}
+.footer{
+    margin-top: 20px;
+}

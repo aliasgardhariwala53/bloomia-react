@@ -1,0 +1,24 @@
+.play-container{
+    height: 500px;
+    /* background-color:#000; */
+}
+.logo-play{
+    float: left;
+    position: absolute;
+    top: 20px;
+    background: white;
+    padding: 8px;
+    margin: 37px;
+    border-radius: .8rem;
+    z-index: 9999;
+}
+#myVideo{
+    width: 100%;
+    object-fit: contain;
+    transform: scale(2.1);
+    height: 100vh;
+    }
+.w-100
+{
+    width: 100%;
+}

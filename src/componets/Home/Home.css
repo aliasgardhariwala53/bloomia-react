@@ -1,0 +1,14 @@
+.home-container{
+    overflow-x: hidden;
+    overflow: hidden;
+    
+
+}
+
+.action-container{
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* height: 97vh; */
+  
+    background-color: white;
+}
