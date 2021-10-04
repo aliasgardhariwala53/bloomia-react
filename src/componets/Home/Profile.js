@@ -1,37 +1,23 @@
 import React, { useState } from "react";
 import "./Profile.css";
-// import Header from "./Header";
+
 import avatar from "../../assets/avatar.jpg";
 import { useForm } from "react-hook-form";
+// import Header from './Header';
 
 const Profile = () => {
-  // fuctions for 1st form start
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const onSubmit = (data) => console.log(data);
   console.log(errors);
 
-  // fuctions for 1st form end
 
-  // password functions
-  const [userpassword, setUserpassword] = useState({
-    password: "",
-    confirmpassword: "",
-  });
-  const handleChangePassword = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUserpassword({ ...userpassword, [name]: value });
-    console.log(value);
-  };
-  const submitPassword = (e) => {
-    e.preventDefault();
-    console.log(userpassword);
-  };
+
+
+  // edit button code start
   const [disabled, setDisabled] = useState(true);
   const enableedit = () => {
     setDisabled(!disabled);
@@ -51,9 +37,9 @@ const Profile = () => {
       }
     }
   };
-
   return (
     <>
+      
       <div className="container profile-container ml-2">
         <div className="row">
           <div className="col-2 ">
@@ -65,36 +51,17 @@ const Profile = () => {
           </div>
           <div className="col-12 d-flex">
             <div className="">Personal Information</div>
-            <div
-              onClick={enableedit}
-              id="editEnable"
-              className="ml-auto edit-button "
-            >
+            <div  onClick={enableedit}
+              id="editEnable" className="ml-auto edit-button ">
               <i className="fa fa-pencil text-light"></i>
             </div>
-            <div
-              onClick={enableedit}
-              id="editDisable"
-              className="ml-auto edit-button d-none"
-            >
+            <div  onClick={enableedit} id="editDisable" className="ml-auto edit-button d-none">
               <i className="fa fa-times text-light" aria-hidden="true"></i>
             </div>
           </div>
-
           <div className="col-12">
-      
-            <form className="row">
-              <button
-                type="submit"
-                id="submitEdit"
-                className=" submitButton d-none"
-              >
-                <i
-                  className="fa fa-check-circle text-light"
-                  aria-hidden="true"
-                ></i>
-              </button>
-              <div className=" form-group image-upload">
+            <form className="row" onSubmit={handleSubmit(onSubmit)}>
+            <div className=" form-group image-upload">
                 <label
                   htmlFor="file"
                   style={{ margin: "2px 6px 0px", cursor: "pointer" }}
@@ -104,65 +71,80 @@ const Profile = () => {
                 
                 <input
                   type="file"
+                  {...register("image", { required: true, maxLength: 80 })}
                   style={{ visibility: "hidden" }}
-                  id="file"
+                  
                   className="form-control "
+                  disabled={disabled}
                 />
               </div>
               <div className="col-6 form-group">
-                <label htmlFor="exampleInputFirstName">First Name</label>
+              <label htmlFor="exampleInputFirstName">First Name</label>
                 <input
-                  // {...register('firstname', { required: true })}
                   type="text"
                   className="form-control authinput profile-input"
-                  placeholder="FirstName"
-                  // name="firstname"
+                  placeholder="First name"
+                  {...register("firstname", { required: true, maxLength: 80 })}
                   disabled={disabled}
                 />
-                {/* { errors.firstname?.type && <span className='text-red-500 text-sm'>First Name is Required</span>} */}
+                {errors.firstname && (
+                   <p  className="error-messege">
+                   firstname is Required
+                 </p>
+                )}
               </div>
-
               <div className="col-6 form-group">
-                <label htmlFor="exampleInputLastName">Last Name</label>
-                <input
-                  {...register("lastname", { required: true })}
-                  type="text"
-                  className="form-control authinput profile-input"
-                  placeholder="Lastname"
-                  // name="lastname"
-                  disabled={disabled}
-                />
-              </div>
-
-              <p className="error-messege">{errors.lastname}</p>
-              <div className="col-6  form-group">
-                <label htmlFor="exampleInputEmail1">Email address</label>
-                <input
-                  style={{ cursor: "not-allowed" }}
-                  type="email"
-                  className="form-control authinput profile-input"
-                  value="a@gmail.com"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                  // name="email"
-                  disabled={true}
-                />
-              </div>
-
-              <div className="col-7  form-group ">
-                <label htmlFor="exampleInputPassword1">Phone Number</label>
+              <label htmlFor="exampleInputLastName">Last Name</label>
                 <input
                   type="text"
                   className="form-control authinput profile-input"
-                  id="exampleInputphone"
-                  placeholder="Phone Number"
-                  // name="phone"
+                  placeholder="Last name"
+                  {...register("lastname", { required: true, maxLength: 100 })}
                   disabled={disabled}
                 />
+                {errors.lastname && (
+                  <p  className="error-messege">
+                    lastname is Required
+                  </p>
+                )}
               </div>
+              <div className="col-6 form-group">
+              <label htmlFor="exampleInputEmail1">Email address</label>
+                <input
+                  type="text"
+                  className="form-control authinput profile-input"
+                  placeholder="Email"
+                  {...register("Email", {
+                    required: true,
+                    pattern: /^\S+@\S+$/i,
+                  })}
+                  disabled={disabled}
+                />
+                
+              </div>
+              <div className="col-7 form-group">
+              <label htmlFor="exampleInputPassword1">Phone Number</label>
+                <input
+                  type="tel"
+                  className="form-control authinput profile-input"
+                  placeholder="Mobile number"
+                  {...register("Mobile number", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 12,
+                  })}
+                  disabled={disabled}
+                />
+                {errors.lastname && (
+                  <p  className="error-messege">
+                    mobile Number is Required
+                  </p>
+                )}
+              </div>
+
+              <input type="submit"  id="submitEdit" className="submitButton d-none" />
             </form>
-            <form className="row" onSubmit={submitPassword}>
+            <form className="row">
               <div className="col-7">
                 <hr />
 
@@ -175,8 +157,6 @@ const Profile = () => {
                   type="password"
                   style={{ cursor: "auto" }}
                   className="form-control authinput profile-input"
-                  value={userpassword.password}
-                  onChange={handleChangePassword}
                   id="exampleInputPassword1"
                   placeholder="Password"
                   name="password"
@@ -188,8 +168,6 @@ const Profile = () => {
                   type="password"
                   style={{ cursor: "auto" }}
                   className="form-control authinput profile-input"
-                  value={userpassword.confirmpassword}
-                  onChange={handleChangePassword}
                   id="exampleInputPassword2"
                   placeholder="Confirm Password"
                   name="confirmpassword"
@@ -201,11 +179,9 @@ const Profile = () => {
               </button>
             </form>
           </div>
-          <div className="col"></div>
         </div>
       </div>
     </>
   );
 };
-
 export default Profile;

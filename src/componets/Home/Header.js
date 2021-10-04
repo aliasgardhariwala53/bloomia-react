@@ -5,7 +5,7 @@ import "./Header.css";
 const Header = () => {
   return (
     <div className="container header-container">
-      <div className="row">
+      <div className="row m-3">
         <div className="col-1 mt-3">
           <a href="./home">
             <i className="fa fa-arrow-left "></i>
@@ -35,7 +35,7 @@ const Header = () => {
               <a className="dropdown-item" href="./home">
                 Profile
               </a>
-              <a className="dropdown-item" href="./Profile.js">
+              <a className="dropdown-item" href="./login">
                 Logout
               </a>
             </div>

@@ -1,0 +1,15 @@
+.formSetting{
+    background-color: #ebebfc;
+    border-radius: 20px;
+    margin: 8px;
+}
+select{
+    border-radius: .8rem!important;
+    border: none;
+}
+.fieldsettoggle{
+    position: absolute;
+    right: 45px;
+    z-index: 99;
+    bottom: 105px;
+}

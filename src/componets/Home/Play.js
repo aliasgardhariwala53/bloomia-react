@@ -5,7 +5,8 @@ import LightMode from '../../video/LightMode.mp4'
 
 
 
-const Play = () => {
+const Play = (props) => {
+    console.log(props.time);
     return (
         <div className="play-container">
             <video autoPlay loop muted controls id="myVideo">
@@ -13,6 +14,7 @@ const Play = () => {
                     Your browser does not support HTML5 video.
                     </video>
            <div className="logo-play">
+            <div>{props.time}hello</div>
              <img src={Logo} alt="hello" width="200px" />
            </div>
         </div>
