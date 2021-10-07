@@ -3,6 +3,11 @@ import avatar from "../../assets/avatar.jpg";
 import "./Header.css";
 
 const Header = () => {
+  const logOut = () => {
+    localStorage.removeItem('token');
+    window.location.assign('./login');
+
+ }
   return (
     <div className="container header-container">
       <div className="row m-3">
@@ -35,9 +40,9 @@ const Header = () => {
               <a className="dropdown-item" href="./home">
                 Profile
               </a>
-              <a className="dropdown-item" href="./login">
+              <div className="dropdown-item" onClick={logOut}>
                 Logout
-              </a>
+              </div>
             </div>
           </div>
         </div>

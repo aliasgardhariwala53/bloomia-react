@@ -3,11 +3,11 @@
 const Validate = (values) => {
   let errors={};
 
-  if(!values.firstname.trim()){
-    errors.firstname="firstname required";
+  if(!values.first_name.trim()){
+    errors.first_name="firstname required";
   }
-  if(!values.lastname.trim()){
-    errors.lastname="lastname required";
+  if(!values.last_name.trim()){
+    errors.last_name="lastname required";
   }
   if(!values.email){
     errors.email="email required";

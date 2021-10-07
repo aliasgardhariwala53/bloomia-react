@@ -10,6 +10,7 @@ const Home = () => {
   
   const [passtime, setPasstime] = useState("")
   const submitFormHandler = (...value) => {
+   
     setPasstime(...value)
     return value
   };
@@ -26,10 +27,10 @@ const Home = () => {
         <div className="col-4 m-0 p-0 action-container">
         <Header />
           <Profile />
-          <Settings selected={submitFormHandler}
+          {/* <Settings selected={submitFormHandler}
           
           onSubmitForm={submitFormHandler}
-          />
+          /> */}
         
         </div>
       </div>

@@ -1,41 +1,60 @@
-import React,{useState} from 'react';
+import React, { useState } from "react";
 import "./Auth.css";
 import Logo from "../../assets/images/Logov1.png";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
+import { handleError, HttpCallPost } from "../../services/UseHttps";
+import { LoginUrl } from "../../services/Network";
+
 // import Images from '../../assets/Images/index'
 
-
-const Login = () => {
-
+const Login = (props) => {
   const [userlogin, setUserlogin] = useState({
-    email:"",
-    password:""
+    email: "",
+    password: "",
   });
 
-const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
-const handleChange = (e) =>{
-  const name=e.target.name;
-  const value = e.target.value;
-  setUserlogin({...userlogin,[name] : value});
-  console.log(name,value);
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUserlogin({ ...userlogin, [name]: value });
+    // console.log(name,value);
   };
   const submitForm = (e) => {
     e.preventDefault();
     console.log(userlogin);
-    let errorlogin={};
-    
-    if(!userlogin.email){
-      errorlogin.email="email required";
-    }else if(!/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-    ){
-      errorlogin.email="email Invalid";
+    let errorlogin = {};
+
+    if (!userlogin.email) {
+      errorlogin.email = "email required";
+    } else if (
+      !/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+    ) {
+      errorlogin.email = "email Invalid";
     }
-    if(!userlogin.password){
-      errorlogin.password="password required";
+    if (!userlogin.password) {
+      errorlogin.password = "password required";
     }
     setErrors(errorlogin);
-    
+
+    // api integration function started
+    const usertoken = localStorage.getItem("token");
+    HttpCallPost(`${LoginUrl}`, "POST", userlogin, usertoken)
+      .then((response) => {
+        console.log("response recieved", response);
+        console.log("token recieved", response.data.result.token);
+        localStorage.setItem("token", response.data.result.token);
+        localStorage.setItem("userId", response.data.result.token);
+        // localStorage.setItem("userId", response.data.data._id);
+        // window.location.assign('/home');
+        props.history.push("./home");
+      })
+      .catch((error) => {
+        // handleError(error)
+        console.log("u", error);
+      });
   };
 
   return (
@@ -46,7 +65,7 @@ const handleChange = (e) =>{
       <form onSubmit={submitForm}>
         <h3 className="welcome">Welcome to Bloomia.</h3>
         <p className="para-create-account">
-        Please enter your address and password to login
+          Please enter your address and password to login
         </p>
         <div className="form-group">
           {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
@@ -61,10 +80,10 @@ const handleChange = (e) =>{
             name="email"
           />
           <div className="input-icon">
-              <span>
-                <i className="fa fa-envelope"></i>
-              </span>
-            </div>
+            <span>
+              <i className="fa fa-envelope"></i>
+            </span>
+          </div>
         </div>
         {errors.email && <p className="error-messege">{errors.email}</p>}
 
@@ -79,16 +98,16 @@ const handleChange = (e) =>{
             placeholder="Password"
             name="password"
           />
-           <div className="input-icon">
-              <span>
-                <i className="fa fa-lock"></i>
-              </span>
-            </div>
+          <div className="input-icon">
+            <span>
+              <i className="fa fa-lock"></i>
+            </span>
+          </div>
         </div>
         {errors.password && <p className="error-messege">{errors.password}</p>}
 
         <button type="submit" className="btn btn-primary signbtn">
-         Sign in
+          Sign in
         </button>
       </form>
       <div>
@@ -98,13 +117,12 @@ const handleChange = (e) =>{
         </button>
       </div>
       <div className="footer">
-          <div>
-          Don't have an account? 
+        <div>
+          Don't have an account?
           <Link to="/sign-up">
-          <span> Sign Up</span>
+            <span> Sign Up</span>
           </Link>
-         
-          </div>
+        </div>
       </div>
     </div>
   );

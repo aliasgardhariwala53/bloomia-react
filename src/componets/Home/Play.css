@@ -22,3 +22,93 @@
 {
     width: 100%;
 }
+.display-time{
+    position: absolute;
+    top: 100px;
+    left: 250px;
+}
+@keyframes buttonTransition {
+    100% {
+      r: 35% ;
+    }
+    50% {
+      r: 25%;
+    }
+    25% {
+      r: 15%;
+    }
+    0% {
+      r: 35%;
+    }
+  }
+
+
+@keyframes buttonTransition2 {
+    from {
+        stroke-dashoffset: 1256 ;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+  }
+  
+  
+  .innerCircle {
+    /* animation-duration: 4s; */
+    transition: all ease-in-out;
+    /* animation-name: buttonTransition; */
+    animation-duration: unset;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+   
+  }
+  .innercircle-two{
+    /* animation-duration: 4s; */
+    transition: all ease-in-out;
+    animation-name: buttonTransition;
+    animation-duration: unset;
+   
+  }
+  #shape {
+    transform: rotate(-90deg);
+    transition: 0s;
+    transform-origin: center;
+    animation-delay: 0s;
+    animation-duration: unset;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .shape-two {
+    transform: rotate(-90deg);
+
+    transition: 0s;
+    transform-origin: center;
+    animation-delay: 0s;
+    
+    animation-timing-function: linear;
+    animation-name: buttonTransition2;
+  }
+.play-button{
+    cursor: pointer;
+    position: absolute;
+    top: 236px;
+    left: 246px;
+    z-index: 999;
+
+}
+.timer-type{
+  position: absolute;
+  top: 306px;
+  left: 195px;
+  color: white;
+  font-size: larger;
+}
+.timer{
+  position: absolute;
+  top: 258px;
+  left: 494px;
+  color: white;
+  font-size: larger;
+  z-index: 999;
+}

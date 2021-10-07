@@ -17,3 +17,28 @@ code {
    url("./Fonts/Riffic/RifficFree-Bold.ttf") format("truetype");
   
   }
+@font-face {
+  font-family: "Gilroy-Bold";
+  src: local("Gilroy"),
+   url("./Fonts/Gilroy/Gilroy-Bold.ttf") format("truetype");
+  
+  }
+@font-face {
+  font-family: "Gilroy-Medium";
+  src: local("Gilroy"),
+   url("./Fonts/Gilroy/Gilroy-Medium.ttf") format("truetype");
+  
+  }
+@font-face {
+  font-family: "Gilroy-Heavy";
+  src: local("Gilroy"),
+   url("./Fonts/Gilroy/Gilroy-Heavy.ttf") format("truetype");
+  
+  }
+@font-face {
+  font-family: "Gilroy-SemiBold";
+  src: local("Gilroy"),
+   url("./Fonts/Gilroy/Gilroy-SemiBold.ttf") format("truetype");
+  
+  }
+

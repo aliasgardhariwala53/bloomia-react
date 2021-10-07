@@ -4,11 +4,13 @@ import Logo from "../../assets/images/Logov1.png";
 // import Images from '../../assets/Images/index'
 import { Link } from "react-router-dom";
 import Validate from "./Validate";
+import {handleError, HttpCallPost} from '../../services/UseHttps';
+import { SignupUrl } from "../../services/Network";
 
 const Signup = () => {
   const [usersignup, setUsersignup] = useState({
-    firstname: "",
-    lastname: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
   });
@@ -19,14 +21,24 @@ const Signup = () => {
     const name = e.target.name;
     const value = e.target.value;
     setUsersignup({ ...usersignup, [name]: value });
-    console.log(value);
+    // console.log(value);
   };
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log(usersignup);
-    setErrors(Validate(usersignup));
     
+    // console.log(usersignup);
+    setErrors(Validate(usersignup));
+    // HttpCallPost(`${SignupUrl}`,"POST",usersignup )
+    HttpCallPost(`${SignupUrl}`, 'POST', usersignup)
+    .then((response)=>{
+      console.log("response recieved",response);
+    })
+    .catch((error)=>{
+        handleError(error)
+        console.log("u", error);
+    })
+   
   };
 
   return (
@@ -44,11 +56,11 @@ const Signup = () => {
           <input
             type="text"
             className="form-control authinput"
-            value={usersignup.firstname}
+            value={usersignup.first_name}
             onChange={handleChange}
             id="exampleInputFirstName"
             placeholder="FirstName"
-            name="firstname"
+            name="first_name"
           />
           <div className="input-icon">
               <span>
@@ -56,17 +68,17 @@ const Signup = () => {
               </span>
             </div>
         </div>
-        {errors.firstname && <p className="error-messege">{errors.firstname}</p>}
+        {errors.first_name && <p className="error-messege">{errors.first_name}</p>}
         <div className="form-group">
           {/* <label htmlFor="exampleInputLastName"></label> */}
           <input
             type="text"
             className="form-control authinput"
-            value={usersignup.lastname}
+            value={usersignup.last_name}
             onChange={handleChange}
             id="exampleInputLastName"
             placeholder="Lastname"
-            name="lastname"
+            name="last_name"
             />
             <div className="input-icon">
               <span>
@@ -74,7 +86,7 @@ const Signup = () => {
               </span>
             </div>
         </div>
-            {errors.lastname && <p className="error-messege">{errors.lastname}</p>}
+            {errors.last_name && <p className="error-messege">{errors.last_name}</p>}
         <div className="form-group">
           {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
           <input

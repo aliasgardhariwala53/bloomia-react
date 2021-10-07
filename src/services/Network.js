@@ -1,0 +1,7 @@
+export const BaseUrl = 'https://bloomia.herokuapp.com/'
+export const LoginUrl = 'users/login'
+export const SignupUrl = 'users/signup'
+export const updateProfileUrl = 'users/updateProfile'
+export const ForgetPasswordUrl = 'users/forgetPassword'
+export const UploadImage = 'users/upload'
+export const GetAllUserUrl = 'users/getAll'
