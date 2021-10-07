@@ -1,28 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Profile.css";
-
+import { handleError, HttpCallPost ,HttpCallImgPost} from "../../services/UseHttps";
+import { updateProfileUrl } from "../../services/Network";
+import { HttpCallGet } from "../../services/UseHttps";
+import { GetUserUrl, updatePassworurl,UploadImage } from "../../services/Network";
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 import avatar from "../../assets/avatar.jpg";
 import { useForm } from "react-hook-form";
-import { handleError, HttpCallPost,HttpCallGet } from "../../services/UseHttps";
-import { updateProfileUrl,GetAllUserUrl } from "../../services/Network";
+
 // import Header from './Header';
 
-const Profile = () => {
-// get method called
-  const token =localStorage.getItem("token");
-  const userId =localStorage.getItem("userId");
-  // const userId ="6154037e0f82510c6a3596e8";
- 
-  HttpCallGet(`${GetAllUserUrl}`,token).then((response) => {
-    var result = response.data.find(obj => {
-      return obj._id === userId;
-    })
-    console.log("response recieved for get method", result.firstname);
-  })
-  .catch((error) => {
-    handleError(error);
-    console.log("error getting data", error);
-  });
+const Profile = (props) => {
+  const [userdata, setUserdata] = useState([]);
+  const token = localStorage.getItem("token");
+  // get method called
 
   // useform started
   const {
@@ -31,18 +23,28 @@ const Profile = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-// submit function defined
+  // submit function defined
   const onSubmit = (data) => {
-    HttpCallPost(`${updateProfileUrl}`, "PUT", data)
+    HttpCallPost(`${updateProfileUrl}`, "PUT", data, token)
       .then((response) => {
-        console.log("response recieved", response);
+        console.log("response recieved", response.data.message);
       })
       .catch((error) => {
         handleError(error);
         console.log("u", error);
       });
   };
+  useEffect(() => {
+    HttpCallGet(`${GetUserUrl}`, token)
+      .then((response) => {
+        setUserdata(response.data.result.data);
+        console.log("n");
+      })
+      .catch((error) => {
+        // console.log("error getting data", error);
+        handleError(error);
+      });
+  }, []);
 
   // edit button code start
   const [disabled, setDisabled] = useState(true);
@@ -64,12 +66,105 @@ const Profile = () => {
       }
     }
   };
+
+  props.onchangheaderuser(userdata.first_name);
+
+  // on submit password
+  const [userpassword, setUserpassword] = useState({
+    newPassword: "",
+    password: "",
+    confirmpassword: "",
+  });
+
+  const [errorspassword, setErrorspassword] = useState({});
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUserpassword({ ...userpassword, [name]: value });
+    // console.log(name,value);
+  };
+  const submitFormPassword = (e) => {
+    e.preventDefault();
+    console.log(userpassword);
+    let errorlogin = {};
+
+    if (!userpassword.newPassword) {
+      errorlogin.password = "password required";
+    }
+    if (!userpassword.confirmpassword) {
+      errorlogin.confirmpassword = "confirm password required";
+    }
+    if (!(userpassword.confirmpassword === userpassword.newpassword)) {
+      errorlogin.matchpassword = "confirm password Does not match";
+    }
+    if (!userpassword.password) {
+      errorlogin.password = "current password required";
+    }
+
+    if (true) {
+      setErrorspassword(errorlogin);
+      const usertoken = localStorage.getItem("token");
+
+      HttpCallPost(`${updatePassworurl}`, "PUT", userpassword, usertoken)
+        .then((response) => {
+          // console.log("response recieved", response);
+          // console.log("token recieved", response.data.result.token);
+          console.log("response recieved", response.data.message);
+        })
+        .catch((error) => {
+          // handleError(error)
+          console.log("failed password", error);
+        });
+    }
+  };
+
+  //set user image
+  const [file, setFile] = useState();
+  
+  const popupalert=(event)=>{
+    if (event.target.files.length) {
+     
+      setFile({ image: event.target.files[0]});
+      console.log(file);
+      document.getElementById('modal-box').classList.remove("d-none");
+      
+    } else{
+      document.getElementById('modal-box').classList.add("d-none");
+
+
+    }
+    const usertoken = localStorage.getItem("token");
+
+    HttpCallImgPost(`${UploadImage}`, "PUT", file,usertoken)
+      .then((response) => {
+        console.log("response recieved", response.data.message);
+      })
+      .catch((error) => {
+        // handleError(error)
+        console.log("failed image", error);
+      });
+  }
+
+
+  // const submitimage=(e)=>{
+  //   const file=e.target.files[0]
+  //     setFile(file)
+  //     HttpCallImgPost(`${UploadImage}`, "PUT", file)
+  //     .then((response) => {
+  //       console.log("response recieved", response.data.message);
+  //     })
+  //     .catch((error) => {
+  //       // handleError(error)
+  //       console.log("failed image", error);
+  //     });
+  //   }
   return (
     <>
       <div className="container profile-container ml-2">
         <div className="row">
-          <div className="col-2 ">
-            <h2>Avatar</h2>
+          <div className="col-4 ">
+            <h2>{userdata.first_name}</h2>
           </div>
           <div className="col-12 ">
             <img className="float-left" src={avatar} alt="" width="150px" />{" "}
@@ -93,24 +188,59 @@ const Profile = () => {
             </div>
           </div>
           <div className="col-12">
-            <form className="row" onSubmit={handleSubmit(onSubmit)}>
-              {/* <div className=" form-group image-upload">
-                <label
-                  htmlFor="file"
+
+
+
+
+
+            {/* image form started */}
+            <div className="col-8 offset-2 model-box bg-primary d-none" id="modal-box">
+           <div className="row">
+           <div className="col-8 offset-2">Adjust the image
+                        </div>
+               <div className="col-12 h-5">Image preview
+                        </div>
+               <div className="col-4 offset-2">cancel
+                        </div>
+               <div className="col-4 offset-1">preview
+                        </div>
+           </div>
+            </div>
+            <form>
+            <div className=" form-group image-upload">
+                <label 
+                  htmlFor="imagefile"
                   style={{ margin: "2px 6px 0px", cursor: "pointer" }}
                 >
                   <i className="fa fa-plus"></i>
                 </label>
-                
+
                 <input
+                name="file"
+                id="imagefile"
+                onChange={popupalert}
+                
                   type="file"
-                  {...register("image", { required: true, maxLength: 80 })}
-                  style={{ visibility: "hidden" }}
-                  
+                
+                  // style={{ visibility: "hidden" }}
                   className="form-control "
-                  disabled={disabled}
                 />
-              </div> */}
+              </div>
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+            <form className="row" onSubmit={handleSubmit(onSubmit)}>
+              
               <div className="col-6 form-group">
                 <label htmlFor="exampleInputFirstName">First Name</label>
                 <input
@@ -175,13 +305,27 @@ const Profile = () => {
                 className="submitButton d-none"
               />
             </form>
-            <form className="row">
-              <div className="col-7">
+            <form className="row" onSubmit={submitFormPassword}>
+              <div className="col-12">
                 <hr />
 
                 <h2>Password Settings</h2>
               </div>
-
+              <div className="col-7  form-group ">
+                <label htmlFor="exampleInputPassword2">Current Password</label>
+                <input
+                  type="password"
+                  style={{ cursor: "auto" }}
+                  className="form-control authinput profile-input"
+                  id="exampleInputPassword0"
+                  onChange={handleChange}
+                  placeholder="Confirm Password"
+                  name="password"
+                />
+                {errorspassword.password && (
+                  <p className="error-messege">Current password is Required</p>
+                )}
+              </div>
               <div className="col-6 form-group ">
                 <label htmlFor="exampleInputPassword1">Password</label>
                 <input
@@ -190,24 +334,34 @@ const Profile = () => {
                   className="form-control authinput profile-input"
                   id="exampleInputPassword1"
                   placeholder="Password"
-                  name="password"
+                  onChange={handleChange}
+                  name="newPassword"
                 />
+                {errorspassword.newpassword && (
+                  <p className="error-messege">password is Required</p>
+                )}
               </div>
+
               <div className="col-6 form-group ">
-                <label htmlFor="exampleInputPassword2">Confirm Password</label>
+                <label htmlFor="exampleInputPassword2">confirm Password</label>
                 <input
                   type="password"
                   style={{ cursor: "auto" }}
                   className="form-control authinput profile-input"
                   id="exampleInputPassword2"
+                  onChange={handleChange}
                   placeholder="Confirm Password"
                   name="confirmpassword"
                 />
+                {errorspassword.confirmpassword && (
+                  <p className="error-messege">confirm password is Required</p>
+                )}
               </div>
-
-              <button type="submit" className="btn btn-primary">
-                Save Password
-              </button>
+              <div className="col-3">
+                <button type="submit" className="btn btn-primary">
+                  Save Password
+                </button>
+              </div>
             </form>
           </div>
         </div>

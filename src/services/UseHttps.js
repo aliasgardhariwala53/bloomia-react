@@ -3,7 +3,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 const axios = require("axios");
 
 // For Post Api Calls And Put
-export const HttpCallPost = async (method, type, body, token = "") => {
+export const HttpCallPost = async (method, type, body, token) => {
   return new Promise(async function (resolve, reject) {
     const url = BaseUrl + method;
     console.log(method);
@@ -17,7 +17,7 @@ export const HttpCallPost = async (method, type, body, token = "") => {
       headers: {
         "Content-type": "application/json",
         Accept: "application/json",
-        authorization: token,
+        Authorization: "Bearer " + token,
       },
 
       data: body,
@@ -40,17 +40,18 @@ export const HttpCallPost = async (method, type, body, token = "") => {
 };
 
 //For Get Api Calls
-export const HttpCallGet = async (method, type, token) => {
+export const HttpCallGet = async (method, token) => {
   // console.log("method, type, token",   token)
   return new Promise(async function (resolve, reject) {
     // const userdata = localStorage.getItem("token");
 
     const url = BaseUrl + method;
+    console.log(url);
     axios
       .get(url, {
         headers: {
           "Content-Type": "application/json",
-          authorization: token,
+          Authorization: "Bearer " + token,
         },
       })
       .then((response) => {
@@ -69,7 +70,7 @@ export const HttpCallGet = async (method, type, token) => {
 export const HttpCallDelete = async (method, type, token) => {
   // console.log("method, type, token",   token)
   return new Promise(async function (resolve, reject) {
-    const userdata = localStorage.getItem("token");
+    
 
     const url = BaseUrl + method;
     axios
@@ -135,7 +136,7 @@ export const handleError = (errResponse) => {
 };
 //for delete
 
-export const HttpCallImgPost = async (method, type, token, body) => {
+export const HttpCallImgPost = async (method, type, body, token) => {
   return new Promise(async function (resolve, reject) {
     const url = BaseUrl + method;
     axios({
@@ -143,7 +144,7 @@ export const HttpCallImgPost = async (method, type, token, body) => {
       url: url,
       headers: {
         "content-type": "multipart/form-data",
-        authorization: token,
+        Authorization: "Bearer " + token,
       },
       data: body,
     })

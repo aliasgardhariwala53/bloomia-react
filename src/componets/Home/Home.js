@@ -1,13 +1,19 @@
-import React,{ useState} from "react";
+import React,{ useState,useEffect} from "react";
 import Play from "./Play";
 import Profile from "./Profile"
 import Header from "./Header";
+import { handleError, HttpCallGet } from "../../services/UseHttps";
+import { GetUserUrl } from "../../services/Network";
 
 import "./Home.css";
 import Settings from "./settings";
 
 const Home = () => {
-  
+  const [userdata, setUserdata] = useState()
+
+  const changeusername=(change)=>{
+    setUserdata(change)
+  }
   const [passtime, setPasstime] = useState("")
   const submitFormHandler = (...value) => {
    
@@ -25,13 +31,14 @@ const Home = () => {
           <Play time={passtime}/>
         </div>
         <div className="col-4 m-0 p-0 action-container">
-        <Header />
-          <Profile />
+        <Header username={userdata}/>
+        {/* <h1>{userdata.first_name}</h1> */}
+          <Profile onchangheaderuser={changeusername} />
           {/* <Settings selected={submitFormHandler}
           
           onSubmitForm={submitFormHandler}
-          /> */}
-        
+          />
+         */}
         </div>
       </div>
     </div>

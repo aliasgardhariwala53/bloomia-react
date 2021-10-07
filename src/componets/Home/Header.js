@@ -2,7 +2,7 @@ import React from "react";
 import avatar from "../../assets/avatar.jpg";
 import "./Header.css";
 
-const Header = () => {
+const Header = (props) => {
   const logOut = () => {
     localStorage.removeItem('token');
     window.location.assign('./login');
@@ -16,11 +16,11 @@ const Header = () => {
             <i className="fa fa-arrow-left "></i>
           </a>
         </div>
-        <div className="col-3 offset-6">
+        <div className="col-4 offset-5">
           Welcome,
           <span>
             <br />
-            <h3>Username</h3>
+            <h3>{props.username}</h3>
           </span>
         </div>
         <div className="col-2">
@@ -37,7 +37,7 @@ const Header = () => {
             </div>
 
             <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a className="dropdown-item" href="./home">
+              <a className="dropdown-item" href="./profile">
                 Profile
               </a>
               <div className="dropdown-item" onClick={logOut}>

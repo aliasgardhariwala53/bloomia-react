@@ -41,12 +41,14 @@ const Login = (props) => {
 
     // api integration function started
     const usertoken = localStorage.getItem("token");
+    
     HttpCallPost(`${LoginUrl}`, "POST", userlogin, usertoken)
       .then((response) => {
         console.log("response recieved", response);
         console.log("token recieved", response.data.result.token);
         localStorage.setItem("token", response.data.result.token);
-        localStorage.setItem("userId", response.data.result.token);
+        localStorage.setItem("userId", response.data.result.data._id);
+        console.log("useId", response.data.result.data._id);
         // localStorage.setItem("userId", response.data.data._id);
         // window.location.assign('/home');
         props.history.push("./home");
