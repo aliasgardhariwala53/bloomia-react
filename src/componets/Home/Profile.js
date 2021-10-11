@@ -1,28 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useMemo} from "react";
 import "./Profile.css";
-import { handleError, HttpCallPost ,HttpCallImgPost} from "../../services/UseHttps";
+import {
+  handleError,
+  HttpCallPost,
+  HttpCallImgPost,
+} from "../../services/UseHttps";
 import { updateProfileUrl } from "../../services/Network";
 import { HttpCallGet } from "../../services/UseHttps";
-import { GetUserUrl, updatePassworurl,UploadImage } from "../../services/Network";
-import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
+import {
+  GetUserUrl,
+  updatePassworurl,
+  UploadImage,
+} from "../../services/Network";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
 import avatar from "../../assets/avatar.jpg";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import ImageCropper from "./ImageCropper";
 
 // import Header from './Header';
 
 const Profile = (props) => {
+  const [profileimage, setProfileimage] = useState();
   const [userdata, setUserdata] = useState([]);
+  const [refresh, setrefresh] = useState(false);
+  const [userdatapre, setUserdatapre] = useState([]);
   const token = localStorage.getItem("token");
   // get method called
-
-  // useform started
   const {
     register,
-
+    reset,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({defaultValues: useMemo(() => {
+    console.log("User has changed");
+    return userdata;
+  }, [userdata])
+});
+useEffect(() => {
+  console.log("Reset");
+  reset(userdata);
+}, [userdata]);
+
+  // useform started
+  useEffect(() => {
+    HttpCallGet(`${GetUserUrl}`, token)
+      .then((response) => {
+        console.log(response.data.data);
+        setUserdata(response.data.data);
+      
+        console.log("get api called");
+      })
+      .catch((error) => {
+        // console.log("error getting data", error);
+        handleError(error);
+      });
+ 
+  }, [refresh]);
+
   // submit function defined
   const onSubmit = (data) => {
     HttpCallPost(`${updateProfileUrl}`, "PUT", data, token)
@@ -33,18 +69,11 @@ const Profile = (props) => {
         handleError(error);
         console.log("u", error);
       });
+    setrefresh(!refresh);
   };
-  useEffect(() => {
-    HttpCallGet(`${GetUserUrl}`, token)
-      .then((response) => {
-        setUserdata(response.data.result.data);
-        console.log("n");
-      })
-      .catch((error) => {
-        // console.log("error getting data", error);
-        handleError(error);
-      });
-  }, []);
+
+
+  // get api
 
   // edit button code start
   const [disabled, setDisabled] = useState(true);
@@ -67,7 +96,7 @@ const Profile = (props) => {
     }
   };
 
-  props.onchangheaderuser(userdata.first_name);
+  props.onchangheaderuser(userdata);
 
   // on submit password
   const [userpassword, setUserpassword] = useState({
@@ -82,7 +111,6 @@ const Profile = (props) => {
     const name = e.target.name;
     const value = e.target.value;
     setUserpassword({ ...userpassword, [name]: value });
-    // console.log(name,value);
   };
   const submitFormPassword = (e) => {
     e.preventDefault();
@@ -119,58 +147,105 @@ const Profile = (props) => {
     }
   };
 
-  //set user image
-  const [file, setFile] = useState();
-  
-  const popupalert=(event)=>{
-    if (event.target.files.length) {
-     
-      setFile({ image: event.target.files[0]});
-      console.log(file);
-      document.getElementById('modal-box').classList.remove("d-none");
-      
-    } else{
-      document.getElementById('modal-box').classList.add("d-none");
+  const [imageToCrop, setImageToCrop] = useState(undefined);
+  const [croppedImage, setCroppedImage] = useState(undefined);
 
+  const onUploadFile = (event) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const reader = new FileReader();
 
-    }
-    const usertoken = localStorage.getItem("token");
+      reader.addEventListener("load", () => {
+        const image = reader.result;
 
-    HttpCallImgPost(`${UploadImage}`, "PUT", file,usertoken)
-      .then((response) => {
-        console.log("response recieved", response.data.message);
-      })
-      .catch((error) => {
-        // handleError(error)
-        console.log("failed image", error);
+        setImageToCrop(image);
+        document.getElementById("modal-box").classList.remove("d-none");
       });
+
+      reader.readAsDataURL(event.target.files[0]);
+    } else {
+      document.getElementById("modal-box").classList.add("d-none");
+    }
+  };
+  
+  const onremoveimage=(e)=>{
+    e.preventDefault();
+    let data = new FormData();
+    data.append("attachments", null);
+    const usertoken = localStorage.getItem("token");
+    HttpCallImgPost(`${UploadImage}`, "PUT", data, usertoken)
+    .then((response) => {
+      console.log(response);
+      console.log("response recieved", response.data.message);
+      setProfileimage(response.data.data.profileImage);
+      document.getElementById("remove-image").classList.add("d-none");
+      document.getElementById("image-fa-plus").classList.remove("d-none");
+      document.getElementById("image-fa-pen").classList.add("d-none");
+     
+      setrefresh(!refresh);
+    })
+    .catch((error) => {
+      // handleError(error)
+      console.log("failed image null", error);
+    });
   }
+  const onSubmitfile = (e) => {
+    e.preventDefault();
+    fetch(croppedImage)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const file = new File([blob], "ALi.png", { type: "image/png" });
+        let data = new FormData();
+        data.append("attachments", file);
+        const usertoken = localStorage.getItem("token");
+        HttpCallImgPost(`${UploadImage}`, "PUT", data, usertoken)
+          .then((response) => {
+            console.log(response);
+            console.log("response recieved", response.data.message);
+            setProfileimage(response.data.data.profileImage);
+            document.getElementById("modal-box").classList.add("d-none");
+            document.getElementById("crop-box").classList.add("d-none");
+            document.getElementById("image-fa-plus").classList.add("d-none");
+            document.getElementById("image-fa-pen").classList.remove("d-none");
+            document.getElementById("remove-image").classList.remove("d-none");
+            setrefresh(!refresh);
+          })
+          .catch((error) => {
+            // handleError(error)
+            console.log("failed image", error);
+          });
+      });
+  };
 
-
-  // const submitimage=(e)=>{
-  //   const file=e.target.files[0]
-  //     setFile(file)
-  //     HttpCallImgPost(`${UploadImage}`, "PUT", file)
-  //     .then((response) => {
-  //       console.log("response recieved", response.data.message);
-  //     })
-  //     .catch((error) => {
-  //       // handleError(error)
-  //       console.log("failed image", error);
-  //     });
-  //   }
+  const showPreview = () => {
+    document.getElementById("preview-box").classList.remove("d-none");
+    document.getElementById("crop-box").classList.add("d-none");
+  };
+  const cancelmodel = () => {
+    document.getElementById("modal-box").classList.add("d-none");
+  };
+  const backPreview = () => {
+    document.getElementById("preview-box").classList.add("d-none");
+    document.getElementById("crop-box").classList.remove("d-none");
+  };
   return (
     <>
       <div className="container profile-container ml-2">
         <div className="row">
-          <div className="col-4 ">
-            <h2>{userdata.first_name}</h2>
+          <div className="col-6 ">
+            <h3 className="text-left">{(userdata.first_name + " " +userdata.last_name)||"Avatar" }</h3>
           </div>
           <div className="col-12 ">
-            <img className="float-left" src={avatar} alt="" width="150px" />{" "}
+            <img
+              className="float-left rounded-circle"
+              src={"https://bloomia.herokuapp.com/" + userdata.profileImage}
+              alt=""
+              width="105"
+              height="105"
+            />{" "}
             <span className="float-left mb-0"></span>
           </div>
-          <div className="col-12 d-flex">
+          <span id="remove-image" onClick={onremoveimage} className="col-4 text-danger remove-image " >Remove image</span>
+          <div className="col-12 d-flex mt-4">
             <div className="">Personal Information</div>
             <div
               onClick={enableedit}
@@ -187,66 +262,92 @@ const Profile = (props) => {
               <i className="fa fa-times text-light" aria-hidden="true"></i>
             </div>
           </div>
+          <label
+            className="select-image"
+            htmlFor="imagefile"
+            style={{ margin: "2px 6px 0px",    width: "20px", cursor: "pointer" }}
+          >
+            <i id="image-fa-plus" className="fa fa-plus image-fa-icon"></i>
+            <i id="image-fa-pen" className="fas fa-pen image-fa-icon d-none"></i>
+          </label>
           <div className="col-12">
-
-
-
-
-
             {/* image form started */}
-            <div className="col-8 offset-2 model-box bg-primary d-none" id="modal-box">
-           <div className="row">
-           <div className="col-8 offset-2">Adjust the image
-                        </div>
-               <div className="col-12 h-5">Image preview
-                        </div>
-               <div className="col-4 offset-2">cancel
-                        </div>
-               <div className="col-4 offset-1">preview
-                        </div>
-           </div>
+            <div className="col-8  model-box d-none" id="modal-box">
+              <form
+                className="row"
+                method="POST"
+                action="#"
+                id="#"
+                onSubmit={onSubmitfile}
+              >
+                <h4>Adjust the image</h4>
+                <div className="app " id="crop-box">
+                  <input
+                    type="file"
+                    id="imagefile"
+                    style={{ visibility: "hidden" }}
+                    accept="image/*"
+                    onChange={onUploadFile}
+                  />
+                  <div>
+                    <ImageCropper
+                      imageToCrop={imageToCrop}
+                      onImageCropped={(croppedImage) =>
+                        setCroppedImage(croppedImage)
+                      }
+                    />
+                  </div>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    className="bg-danger rounded save-button mx-auto "
+                    onClick={cancelmodel}
+                  >
+                    cancel
+                  </div>
+                  <div
+                    className="bg-success rounded save-button mx-auto my-1"
+                    style={{ cursor: "pointer" }}
+                    onClick={showPreview}
+                  >
+                    preview
+                  </div>
+                </div>
+
+                <div className="d-none" id="preview-box">
+                  {croppedImage && (
+                    <div>
+                      <img
+                        className="Cropped_Img"
+                        alt="Cropped Img"
+                        src={croppedImage}
+                      />
+                      <div
+                        style={{ cursor: "pointer" }}
+                        className="bg-danger rounded save-button mt-2 mx-auto c"
+                        onClick={backPreview}
+                      >
+                        back
+                      </div>
+                      <button className="bg-success rounded m-1 save-button">
+                        Save
+                      </button>
+                    </div>
+                  )}
+                </div>
+                {/* <button className="bg-success">Cancel</button> */}
+              </form>
             </div>
-            <form>
-            <div className=" form-group image-upload">
-                <label 
-                  htmlFor="imagefile"
-                  style={{ margin: "2px 6px 0px", cursor: "pointer" }}
-                >
-                  <i className="fa fa-plus"></i>
-                </label>
-
-                <input
-                name="file"
-                id="imagefile"
-                onChange={popupalert}
-                
-                  type="file"
-                
-                  // style={{ visibility: "hidden" }}
-                  className="form-control "
-                />
-              </div>
-            </form>
-
-
-
-
-
-
-
-
-
-
-
+           
 
             <form className="row" onSubmit={handleSubmit(onSubmit)}>
-              
               <div className="col-6 form-group">
                 <label htmlFor="exampleInputFirstName">First Name</label>
                 <input
+                  ref={register}
                   type="text"
                   className="form-control authinput profile-input"
                   placeholder="First name"
+                  name="first"
                   {...register("first_name", { required: true, maxLength: 80 })}
                   disabled={disabled}
                 />
@@ -270,24 +371,27 @@ const Profile = (props) => {
               <div className="col-6 form-group">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input
+                  style={{ cursor: "not-allowed" }}
                   type="text"
                   className="form-control authinput profile-input"
                   placeholder="Email"
-                  value="a@gmail"
-                  // {...register("Email", {
-                  //   required: true,
-                  //   pattern: /^\S+@\S+$/i,
-                  // })}
-                  disabled={disabled}
+                  value={userdata.email}
+                
+                  disabled={true}
                 />
               </div>
-              <div className="col-7 form-group">
+              <div className="col-6 form-group">
+                
+              </div>
+              
+              <div className="col-6 form-group">
                 <label htmlFor="exampleInputPassword1">Phone Number</label>
                 <input
                   type="tel"
+                  ref={register}
                   className="form-control authinput profile-input"
                   placeholder="Mobile number"
-                  {...register("number", {
+                  {...register("contact", {
                     required: true,
                     minLength: 6,
                     maxLength: 12,
@@ -299,19 +403,20 @@ const Profile = (props) => {
                 )}
               </div>
 
-              <input
+              <button
                 type="submit"
                 id="submitEdit"
                 className="submitButton d-none"
-              />
+                
+              ><i className="fas fa-check fa-sm text-light"></i></button>
             </form>
             <form className="row" onSubmit={submitFormPassword}>
               <div className="col-12">
                 <hr />
 
-                <h2>Password Settings</h2>
+                <h5 className="text-left">Password Settings</h5>
               </div>
-              <div className="col-7  form-group ">
+              <div className="col-6  form-group ">
                 <label htmlFor="exampleInputPassword2">Current Password</label>
                 <input
                   type="password"
@@ -325,6 +430,9 @@ const Profile = (props) => {
                 {errorspassword.password && (
                   <p className="error-messege">Current password is Required</p>
                 )}
+              </div>
+               <div className="col-6 form-group">
+                
               </div>
               <div className="col-6 form-group ">
                 <label htmlFor="exampleInputPassword1">Password</label>

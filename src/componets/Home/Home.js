@@ -9,7 +9,11 @@ import "./Home.css";
 import Settings from "./settings";
 
 const Home = () => {
-  const [userdata, setUserdata] = useState()
+  const [userdata, setUserdata] = useState({
+    first_name:"",
+    last_name:"",
+    profileImage:""
+  })
 
   const changeusername=(change)=>{
     setUserdata(change)
@@ -37,8 +41,8 @@ const Home = () => {
           {/* <Settings selected={submitFormHandler}
           
           onSubmitForm={submitFormHandler}
-          />
-         */}
+          /> */}
+        
         </div>
       </div>
     </div>

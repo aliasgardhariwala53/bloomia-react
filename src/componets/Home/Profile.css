@@ -5,34 +5,44 @@
 .profile-input{
         display: -webkit-inline-box;
         /* cursor: not-allowed; */
+        background-color: #e2e2e2!important;
+        font: ;
         
     }
     .form-group{
         text-align: left;
     }
 .edit-button{
-    background-color: blue;
-    border-radius: 50%;
-    width: 27px;
-    height: 27px;
-    margin-right: 20px;
+    height: 36px;
+    width: 36px;
+    padding: 2px;
+    cursor: pointer;
+    
+    border-radius: 20px;
+    border: 1px solid #2f45c5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2f45c5;
 }
 .mystyle{
-    background-color: #e5e2e2!important;
+    background-color: #ebebeb!important;
     cursor: auto;
 }
 .submitButton{
-    background-color: blue;
+    height: 36px;
     position: absolute;
-    top: -26px;
-    right: 49px !important;
-    right: 10px;
-    border-radius: 50%;
-    width: 27px;
-    height: 27px;
-    border: none;
-    margin-right: 20px;
+    width: 36px;
+    top: -36px;
     cursor: pointer;
+    right: 54px;
+    padding: 2px;
+    border: 1px solid #2f45c5;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2f45c5;
 }
 .image-upload{
     width: 25px;
@@ -50,4 +60,69 @@
   
     color: red;
     font-size: smaller;
+}
+#modal-box{
+    top: -14%;
+    z-index: 99;
+    position: absolute;
+    left: 30%;
+    height: 55%;
+    width: 39%;
+    margin: auto auto;
+    background: #fff;
+    padding: 0 30px;
+    box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+    border-radius: 34px;
+}
+#crop-box{
+    margin-top: -35px;
+}
+.ReactCrop__image{
+    height: 160px;
+    width: 160px;
+    /* border-radius: 50%; */
+}
+.Cropped_Img{
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+}
+#preview-box{   
+    top: 20px;
+}
+.save-button{
+    width: 71px;
+}
+.select-image{
+    
+
+    position: absolute;
+    top: 205px;
+    left: 98px;
+}
+.image-fa-icon{
+    background-color: #ebebfc;
+    border-radius: 50%;
+    border: 1px solid #2f45c5;
+    color: #2f45c5;
+    padding: 4px ;
+    height: 24px!important;
+    width: 24px!important;
+   
+}
+.remove-image{
+   cursor: pointer;
+   font-size: small;
+}
+.bg-danger{
+
+    color: white;
+}
+.bg-success {
+    background-color: #28a745!important;
+    color: white;
+    border: none;
+}
+.bg-success:hover {
+    background-color: #2f45c5;
 }

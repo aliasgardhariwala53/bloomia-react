@@ -19,9 +19,12 @@
     "react-hook-form": "^7.16.2",
     "react-image-crop": "^9.0.4",
     "react-router-dom": "^5.3.0",
+    "react-router-guards": "^1.0.2",
     "react-scripts": "4.0.3",
+    "react-utils": "^1.0.0",
     "slim-select": "^1.27.0",
     "sweetalert2": "^11.1.7",
+    "utils": "^0.3.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

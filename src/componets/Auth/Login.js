@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import Logo from "../../assets/images/Logov1.png";
-import { Link } from "react-router-dom";
-
+import { Link ,useHistory} from "react-router-dom";
 import { handleError, HttpCallPost } from "../../services/UseHttps";
 import { LoginUrl } from "../../services/Network";
 
 // import Images from '../../assets/Images/index'
 
 const Login = (props) => {
+  const history =useHistory();
   const [userlogin, setUserlogin] = useState({
     email: "",
     password: "",
@@ -44,18 +44,18 @@ const Login = (props) => {
     
     HttpCallPost(`${LoginUrl}`, "POST", userlogin, usertoken)
       .then((response) => {
-        console.log("response recieved", response);
-        console.log("token recieved", response.data.result.token);
-        localStorage.setItem("token", response.data.result.token);
-        localStorage.setItem("userId", response.data.result.data._id);
-        console.log("useId", response.data.result.data._id);
+        // console.log("response recieved", response);
+        console.log("token recieved", response.data.token);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data._id);
+        // console.log("useId", response.data._id);
         // localStorage.setItem("userId", response.data.data._id);
         // window.location.assign('/home');
-        props.history.push("./home");
+        history.push("./home");
       })
       .catch((error) => {
         // handleError(error)
-        console.log("u", error);
+        console.log("not logged in", error);
       });
   };
 
@@ -107,7 +107,12 @@ const Login = (props) => {
           </div>
         </div>
         {errors.password && <p className="error-messege">{errors.password}</p>}
-
+        <div>
+       
+        <Link to="/Forgetpassword">
+            <span>  Forget Your password?</span>
+          </Link>
+        </div>
         <button type="submit" className="btn btn-primary signbtn">
           Sign in
         </button>
@@ -124,7 +129,9 @@ const Login = (props) => {
           <Link to="/sign-up">
             <span> Sign Up</span>
           </Link>
+          
         </div>
+        
       </div>
     </div>
   );

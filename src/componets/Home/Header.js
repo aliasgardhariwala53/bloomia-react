@@ -10,17 +10,18 @@ const Header = (props) => {
  }
   return (
     <div className="container header-container">
-      <div className="row m-3">
-        <div className="col-1 mt-3">
+      <div className="row mt-3 ml-3 mr-3">
+        <div className="col-1 mt-3 backbutton">
           <a href="./home">
             <i className="fa fa-arrow-left "></i>
           </a>
         </div>
-        <div className="col-4 offset-5">
+        <div className="col-5 offset-4 text-right">
           Welcome,
           <span>
             <br />
-            <h3>{props.username}</h3>
+           
+            <h4>{(props.username.first_name +" " +props.username.last_name)|| "avatar"}</h4>
           </span>
         </div>
         <div className="col-2">
@@ -33,14 +34,16 @@ const Header = (props) => {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img src={avatar} alt="" width="50px" />
+              <img src={"https://bloomia.herokuapp.com/" + props.username.profileImage} alt="" width="50px" className="rounded-circle"/>
             </div>
 
             <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a className="dropdown-item" href="./profile">
-                Profile
+              <a className="dropdown-item" href="/profile">
+                <i className="far fa-user-circle">  </i>
+                 Profile
               </a>
               <div className="dropdown-item" onClick={logOut}>
+              <i className="fas fa-sign-out-alt"></i>
                 Logout
               </div>
             </div>

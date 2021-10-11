@@ -1,5 +1,6 @@
 .home-container{
     overflow-x: hidden;
+    overflow-y   : hidden;
     overflow: hidden;
     
 
@@ -7,8 +8,28 @@
 
 .action-container{
     overflow-x: hidden;
-    overflow-y: hidden;
-    /* height: 97vh; */
+    overflow-y: auto;
+    height: 100vh;
+    
   
     background-color: white;
+}
+::-webkit-scrollbar{
+   
+        width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #a5a5a5;
+    border-radius: 10px;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #a5a5a5;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #e7e7e7;
 }

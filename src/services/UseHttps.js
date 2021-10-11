@@ -1,5 +1,7 @@
 import { BaseUrl } from "./Network.js";
-import Swal from "sweetalert2/dist/sweetalert2.js";
+// import Swal from 'sweetalert2/dist/sweetalert2.js'
+import Swal from 'sweetalert2'
+
 const axios = require("axios");
 
 // For Post Api Calls And Put
@@ -136,8 +138,9 @@ export const handleError = (errResponse) => {
 };
 //for delete
 
-export const HttpCallImgPost = async (method, type, body, token) => {
+export const HttpCallImgPost = async (method, type, body, token="") => {
   return new Promise(async function (resolve, reject) {
+   
     const url = BaseUrl + method;
     axios({
       method: type,

@@ -1,3 +1,27 @@
+
+* {
+    font-family: Gilroy;
+}
 .dropdown-menu{
     left: -73px ;
+    font-family: Gilroy-Bold!important;
+    border: none;
+    box-shadow: 0 1px 4px 0 #dadada!important;
+    border-radius: 1.05rem!important;
     }
+    .dropdown-item{
+
+        font-family: Gilroy!important;
+        border-radius: .6em;
+    }
+    /* .backbutton{
+        height: 36px;
+        width: 36px;
+        padding: 2px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ebebfc;
+        cursor: pointer;
+    } */
