@@ -4,6 +4,7 @@ import Logo from "../../assets/images/Logov1.png";
 import { Link ,useHistory} from "react-router-dom";
 import { handleError, HttpCallPost } from "../../services/UseHttps";
 import { LoginUrl } from "../../services/Network";
+import GuardedRoute from './GuardedRoute';
 
 // import Images from '../../assets/Images/index'
 
@@ -52,6 +53,7 @@ const Login = (props) => {
         // localStorage.setItem("userId", response.data.data._id);
         // window.location.assign('/home');
         history.push("./home");
+        props.authcheck(true);
       })
       .catch((error) => {
         // handleError(error)
@@ -109,7 +111,7 @@ const Login = (props) => {
         {errors.password && <p className="error-messege">{errors.password}</p>}
         <div>
        
-        <Link to="/Forgetpassword">
+        <Link to="/Forgetpassword" className="float-right mb-2 "  style={{ textDecoration: 'none' }}>
             <span>  Forget Your password?</span>
           </Link>
         </div>
@@ -126,7 +128,7 @@ const Login = (props) => {
       <div className="footer">
         <div>
           Don't have an account?
-          <Link to="/sign-up">
+          <Link to="/sign-up"  style={{ textDecoration: 'none' }}>
             <span> Sign Up</span>
           </Link>
           

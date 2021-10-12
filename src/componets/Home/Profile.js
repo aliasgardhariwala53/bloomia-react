@@ -18,12 +18,20 @@ import avatar from "../../assets/avatar.jpg";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import ImageCropper from "./ImageCropper";
-
+import Swal from 'sweetalert2'
 // import Header from './Header';
 
 const Profile = (props) => {
   const [profileimage, setProfileimage] = useState();
-  const [userdata, setUserdata] = useState([]);
+  const [userdata, setUserdata] = useState({
+   
+  
+  first_name: "Avatar ",
+  last_name: " ",
+  profileImage: "uploads/1633780506772defaultImage.jpg"
+
+  });
+
   const [refresh, setrefresh] = useState(false);
   const [userdatapre, setUserdatapre] = useState([]);
   const token = localStorage.getItem("token");
@@ -49,14 +57,16 @@ useEffect(() => {
       .then((response) => {
         console.log(response.data.data);
         setUserdata(response.data.data);
-      
         console.log("get api called");
       })
       .catch((error) => {
         // console.log("error getting data", error);
         handleError(error);
       });
- 
+      
+      if (userdata.profileImage==="uploads/1633780506772defaultImage.jpg") {
+        document.getElementById("remove-image").classList.add("d-none");
+      }
   }, [refresh]);
 
   // submit function defined
@@ -166,27 +176,45 @@ useEffect(() => {
       document.getElementById("modal-box").classList.add("d-none");
     }
   };
-  
+ 
   const onremoveimage=(e)=>{
+    
     e.preventDefault();
-    let data = new FormData();
-    data.append("attachments", null);
-    const usertoken = localStorage.getItem("token");
-    HttpCallImgPost(`${UploadImage}`, "PUT", data, usertoken)
-    .then((response) => {
-      console.log(response);
-      console.log("response recieved", response.data.message);
-      setProfileimage(response.data.data.profileImage);
-      document.getElementById("remove-image").classList.add("d-none");
-      document.getElementById("image-fa-plus").classList.remove("d-none");
-      document.getElementById("image-fa-pen").classList.add("d-none");
-     
-      setrefresh(!refresh);
-    })
-    .catch((error) => {
-      // handleError(error)
-      console.log("failed image null", error);
-    });
+  Swal.fire({
+    title: 'Are you sure Want to remove Profile Image?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+    
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire('Succesfully Removed!', '', 'success')
+      let data = new FormData();
+      data.append("attachments", null);
+      const usertoken = localStorage.getItem("token");
+      HttpCallImgPost(`${UploadImage}`, "PUT", data, usertoken)
+      .then((response) => {
+        console.log(response);
+        console.log("response recieved", response.data.message);
+        setProfileimage(response.data.data.profileImage);
+        document.getElementById("remove-image").classList.add("d-none");
+        document.getElementById("image-fa-plus").classList.remove("d-none");
+        document.getElementById("image-fa-pen").classList.add("d-none");
+       
+        setrefresh(!refresh);
+      })
+      .catch((error) => {
+        // handleError(error)
+        console.log("failed image null", error);
+      });
+    } 
+  })
+ 
+   
   }
   const onSubmitfile = (e) => {
     e.preventDefault();
@@ -232,7 +260,7 @@ useEffect(() => {
       <div className="container profile-container ml-2">
         <div className="row">
           <div className="col-6 ">
-            <h3 className="text-left">{(userdata.first_name + " " +userdata.last_name)||"Avatar" }</h3>
+            <h3 className="text-left">{(userdata.first_name + " " +userdata.last_name) || "Avatar" }</h3>
           </div>
           <div className="col-12 ">
             <img

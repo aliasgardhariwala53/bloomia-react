@@ -25,3 +25,12 @@
         background-color: #ebebfc;
         cursor: pointer;
     } */
+    .signin-header{
+        
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: #2f45c5;
+        text-align: center;
+        font-size: initial;
+        text-decoration: none;
+    }

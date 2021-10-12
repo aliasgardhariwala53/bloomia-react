@@ -139,7 +139,7 @@ const Signup = () => {
       <div className="footer">
         <div>
           Already have an account?
-          <Link to="./login">
+          <Link to="./login"  style={{ textDecoration: 'none' }}>
             <span> Sign In</span>
           </Link>
         </div>

@@ -36,19 +36,19 @@ const Settings = (props) => {
     e.preventDefault();
   };
   return (
-    <div className="container">
+    <div className="container mt-5">
       <div className="row">
         <div className="col-4">
           <h5>Kegel Exercise</h5>
           <span>
-            <h3>
+            <h4>
               <select id="cars" name="carlist" form="carform ">
                 <option value="volvo">Beginner</option>
                 <option value="saab">Quick</option>
                 <option value="opel">Advanced</option>
                 <option value="audi">Quick</option>
               </select>
-            </h3>
+            </h4>
           </span>
         </div>
         <div className="col-1 "></div>
@@ -65,7 +65,7 @@ const Settings = (props) => {
         </div>
       </div>
 
-      <form onSubmit={submitFormTime} className="row formSetting ">
+      <form onSubmit={submitFormTime} className="row formSetting position-relative">
         <div className="col-12">
           <h6 className="float-left mt-3">Long Squeeze</h6>
         </div>

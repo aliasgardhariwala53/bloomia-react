@@ -1,27 +1,55 @@
-import React from "react";
+import {React,useState} from "react";
+import { Link } from "react-router-dom";
 import avatar from "../../assets/avatar.jpg";
 import "./Header.css";
 
 const Header = (props) => {
+  
   const logOut = () => {
-    localStorage.removeItem('token');
-    window.location.assign('./login');
-
- }
+    localStorage.removeItem("token");
+    
+    window.location.assign("../login");
+  };
   return (
     <div className="container header-container">
-      <div className="row mt-3 ml-3 mr-3">
+      
+      { !props.onloggedincheck && <div className="row mt-3 ml-3 mr-3">
+                <div className="col-3 offset-5 ">
+                <Link to="/login" style={{ textDecoration: 'none' }}>
+                
+                <div className=" signin-header px-2 py-2 text-dark bg-light cursor-pointer  ">
+                 
+                 Sign in
+                </div>
+                </Link>
+                </div>
+        
+                <div className="col-3">
+                <Link to="/sign-up" style={{ textDecoration: 'none' }}>
+                <div className=" signin-header px-2 py-2 text-light  cursor-pointer ">
+                 
+                 Sign Up
+                </div>
+                </Link>
+                </div>
+        
+       
+      </div>}
+      { props.onloggedincheck && <div className="row mt-3 ml-3 mr-3">
         <div className="col-1 mt-3 backbutton">
-          <a href="./home">
+          <Link to="/home">
             <i className="fa fa-arrow-left "></i>
-          </a>
+          </Link>
         </div>
         <div className="col-5 offset-4 text-right">
           Welcome,
           <span>
             <br />
-           
-            <h4>{(props.username.first_name +" " +props.username.last_name)|| "avatar"}</h4>
+
+            <h4>
+              {props.username.first_name + " " + props.username.last_name ||
+                "avatar"}
+            </h4>
           </span>
         </div>
         <div className="col-2">
@@ -34,22 +62,31 @@ const Header = (props) => {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img src={"https://bloomia.herokuapp.com/" + props.username.profileImage} alt="" width="50px" className="rounded-circle"/>
+              <img
+                src={
+                  "https://bloomia.herokuapp.com/" + props.username.profileImage
+                }
+                alt=""
+                width="50px"
+                className="rounded-circle"
+              />
             </div>
 
             <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a className="dropdown-item" href="/profile">
-                <i className="far fa-user-circle">  </i>
-                 Profile
-              </a>
+              <Link to="/home/profile" style={{ textDecoration: 'none' }}>
+                <div className="dropdown-item">
+                  <i className="far fa-user-circle"> </i>
+                  Profile
+                </div>
+              </Link>
               <div className="dropdown-item" onClick={logOut}>
-              <i className="fas fa-sign-out-alt"></i>
+                <i className="fas fa-sign-out-alt"></i>
                 Logout
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div>}
     </div>
   );
 };
