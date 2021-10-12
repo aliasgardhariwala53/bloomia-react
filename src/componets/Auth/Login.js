@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import Logo from "../../assets/images/Logov1.png";
-import { Link ,useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { handleError, HttpCallPost } from "../../services/UseHttps";
 import { LoginUrl } from "../../services/Network";
-import GuardedRoute from './GuardedRoute';
+import GuardedRoute from "./GuardedRoute";
 
 // import Images from '../../assets/Images/index'
 
 const Login = (props) => {
-  const history =useHistory();
+  const history = useHistory();
   const [userlogin, setUserlogin] = useState({
     email: "",
     password: "",
@@ -41,17 +41,11 @@ const Login = (props) => {
     setErrors(errorlogin);
 
     // api integration function started
-    const usertoken = localStorage.getItem("token");
-    
-    HttpCallPost(`${LoginUrl}`, "POST", userlogin, usertoken)
+
+    HttpCallPost(`${LoginUrl}`, "POST", userlogin)
       .then((response) => {
-        // console.log("response recieved", response);
-        console.log("token recieved", response.data.token);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data._id);
-        // console.log("useId", response.data._id);
-        // localStorage.setItem("userId", response.data.data._id);
-        // window.location.assign('/home');
         history.push("./home");
         props.authcheck(true);
       })
@@ -72,7 +66,7 @@ const Login = (props) => {
           Please enter your address and password to login
         </p>
         <div className="form-group">
-          {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
+         
           <input
             type="email"
             className="form-control authinput  authinput-email"
@@ -92,7 +86,7 @@ const Login = (props) => {
         {errors.email && <p className="error-messege">{errors.email}</p>}
 
         <div className="form-group ">
-          {/* <label htmlFor="exampleInputPassword1">Password</label> */}
+          
           <input
             type="password"
             className="form-control authinput  authinput-email"
@@ -110,9 +104,12 @@ const Login = (props) => {
         </div>
         {errors.password && <p className="error-messege">{errors.password}</p>}
         <div>
-       
-        <Link to="/Forgetpassword" className="float-right mb-2 "  style={{ textDecoration: 'none' }}>
-            <span>  Forget Your password?</span>
+          <Link
+            to="/Forgetpassword"
+            className="float-right mb-2 "
+            style={{ textDecoration: "none" }}
+          >
+            <span> Forget Your password?</span>
           </Link>
         </div>
         <button type="submit" className="btn btn-primary signbtn">
@@ -128,12 +125,10 @@ const Login = (props) => {
       <div className="footer">
         <div>
           Don't have an account?
-          <Link to="/sign-up"  style={{ textDecoration: 'none' }}>
+          <Link to="/sign-up" style={{ textDecoration: "none" }}>
             <span> Sign Up</span>
           </Link>
-          
         </div>
-        
       </div>
     </div>
   );

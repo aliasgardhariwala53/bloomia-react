@@ -33,8 +33,8 @@ const Profile = (props) => {
   });
 
   const [refresh, setrefresh] = useState(false);
-  const [userdatapre, setUserdatapre] = useState([]);
-  const token = localStorage.getItem("token");
+  
+  
   // get method called
   const {
     register,
@@ -53,7 +53,7 @@ useEffect(() => {
 
   // useform started
   useEffect(() => {
-    HttpCallGet(`${GetUserUrl}`, token)
+    HttpCallGet(`${GetUserUrl}`)
       .then((response) => {
         console.log(response.data.data);
         setUserdata(response.data.data);
@@ -71,7 +71,7 @@ useEffect(() => {
 
   // submit function defined
   const onSubmit = (data) => {
-    HttpCallPost(`${updateProfileUrl}`, "PUT", data, token)
+    HttpCallPost(`${updateProfileUrl}`, "PUT", data)
       .then((response) => {
         console.log("response recieved", response.data.message);
       })
@@ -142,12 +142,10 @@ useEffect(() => {
 
     if (true) {
       setErrorspassword(errorlogin);
-      const usertoken = localStorage.getItem("token");
+     
 
-      HttpCallPost(`${updatePassworurl}`, "PUT", userpassword, usertoken)
+      HttpCallPost(`${updatePassworurl}`, "PUT", userpassword)
         .then((response) => {
-          // console.log("response recieved", response);
-          // console.log("token recieved", response.data.result.token);
           console.log("response recieved", response.data.message);
         })
         .catch((error) => {
@@ -195,8 +193,8 @@ useEffect(() => {
       Swal.fire('Succesfully Removed!', '', 'success')
       let data = new FormData();
       data.append("attachments", null);
-      const usertoken = localStorage.getItem("token");
-      HttpCallImgPost(`${UploadImage}`, "PUT", data, usertoken)
+      
+      HttpCallImgPost(`${UploadImage}`, "PUT", data)
       .then((response) => {
         console.log(response);
         console.log("response recieved", response.data.message);
@@ -224,8 +222,8 @@ useEffect(() => {
         const file = new File([blob], "ALi.png", { type: "image/png" });
         let data = new FormData();
         data.append("attachments", file);
-        const usertoken = localStorage.getItem("token");
-        HttpCallImgPost(`${UploadImage}`, "PUT", data, usertoken)
+        
+        HttpCallImgPost(`${UploadImage}`, "PUT", data)
           .then((response) => {
             console.log(response);
             console.log("response recieved", response.data.message);

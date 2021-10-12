@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./Auth.css";
 import Logo from "../../assets/images/Logov1.png";
 import { Link ,useHistory} from "react-router-dom";
-import { handleError, HttpCallPost } from "../../services/UseHttps";
+import { HttpCallPost } from "../../services/UseHttps";
 import { ForgetPasswordUrl } from "../../services/Network";
 const Forgetpassword = () => {
-    const history =useHistory();
+  
   const [useremail, setUseremail] = useState({
     email: "",
   
@@ -85,12 +85,6 @@ const Forgetpassword = () => {
           {errors.email && <p className="error-messege">{errors.email}</p>}
   
        
-          <div>
-          
-          <Link to="/sign-up">
-              <span>Forget Your password?</span>
-            </Link>
-          </div>
           <button type="submit" className="btn btn-primary signbtn">
             Submit
           </button>

@@ -29,7 +29,7 @@ const Signup = () => {
     
     // console.log(usersignup);
     setErrors(Validate(usersignup));
-    // HttpCallPost(`${SignupUrl}`,"POST",usersignup )
+  
     HttpCallPost(`${SignupUrl}`, 'POST', usersignup)
     .then((response)=>{
       console.log("response recieved",response);

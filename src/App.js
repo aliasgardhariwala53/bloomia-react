@@ -11,9 +11,12 @@ import Home from './componets/Home/Home';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 function App() {
-  const[isAutheticated, setisAutheticated] = useState(false);
+  const token = localStorage.getItem("token")
+  const[isAutheticated, setisAutheticated] = useState(token);
 
   console.log("auth is ......",isAutheticated);
+  
+
   return (
     <div className="App">
     <Router>
