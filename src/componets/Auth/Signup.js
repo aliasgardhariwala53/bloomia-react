@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import Logo from "../../assets/images/Logov1.png";
-// import Images from '../../assets/Images/index'
+import './Signup.css'
 import { Link } from "react-router-dom";
 import Validate from "./Validate";
 import {handleError, HttpCallPost} from '../../services/UseHttps';
@@ -12,10 +12,13 @@ const Signup = () => {
     first_name: "",
     last_name: "",
     email: "",
+    contact:"",
     password: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    
+  });
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -26,20 +29,21 @@ const Signup = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    
     // console.log(usersignup);
     setErrors(Validate(usersignup));
-  
-    HttpCallPost(`${SignupUrl}`, 'POST', usersignup)
-    .then((response)=>{
-      console.log("response recieved",response);
-    })
-    .catch((error)=>{
+    if(errors.isSignup){
+
+      HttpCallPost(`${SignupUrl}`, 'POST', usersignup)
+      .then((response)=>{
+        console.log("response recieved",response);
+      })
+      .catch((error)=>{
         handleError(error)
         console.log("u", error);
-    })
-   
-  };
+      })
+      
+    };
+  }
 
   return (
     <div className="sign-form-container  ">
@@ -68,7 +72,7 @@ const Signup = () => {
               </span>
             </div>
         </div>
-        {errors.first_name && <p className="error-messege">{errors.first_name}</p>}
+        {errors.first_name && <p className="error-message-signup">{errors.first_name}</p>}
         <div className="form-group">
           {/* <label htmlFor="exampleInputLastName"></label> */}
           <input
@@ -86,7 +90,7 @@ const Signup = () => {
               </span>
             </div>
         </div>
-            {errors.last_name && <p className="error-messege">{errors.last_name}</p>}
+            {errors.last_name && <p className="error-message-signup">{errors.last_name}</p>}
         <div className="form-group">
           {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
           <input
@@ -105,8 +109,26 @@ const Signup = () => {
               </span>
             </div>
         </div>
-            {errors.email && <p className="error-messege">{errors.email}</p>}
+            {errors.email && <p className="error-message-signup">{errors.email}</p>}
 
+        <div className="form-group ">
+          {/* <label htmlFor="exampleInputPassword1">Password</label> */}
+          <input
+            type="text"
+            className="form-control authinput authinput-email"
+            value={usersignup.contact}
+            onChange={handleChange}
+            id="exampleInputcontact"
+            placeholder="contact"
+            name="contact"
+            />
+            <div className="input-icon">
+              <span>
+                <i className="fa fa-mobile"></i>
+              </span>
+            </div>
+        </div>
+            {errors.contact  && <p className="error-message-signup">{errors.contact}</p>}
         <div className="form-group ">
           {/* <label htmlFor="exampleInputPassword1">Password</label> */}
           <input
@@ -124,7 +146,7 @@ const Signup = () => {
               </span>
             </div>
         </div>
-            {errors.password  && <p className="error-messege">{errors.password}</p>}
+            {errors.password  && <p className="error-message-signup">{errors.password}</p>}
 
         <button type="submit" className="btn btn-primary signbtn">
           Registration

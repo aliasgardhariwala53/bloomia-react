@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { handleError, HttpCallPost } from "../../services/UseHttps";
 import { LoginUrl } from "../../services/Network";
 import GuardedRoute from "./GuardedRoute";
+import "./Login.css"
 
 // import Images from '../../assets/Images/index'
 
@@ -28,7 +29,7 @@ const Login = (props) => {
     console.log(userlogin);
     let errorlogin = {};
 
-    if (!userlogin.email) {
+    if (!userlogin.email ) {
       errorlogin.email = "email required";
     } else if (
       !/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
@@ -41,18 +42,26 @@ const Login = (props) => {
     setErrors(errorlogin);
 
     // api integration function started
-
-    HttpCallPost(`${LoginUrl}`, "POST", userlogin)
+    if(userlogin.email && userlogin.password )
+   { HttpCallPost(`${LoginUrl}`, "POST", userlogin)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
+     
         localStorage.setItem("userId", response.data._id);
-        history.push("./home");
-        props.authcheck(true);
+        console.log("response",response.data.message);
+        if (response.data.message==="login user successfully") {
+          
+          history.push("./home");
+          props.authcheck(true);
+        }else{
+          localStorage.clear();
+        }
+        handleError(response.data)
       })
       .catch((error) => {
-        // handleError(error)
         console.log("not logged in", error);
-      });
+        // props.onwrongLogin(true)
+      });}
   };
 
   return (
@@ -83,7 +92,7 @@ const Login = (props) => {
             </span>
           </div>
         </div>
-        {errors.email && <p className="error-messege">{errors.email}</p>}
+        {errors.email && <p className="error-message-login">{errors.email}</p>}
 
         <div className="form-group ">
           
@@ -102,7 +111,7 @@ const Login = (props) => {
             </span>
           </div>
         </div>
-        {errors.password && <p className="error-messege">{errors.password}</p>}
+        {errors.password && <p className="error-message-login">{errors.password}</p>}
         <div>
           <Link
             to="/Forgetpassword"

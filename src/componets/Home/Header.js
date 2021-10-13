@@ -79,7 +79,7 @@ const Header = (props) => {
                   Profile
                 </div>
               </Link>
-              <div className="dropdown-item" onClick={logOut}>
+              <div className="dropdown-item " style={{cursor: "pointer"}} onClick={logOut}>
                 <i className="fas fa-sign-out-alt"></i>
                 Logout
               </div>

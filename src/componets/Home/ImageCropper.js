@@ -10,8 +10,8 @@ function ImageCropper(props) {
     // default crop config
     {
       unit: "%",
-      width: 50,
-      height: 50,
+      width: 20,
+      height: 20,
       aspect: 1 / 1
     }
   );

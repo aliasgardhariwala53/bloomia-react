@@ -5,12 +5,14 @@
 .profile-input{
         display: -webkit-inline-box;
         /* cursor: not-allowed; */
-        background-color: #e2e2e2!important;
-        font: ;
+        color: #495057;
+        background-color: #ebebeb!important;
+        
         
     }
     .form-group{
         text-align: left;
+        position: relative;
     }
 .edit-button{
     height: 36px;
@@ -55,13 +57,13 @@
     left: 136px;
 }
 .error-messege{
-    margin-top: -17px;
-    margin-bottom: 8px;
+    position: absolute;
+    top: 82px;
   
     color: red;
     font-size: smaller;
 }
-#modal-box{
+.modal-box{
     top: -14%;
     z-index: 99;
     position: absolute;
@@ -74,8 +76,19 @@
     box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
     border-radius: 34px;
 }
-#crop-box{
-    margin-top: -35px;
+.crop-box{
+    top: -110px;
+    z-index: 100;
+    position: absolute;
+    left: 22%;
+    /* height: 70vh; */
+    padding: 20px;
+    width: 63%;
+    margin: auto auto;
+    background: #fff;
+    padding: -12px 19px;
+    box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+    border-radius: 34px;
 }
 .ReactCrop__image{
     height: 160px;
@@ -87,16 +100,27 @@
     width: 140px;
     height: 140px;
 }
-#preview-box{   
-    top: 20px;
+.preview-box{   
+    top: -110px;
+    z-index: 99;
+    position: absolute;
+    left: 22%;
+   
+    padding: 20px;
+    width: 63%;
+    margin: auto auto;
+    background: #fff;
+    padding: -12px 19px;
+    box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+    border-radius: 34px;
 }
 .save-button{
     width: 71px;
 }
 .select-image{
     position: absolute;
-    top: 205px;
-    left: 98px;
+    top: 118px;
+    left: 71px;
 }
 .image-fa-icon{
     background-color: #ebebfc;
@@ -123,4 +147,13 @@
 }
 .bg-success:hover {
     background-color: #2f45c5;
+}
+.change-password
+{
+    color: white;
+    background-color: #2f45c5;
+    border: none;
+    font-size: .8rem!important;
+    border-radius: 10px;
+    cursor: pointer;
 }

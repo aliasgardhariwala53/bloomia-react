@@ -39,7 +39,7 @@ export const HttpCallPost = async (method, type, body) => {
 };
 
 //For Get Api Calls
-export const HttpCallGet = async (method) => {
+export const HttpCallGet = async (method,token) => {
   
   return new Promise(async function (resolve, reject) {
     
@@ -69,7 +69,7 @@ export const HttpCallGet = async (method) => {
 
 //For Api Error Handling Globaly
 export const handleError = (errResponse) => {
-  if (errResponse.response.status === 403) {
+  if (errResponse.status === 403) {
     localStorage.clear();
     return Swal.fire({
       position: "center",
@@ -78,29 +78,29 @@ export const handleError = (errResponse) => {
     }).then((ok) => {
       window.location.assign("/");
     });
-  } else if (errResponse.response.status === 404) {
+  } else if (errResponse.status === 404) {
     Swal.fire({
       position: "center",
       type: "error",
-      title: errResponse.response.data.msg,
+      title: errResponse.data.message,
     });
-  } else if (errResponse.response.status === 500) {
+  } else if (errResponse.status === 500) {
     Swal.fire({
       position: "center",
       type: "error",
-      title: errResponse.response.data,
+      title: errResponse.data.message,
     });
-  } else if (errResponse.response.status === 400) {
+  } else if (errResponse.status === 400) {
     Swal.fire({
       position: "center",
       type: "error",
-      title: errResponse.response.data,
+      title: errResponse.data.message,
     });
-  } else if (errResponse.response.status === 401) {
+  } else if (errResponse.status === 401) {
     Swal.fire({
       position: "center",
       type: "error",
-      title: errResponse.response.data.msg,
+      title:errResponse.data.message,
     });
   }
 };
@@ -120,14 +120,7 @@ export const HttpCallImgPost = async (method, type, body) => {
       data: body,
     })
       .then((response) => {
-        if (response.status === 200) {
-          Swal.fire({
-            position: "center",
-            type: "error",
-            title: "image Successfully uploaded",
-          });
-          return resolve(response);
-        }
+        
         return resolve(response);
       })
       .catch((err) => {
