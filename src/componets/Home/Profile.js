@@ -2,11 +2,10 @@ import React, { useState, useEffect, useMemo } from "react";
 import "./Profile.css";
 import {
   handleError,
-  HttpCallPost,
-  HttpCallImgPost,
+  HttpCall,
 } from "../../services/UseHttps";
 import { updateProfileUrl } from "../../services/Network";
-import { HttpCallGet } from "../../services/UseHttps";
+
 import { GetUserUrl, UploadImage } from "../../services/Network";
 import "react-image-crop/dist/ReactCrop.css";
 import { useForm } from "react-hook-form";
@@ -15,6 +14,7 @@ import Swal from "sweetalert2";
 import Changepassword from "./Changepassword";
 
 const Profile = (props) => {
+  const token = localStorage.getItem("token")
   const [removebutton, setRemovebutton] = useState(true);
   const [editprofile, setEditprofile] = useState(true);
 
@@ -24,7 +24,7 @@ const Profile = (props) => {
   const [userdata, setUserdata] = useState({
     first_name: "Avatar ",
     last_name: " ",
-    profileImage: "uploads/1633780506772defaultImage.jpg",
+    profileImage: "uploads/1634108597644defaultPicture.png",
   });
 
   // get method called
@@ -45,9 +45,9 @@ const Profile = (props) => {
   }, [userdata]);
 
   // useform started
-  const token = localStorage.getItem("token");
+
   useEffect(() => {
-    HttpCallGet(`${GetUserUrl}`, token)
+    HttpCall(`${GetUserUrl}`,"GET")
       .then((response) => {
         setUserdata(response.data.data);
         setRemovebutton(
@@ -58,11 +58,11 @@ const Profile = (props) => {
       .catch((error) => {
         handleError(error);
       });
-  }, [refresh]);
+  }, [refresh,token]);
 
   // submit function defined
   const onSubmit = (data) => {
-    HttpCallPost(`${updateProfileUrl}`, "PUT", data)
+    HttpCall(`${updateProfileUrl}`,"PUT", data)
       .then((response) => {})
       .catch((error) => {
         handleError(error);
@@ -118,7 +118,7 @@ const Profile = (props) => {
         Swal.fire("Succesfully Removed!", "", "success");
         let data = new FormData();
         data.append("attachments", null);
-        HttpCallImgPost(`${UploadImage}`, "PUT", data)
+        HttpCall(`${UploadImage}`, "PUT", data)
           .then((response) => {
             setProfileimage(response.data.data.profileImage);
             setrefresh(!refresh);
@@ -135,7 +135,7 @@ const Profile = (props) => {
         const file = new File([blob], "ALi.png", { type: "image/png" });
         let data = new FormData();
         data.append("attachments", file);
-        HttpCallImgPost(`${UploadImage}`, "PUT", data)
+        HttpCall(`${UploadImage}`, "PUT", data)
           .then((response) => {
             setProfileimage(response.data.data.profileImage);
             setpreviewbox(false);

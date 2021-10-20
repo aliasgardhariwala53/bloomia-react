@@ -8,13 +8,13 @@ import Resetpassword from './componets/Auth/Resetpassword';
 // import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import Home from './componets/Home/Home';
 
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
   const token = localStorage.getItem("token")
   const[isAutheticated, setisAutheticated] = useState(token);
 
-  console.log("auth is ......",isAutheticated);
+  // console.log("auth is ......",isAutheticated);
   
 
   return (

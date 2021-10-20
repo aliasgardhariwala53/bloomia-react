@@ -1,9 +1,9 @@
-import {React,useState} from "react";
+import {React} from "react";
 import { Link } from "react-router-dom";
-import avatar from "../../assets/avatar.jpg";
+
 import "./Header.css";
 
-const Header = (props) => {
+const Header = (props) => { 
   
   const logOut = () => {
     localStorage.removeItem("token");
@@ -36,11 +36,11 @@ const Header = (props) => {
        
       </div>}
       { props.onloggedincheck && <div className="row mt-3 ml-3 mr-3">
-        <div className="col-1 mt-3 backbutton">
-          <Link to="/home">
-            <i className="fa fa-arrow-left "></i>
-          </Link>
-        </div>
+      { window.location.href==="http://localhost:3000/home/profile"  && <div className="col-1 mt-3 backbutton">
+            <Link to="/home">
+              <i className="fa fa-arrow-left "></i>
+            </Link>
+          </div>}
         <div className="col-5 offset-4 text-right">
           Welcome,
           <span>

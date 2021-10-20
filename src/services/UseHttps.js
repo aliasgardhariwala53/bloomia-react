@@ -1,24 +1,14 @@
 import { BaseUrl } from "./Network.js";
 // import Swal from 'sweetalert2/dist/sweetalert2.js'
-import Swal from 'sweetalert2'
-
-const token = localStorage.getItem("token")
+import Swal from "sweetalert2";
 const axios = require("axios");
-
 // For Post Api Calls And Put
-export const HttpCallPost = async (method, type, body) => {
+export const HttpCall = async (method, type, body) => {
   return new Promise(async function (resolve, reject) {
     const url = BaseUrl + method;
-
     axios({
       method: type,
       url: url,
-      headers: {
-        "Content-type": "application/json",
-        Accept: "application/json",
-        Authorization: "Bearer " + token,
-      },
-
       data: body,
     })
       .then((response) => {
@@ -37,33 +27,103 @@ export const HttpCallPost = async (method, type, body) => {
       });
   });
 };
+axios.interceptors.request.use(
+  function (config) {
+    const token = localStorage.getItem("token");
+    Object.assign(config.headers, {
+      "Content-type": "application/json",
+      Accept: "application/json",
+      Authorization: "Bearer " + token,
+    });
+    console.log(config);
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
-//For Get Api Calls
-export const HttpCallGet = async (method,token) => {
-  
-  return new Promise(async function (resolve, reject) {
-    
+// Add a response interceptor
+axios.interceptors.response.use(
+  function (response) {
+    console.log("INTERCEPTORS response", response.data.token);
 
-    const url = BaseUrl + method;
-    console.log(url);
-    axios
-      .get(url, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((response) => {
-        if (response.status === 304) {
-          return resolve(response);
-        }
-        return resolve(response);
-      })
-      .catch((err) => {
-        return reject(err);
-      });
-  });
-};
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+  },
+  function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error);
+  }
+);
+
+// For Get Api Calls
+// export const HttpCallGet = async (method,token) => {
+
+//   return new Promise(async function (resolve, reject) {
+
+//     const url = BaseUrl + method;
+//     console.log(url);
+//     axios
+//       .get(url, {
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: "Bearer " + token,
+//         },
+//       })
+//       .then((response) => {
+//         if (response.status === 304) {
+//           return resolve(response);
+//         }
+//         return resolve(response);
+//       })
+//       .catch((err) => {
+//         return reject(err);
+//       });
+//   });
+// };
+
+// export const HttpCallPost = async (method, body) => {
+//   return new Promise(async function (resolve, reject) {
+//     // const url = BaseUrl + method;
+//    api.post(method,body)
+//       .then((response) => {
+//         if (response.status === 200) {
+//           Swal.fire({
+//             position: "center",
+//             type: "error",
+//             title: response.data.message,
+//           });
+//           return resolve(response);
+//         }
+//         return resolve(response);
+//       })
+//       .catch((err) => {
+//         return reject(err);
+//       });
+//   });
+// };
+
+// export const HttpCallGet = async (method) => {
+
+//   return new Promise(async function (resolve, reject) {
+
+//     api
+//     .get(method)
+//       .then((response) => {
+//           // console.log("helllo this is new responseeeeeeeeeeeeee",response);
+//           if (response.status === 304) {
+//           return resolve(response);
+//         }
+//         return resolve(response);
+//       })
+//       .catch((err) => {
+//         return reject(err);
+//       });
+//   });
+// };
 
 //for delete
 
@@ -100,31 +160,8 @@ export const handleError = (errResponse) => {
     Swal.fire({
       position: "center",
       type: "error",
-      title:errResponse.data.message,
+      title: errResponse.data.message,
     });
   }
 };
 //for delete
-
-export const HttpCallImgPost = async (method, type, body) => {
-  return new Promise(async function (resolve, reject) {
-   
-    const url = BaseUrl + method;
-    axios({
-      method: type,
-      url: url,
-      headers: {
-        "content-type": "multipart/form-data",
-        Authorization: "Bearer " + token,
-      },
-      data: body,
-    })
-      .then((response) => {
-        
-        return resolve(response);
-      })
-      .catch((err) => {
-        return reject(err);
-      });
-  });
-};

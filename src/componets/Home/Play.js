@@ -16,7 +16,7 @@ const Play = (props) => {
   const [playState, setPlaystate] = useState("running");
   const [Timestate, setTimestate] = useState({});
   function startanimation() {
-    console.log(props.time);
+    // console.log(props.time);
     setTimestate(props.time.a1);
     if (playState === "paused") {
         setPlaystate("running");
@@ -40,7 +40,7 @@ function longfunction(params) {
     document.getElementById("shape" ).style.animationIterationCount = `${Timestate}s`;
     document.getElementById("shape").classList.add("shape-two");
     document.getElementById("squeezetype").innerHTML="Long Squeeze";
-    console.log("long Squeeze");
+    // console.log("long Squeeze");
 
     setTimeout(() => {
         shortfunction()

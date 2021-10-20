@@ -1,6 +1,6 @@
 import {React ,useState} from 'react';
 import { Route, Redirect } from "react-router-dom";
-import { useFormState } from "react-hook-form";
+
 
 const ProfileRoute = ({ component: Component,authVerify, auth, ...rest }) => {
 const [authrization, setauthrization] = useState(false)
@@ -8,7 +8,7 @@ const [authrization, setauthrization] = useState(false)
         setauthrization(value);
         authVerify(value)
     }
-console.log("auth:" + auth)
+// console.log("auth:" + auth)
     return(
         <Route {...rest} render={(props) => (
             auth === authrization

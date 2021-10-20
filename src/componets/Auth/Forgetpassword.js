@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import Logo from "../../assets/images/Logov1.png";
-import { Link ,useHistory} from "react-router-dom";
-import { HttpCallPost } from "../../services/UseHttps";
+import { Link } from "react-router-dom";
+import { HttpCall } from "../../services/UseHttps";
 import { ForgetPasswordUrl } from "../../services/Network";
 const Forgetpassword = () => {
   
@@ -21,7 +21,7 @@ const Forgetpassword = () => {
   };
   const submitForm = (e) => {
     e.preventDefault();
-    console.log(useremail);
+    // console.log(useremail);
     let errorlogin = {};
 
     if (!useremail.email) {
@@ -37,20 +37,17 @@ const Forgetpassword = () => {
     // api integration function started
 
     
-    HttpCallPost(`${ForgetPasswordUrl}`, "PUT", useremail)
+    HttpCall(`${ForgetPasswordUrl}`,"PUT", useremail)
       .then((response) => {
-        console.log("response recieved", response);
-        console.log("token recieved", response.data.result.token);
+        // console.log("response recieved", response);
+        // console.log("token recieved", response.data.result.token);
         localStorage.setItem("token", response.data.result.token);
         localStorage.setItem("userId", response.data.result.data._id);
-        console.log("Reset link has been to your email, Check your email!", response.data.result.data._id);
-        // localStorage.setItem("userId", response.data.data._id);
-        // window.location.assign('/home');
-        // history.push("./login");
+  
       })
       .catch((error) => {
         // handleError(error)
-        console.log("u", error);
+        // console.log("u", error);
       });
   };
 

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./Auth.css";
 import Logo from "../../assets/images/Logov1.png";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { handleError, HttpCallPost } from "../../services/UseHttps";
+import { HttpCall } from "../../services/UseHttps";
 import { ResetPasswordurl } from "../../services/Network";
-import SweetAlert from 'react-bootstrap-sweetalert';
+
 
 // import Images from '../../assets/Images/index'
 
@@ -29,7 +29,7 @@ const Resetpassword = (props) => {
   };
   const submitForm = (e) => {
     e.preventDefault();
-    console.log(userpassword);
+    // console.log(userpassword);
     let errorlogin = {};
 
     if (!userpassword.password) {
@@ -39,14 +39,14 @@ const Resetpassword = (props) => {
 
     // api integration function started
 
-    HttpCallPost(`${ResetPasswordurl}`, "PUT", userpassword)
+    HttpCall(`${ResetPasswordurl}`,"PUT", userpassword)
       .then((response) => {
-        console.log("response recieved", response);
+        // console.log("response recieved", response);
        
         history.push('/login')
       })
       .catch((error) => {
-        console.log("u", error);
+        // console.log("u", error);
       });
   };
 

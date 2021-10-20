@@ -1,15 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState ,useEffect} from "react";
 import Play from "./Play";
 import Profile from "./Profile";
 import Header from "./Header";
 import { Route, useRouteMatch } from "react-router-dom";
-
+import {
+  handleError,HttpCall,
+} from "../../services/UseHttps";
+import { GetUserUrl } from "../../services/Network";
 import GuardedRoute from '../Auth/GuardedRoute';
 import "./Home.css";
 import Settings from "./settings";
 
 const Home = (props) => {
-  console.log("auth in home",props.profileView);
+  useEffect(() => {
+    HttpCall(`${GetUserUrl}`,"GET")
+      .then((response) => {
+        setUserdata(response.data.data);
+        
+      })
+      .catch((error) => {
+        handleError(error);
+      });
+  }, []);
+  // console.log("auth in home",props.profileView);
   const [userdata, setUserdata] = useState({
     first_name: "",
     last_name: "",

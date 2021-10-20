@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./Auth.css";
 import Logo from "../../assets/images/Logov1.png";
 import { Link, useHistory } from "react-router-dom";
-import { handleError, HttpCallPost } from "../../services/UseHttps";
+import { handleError, HttpCall } from "../../services/UseHttps";
 import { LoginUrl } from "../../services/Network";
-import GuardedRoute from "./GuardedRoute";
+
 import "./Login.css"
 
 // import Images from '../../assets/Images/index'
@@ -26,7 +26,7 @@ const Login = (props) => {
   };
   const submitForm = (e) => {
     e.preventDefault();
-    console.log(userlogin);
+    // console.log(userlogin);
     let errorlogin = {};
 
     if (!userlogin.email ) {
@@ -43,12 +43,12 @@ const Login = (props) => {
 
     // api integration function started
     if(userlogin.email && userlogin.password )
-   { HttpCallPost(`${LoginUrl}`, "POST", userlogin)
+   { HttpCall(`${LoginUrl}`, "POST", userlogin)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
      
         localStorage.setItem("userId", response.data._id);
-        console.log("response",response.data.message);
+        // console.log("response",response.data.message);
         if (response.data.message==="login user successfully") {
           
           history.push("./home");
@@ -59,7 +59,7 @@ const Login = (props) => {
         handleError(response.data)
       })
       .catch((error) => {
-        console.log("not logged in", error);
+        // console.log("not logged in", error);
         // props.onwrongLogin(true)
       });}
   };

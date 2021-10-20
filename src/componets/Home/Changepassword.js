@@ -1,5 +1,5 @@
 import {React,useState} from 'react'
-import {HttpCallPost} from "../../services/UseHttps";
+import {HttpCall} from "../../services/UseHttps";
   import {updatePassworurl} from "../../services/Network";
 const Changepassword = () => {
     const [errorspassword, setErrorspassword] = useState({});
@@ -18,7 +18,7 @@ const Changepassword = () => {
       };
       const submitFormPassword = (e) => {
         e.preventDefault();
-        console.log(userpassword);
+        // console.log(userpassword);
         let errorlogin = {};
         if (!userpassword.newPassword) {
           errorlogin.newPassword = "new password required";
@@ -35,7 +35,7 @@ const Changepassword = () => {
     const token = localStorage.getItem("token")
         if (true) {
           setErrorspassword(errorlogin);
-          HttpCallPost(`${updatePassworurl}`, "PUT", userpassword,token)
+          HttpCall(`${updatePassworurl}`,"PUT", userpassword,token)
             .then((response) => {}) 
             .catch((error) => {});
         }
