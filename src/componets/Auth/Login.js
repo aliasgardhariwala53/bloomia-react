@@ -51,7 +51,7 @@ const Login = (props) => {
         // console.log("response",response.data.message);
         if (response.data.message==="login user successfully") {
           
-          history.push("./home");
+          history.push("./");
           props.authcheck(true);
         }else{
           localStorage.clear();

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 {
   "homepage": "https://aliasgardhariwala53.github.io/bloomia-react/",
+=======
+{    
+  "homepage": "https://aliasgardhariwala53.github.io/bloomia-react",
+>>>>>>> c44817d5d93037151f5d7f9e9b037e80268d25f7
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
