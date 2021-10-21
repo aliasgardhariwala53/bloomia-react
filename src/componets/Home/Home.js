@@ -40,7 +40,7 @@ const Home = (props) => {
   };
   // console.log(passtime);
 
-  let { path } = useRouteMatch();
+  
   return (
     <div className="container-fluid home-container p-0">
       <div className="row m-0 p-0">
@@ -50,11 +50,11 @@ const Home = (props) => {
         <div className="col-4 m-0 p-0 action-container">
           <Header username={userdata} onloggedincheck={props.profileView}/>
         
-          <GuardedRoute path={`${path}/profile`} component={Profile} authVerify={changeusername} auth={!props.profileView} />
+          <GuardedRoute path="/profile" component={Profile} authVerify={changeusername} auth={!props.profileView} />
           {/* <Route path={`${path}/profile`}>
             <Profile onchangheaderuser={changeusername} />
           </Route> */}
-          <Route exact path={`${path}`}>
+          <Route exact path="/">
             <Settings
               selected={submitFormHandler}
               onSubmitForm={submitFormHandler}

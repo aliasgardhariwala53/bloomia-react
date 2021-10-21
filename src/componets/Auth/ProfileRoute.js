@@ -13,7 +13,7 @@ const [authrization, setauthrization] = useState(false)
         <Route {...rest} render={(props) => (
             auth === authrization
                 ? <Component {...props} onchangheaderuser={authVerify}/>
-                : <Redirect to='/home/profile' />
+                : <Redirect to='/profile' />
         )} />
     )
 }

@@ -27,7 +27,7 @@ function App() {
         <Route path="/sign-up">
           <Signup/>
         </Route> 
-        <Route  path="/home">
+        <Route  path="/">
           <Home profileView={isAutheticated}/>
           </Route>
          

@@ -36,8 +36,8 @@ const Header = (props) => {
        
       </div>}
       { props.onloggedincheck && <div className="row mt-3 ml-3 mr-3">
-      { window.location.href==="http://localhost:3000/home/profile"  && <div className="col-1 mt-3 backbutton">
-            <Link to="/home">
+      { window.location.href==="http://localhost:3000/profile"  && <div className="col-1 mt-3 backbutton">
+            <Link to="/">
               <i className="fa fa-arrow-left "></i>
             </Link>
           </div>}
@@ -73,7 +73,7 @@ const Header = (props) => {
             </div>
 
             <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <Link to="/home/profile" style={{ textDecoration: 'none' }}>
+              <Link to="/profile" style={{ textDecoration: 'none' }}>
                 <div className="dropdown-item">
                   <i className="far fa-user-circle"> </i>
                   Profile
