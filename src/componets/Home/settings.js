@@ -1,9 +1,18 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Calender from "./Calender";
+import GoalSet from "./GoalSet";
 import "./settings.css";
+import Footer from "./Footer";
+import Subscription from "./Subscription";
+import EmailNotification from "./EmailNotification";
+
+import ModalTerms from './ModelTerms'
 
 const Settings = (props) => {
-  var n = 60;
-  var arr = [...Array(n)].map((item, index) => index + 1);
+  const [aboutApp, setAboutApp] = useState(false)
+  var arr = [...Array(60)].map((item, index) => index + 1);
+
+  var arr2 = [...Array(20)].map((item, index) => index + 1);
 
   const [disabledreverse, setDisabledreverse] = useState(true);
   const enableReverse = () => {
@@ -20,26 +29,48 @@ const Settings = (props) => {
     c2: 0,
     c3: 0,
   });
+
+  let setGoalTime =
+    (selecttime.a1 + selecttime.a2) * selecttime.a3 +
+    (selecttime.b1 + selecttime.b2) * selecttime.b3;
   const dropdownChangeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setSelecttime({ ...selecttime, [name]: Number(value) });
   };
-  
-  useEffect(()=> {
-    
-    // console.log(selecttime);
+
+
+  useEffect(() => {
     props.onSubmitForm(selecttime);
-      // props.onChangeFilter(selecttime);
-    }, [selecttime])
+
+    // props.onChangeFilter(selecttime);
+  }, [selecttime]);
+  // useEffect(()=> {
+  //   setSelecttime({ ...selecttime, setGoalTime:setGoalTime })
+  //   }, [setGoalTime])
   const submitFormTime = (e) => {
     e.preventDefault();
   };
+
+  const onGetSets = (value) => {
+    props.setchange(value);
+  };
+
   return (
     <div className="container mt-5">
       <div className="row">
-        <div className="col-4">
-          <h5>Kegel Exercise</h5>
+        <ModalTerms onenable={aboutApp} setAboutApp={setAboutApp}/>
+      
+
+
+        <div className="col-4 ">
+          
+
+          <div className="h6 d-flex w-100">Kegel Exercise
+          <span className=" round-bottons round-bottons-sm p-1">
+            <i onClick={()=>setAboutApp(true)} className="fa fa-question-circle fa-sm"></i>
+          </span>
+          </div>
           <span>
             <h4>
               <select id="cars" name="carlist" form="carform ">
@@ -53,19 +84,20 @@ const Settings = (props) => {
         </div>
         <div className="col-1 "></div>
         <div className="col-1 button-color fa-icon offset-3 d-flex justify-content-center align-items-center rounded-circle">
-          <i  className="fas  fa-sm">
-            W
-          </i>
+          <i className="fas  fa-sm">W</i>
         </div>
         <div className="col-1 fa-icon d-flex justify-content-center align-items-center  rounded-circle">
-          <i  className="fas fa-fill-drip fa-sm"></i>
+          <i className="fas fa-fill-drip fa-sm"></i>
         </div>
         <div className="col-1 fa-icon d-flex justify-content-center align-items-center rounded-circle ">
-          <i  className="fas fa-volume-up fa-sm"></i>
+          <i className="fas fa-volume-up fa-sm"></i>
         </div>
       </div>
 
-      <form onSubmit={submitFormTime} className="row formSetting position-relative">
+      <form
+        onSubmit={submitFormTime}
+        className="row formSetting position-relative m-2"
+      >
         <div className="col-12">
           <h6 className="float-left mt-3">Long Squeeze</h6>
         </div>
@@ -79,9 +111,9 @@ const Settings = (props) => {
           >
             {arr.map((object, i) => (
               <option value={i + 1}>{i + 1}</option>
-              ))}
+            ))}
           </select>
-              <div className="title-section">Squeeze Seconds</div>
+          <div className="title-section">Squeeze Seconds</div>
         </div>
         <div className=" form-group col-4">
           <select
@@ -92,7 +124,7 @@ const Settings = (props) => {
             onChange={dropdownChangeHandler}
           >
             {arr.map((object, i) => (
-              <option value={i+1}>{i + 1}</option>
+              <option value={i + 1}>{i + 1}</option>
             ))}
           </select>
           <div className="title-section">Rest Seconds</div>
@@ -105,11 +137,11 @@ const Settings = (props) => {
             value={props.selected.a3}
             onChange={dropdownChangeHandler}
           >
-            {arr.map((object, i) => (
-              <option value={i+1}>{i + 1}</option>
-              ))}
+            {arr2.map((object, i) => (
+              <option value={i + 1}>{i + 1}</option>
+            ))}
           </select>
-              <div className="title-section">Reps</div>
+          <div className="title-section">Reps</div>
         </div>
 
         <div className="col-12 mt-3">
@@ -124,10 +156,10 @@ const Settings = (props) => {
             onChange={dropdownChangeHandler}
           >
             {arr.map((object, i) => (
-                <option value={i + 1}>{i + 1}</option>
-                ))}
+              <option value={i + 1}>{i + 1}</option>
+            ))}
           </select>
-              <div className="title-section">Squeeze Seconds</div>
+          <div className="title-section">Squeeze Seconds</div>
         </div>
         <div className=" form-group col-4">
           <select
@@ -139,9 +171,9 @@ const Settings = (props) => {
           >
             {arr.map((object, i) => (
               <option value={i + 1}>{i + 1}</option>
-              ))}
+            ))}
           </select>
-              <div className="title-section">Rest Seconds</div>
+          <div className="title-section">Rest Seconds</div>
         </div>
         <div className=" form-group col-4">
           <select
@@ -151,11 +183,11 @@ const Settings = (props) => {
             value={props.selected.b3}
             onChange={dropdownChangeHandler}
           >
-            {arr.map((object, i) => (
+            {arr2.map((object, i) => (
               <option value={i + 1}>{i + 1}</option>
-              ))}
+            ))}
           </select>
-              <div className="title-section">Reps</div>
+          <div className="title-section">Reps</div>
         </div>
 
         <div className="fieldsettoggle form-check form-switch">
@@ -168,7 +200,12 @@ const Settings = (props) => {
         </div>
         <fieldset className="row my-4" disabled={disabledreverse}>
           <div className="col-12">
-            <h6 className="float-left mt-5">Reverse Kegel Exercise <span ><i className="far fa-question-circle fa-sm"></i></span></h6>
+            <h6 className="float-left mt-3 mb-3">
+              Reverse Kegel Exercise{" "}
+              <span>
+                <i className="far fa-question-circle fa-sm"></i>
+              </span>
+            </h6>
           </div>
 
           <div className=" form-group col-4">
@@ -181,7 +218,7 @@ const Settings = (props) => {
             >
               {arr.map((object, i) => (
                 <option value={i + 1}>{i + 1}</option>
-                ))}
+              ))}
             </select>
             <div className="title-section">Squeeze Seconds</div>
           </div>
@@ -207,18 +244,21 @@ const Settings = (props) => {
               value={props.selected.c3}
               onChange={dropdownChangeHandler}
             >
-              {arr.map((object, i) => (
-                <option style={{backgroundColor:"black"}}value={i + 1}>{i + 1}</option>
-                ))}
+              {arr2.map((object, i) => (
+                <option style={{ backgroundColor: "black" }} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
             </select>
-                <div className="title-section">Reps</div>
+            <div className="title-section">Reps</div>
           </div>
         </fieldset>
-
-        {/* <button type="submit" className="btn btn-primary">
-          Submit
-        </button> */}
       </form>
+      <Calender />
+      <GoalSet onGoaltime={setGoalTime} onGetSets={onGetSets} />
+      <EmailNotification />
+      <Subscription />
+      <Footer />
     </div>
   );
 };

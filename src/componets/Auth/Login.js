@@ -1,67 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Auth.css";
 import Logo from "../../assets/images/Logov1.png";
 import { Link, useHistory } from "react-router-dom";
 import { handleError, HttpCall } from "../../services/UseHttps";
 import { LoginUrl } from "../../services/Network";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/index";
 
-import "./Login.css"
+import "./Login.css";
 
 // import Images from '../../assets/Images/index'
 
 const Login = (props) => {
+  const dispatch = useDispatch()
+  const emailref = useRef();
+  const passwordref = useRef();
   const history = useHistory();
-  const [userlogin, setUserlogin] = useState({
-    email: "",
-    password: "",
-  });
-
   const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUserlogin({ ...userlogin, [name]: value });
-    // console.log(name,value);
-  };
   const submitForm = (e) => {
     e.preventDefault();
-    // console.log(userlogin);
+    const data = {
+      email: emailref.current.value,
+      password: passwordref.current.value,
+    };
     let errorlogin = {};
-
-    if (!userlogin.email ) {
+    if (!data.email) {
       errorlogin.email = "email required";
-    } else if (
-      !/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-    ) {
-      errorlogin.email = "email Invalid";
     }
-    if (!userlogin.password) {
+    if (!data.password) {
       errorlogin.password = "password required";
     }
     setErrors(errorlogin);
 
     // api integration function started
-    if(userlogin.email && userlogin.password )
-   { HttpCall(`${LoginUrl}`, "POST", userlogin)
-      .then((response) => {
-        localStorage.setItem("token", response.data.token);
-     
-        localStorage.setItem("userId", response.data._id);
-        // console.log("response",response.data.message);
-        if (response.data.message==="login user successfully") {
-          
-          history.push("./");
-          props.authcheck(true);
-        }else{
-          localStorage.clear();
-        }
-        handleError(response.data)
-      })
-      .catch((error) => {
-        // console.log("not logged in", error);
-        // props.onwrongLogin(true)
-      });}
+    if (data.email && data.password) {
+      HttpCall(`${LoginUrl}`, "POST", data)
+        .then((response) => {
+          localStorage.setItem("token", response.data.token);
+          if (response.data.sucess === true) {
+            history.push("./");
+            dispatch(authActions.login())//redux dispatch function
+            props.authcheck(true);
+          } else {
+            localStorage.clear();
+          }
+          handleError(response.data);
+        })
+        .catch((error) => {
+          // console.log("not logged in", error);
+          // props.onwrongLogin(true)
+        });
+    }
   };
 
   return (
@@ -75,12 +65,10 @@ const Login = (props) => {
           Please enter your address and password to login
         </p>
         <div className="form-group">
-         
           <input
+            ref={emailref}
             type="email"
             className="form-control authinput  authinput-email"
-            value={userlogin.email}
-            onChange={handleChange}
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Enter email"
@@ -95,12 +83,10 @@ const Login = (props) => {
         {errors.email && <p className="error-message-login">{errors.email}</p>}
 
         <div className="form-group ">
-          
           <input
+            ref={passwordref}
             type="password"
             className="form-control authinput  authinput-email"
-            value={userlogin.password}
-            onChange={handleChange}
             id="exampleInputPassword1"
             placeholder="Password"
             name="password"
@@ -111,7 +97,9 @@ const Login = (props) => {
             </span>
           </div>
         </div>
-        {errors.password && <p className="error-message-login">{errors.password}</p>}
+        {errors.password && (
+          <p className="error-message-login">{errors.password}</p>
+        )}
         <div>
           <Link
             to="/Forgetpassword"

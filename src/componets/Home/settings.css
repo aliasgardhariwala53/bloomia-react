@@ -1,50 +1,48 @@
-*{
-    
-    font-family: Gilroy-SemiBold;
+* {
+  font-family: Gilroy-SemiBold;
 }
-.formSetting{
-    background-color: #ebebfc;
-    border-radius: 20px;
-    margin: 8px;
+.formSetting {
+  background-color: #ebebfc;
+  border-radius: 20px;
+  margin: 8px;
+  padding: 6px;
 }
-select{
-    border-radius: .8rem!important;
-    border: none;
-    font-family: Gilroy-Bold;
+select {
+  border-radius: 0.8rem !important;
+  border: none;
+  font-family: Gilroy-Bold;
 }
-.fieldsettoggle{
-    position: absolute;
-    right: 45px;
-    justify-content: end;
-    display: flex;
-    z-index: 99;
-    bottom: 105px;
+.fieldsettoggle {
+  position: absolute;
+  right: 45px;
+  justify-content: end;
+  display: flex;
+  z-index: 99;
+  bottom: 122px;
 }
-.fa-icon{
-    background-color: #ebebfc;
-    height: 36px;
-    width: 36px;
-    padding: 2px;
-    margin-right: 4px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ebebfc;
-    cursor: pointer;
+.fa-icon {
+  background-color: #ebebfc;
+  height: 36px;
+  width: 36px;
+  padding: 2px;
+  margin-right: 4px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ebebfc;
+  cursor: pointer;
 }
-.button-color{
-    background-color: #2f45c5;
+.button-color {
+  background-color: #2f45c5;
 }
-.form-check-input{
-    margin: 15px 10px 0 0;
+.form-check-input {
+  margin: 15px 10px 0 0;
 }
-.title-section{
-    position: relative;
-    width: max-content;
-    font-family: Gilroy-SemiBold;
-    font-size: small;
-    right: 103px;
-    top: 37px;
+.title-section {
+  width: auto;
+  font-family: Gilroy-SemiBold;
+  font-size: small;
+  right: 103px;
+  top: 37px;
 }
-

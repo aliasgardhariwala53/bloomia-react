@@ -1,0 +1,25 @@
+.popupModal {
+    position: absolute;
+    top: 124px;
+    left: 208px;
+    width: 60%;
+}
+.alertBox {
+    /* width: 50%; */
+    border-radius: 3rem;
+    overflow-wrap: break-word;
+    /* background-color: #fff; */
+}
+.roundFinishPopImage {
+    width: 300px;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+.custom-button-sign-up {
+    font-size: .8rem!important;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #2f45c5;
+}

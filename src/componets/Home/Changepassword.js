@@ -15,10 +15,10 @@ const Changepassword = () => {
         const name = e.target.name;
         const value = e.target.value;
         setUserpassword({ ...userpassword, [name]: value });
+        
       };
       const submitFormPassword = (e) => {
         e.preventDefault();
-        // console.log(userpassword);
         let errorlogin = {};
         if (!userpassword.newPassword) {
           errorlogin.newPassword = "new password required";

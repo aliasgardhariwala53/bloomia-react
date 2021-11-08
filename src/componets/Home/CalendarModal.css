@@ -1,0 +1,108 @@
+.modal-main-body {
+  width: 1030px;
+  background-color: #ebebfc;
+  border-top-right-radius: 76px;
+  border-bottom-right-radius: 76px;
+  /* overflow-y: hidden !important; */
+}
+.modal-main-body::-webkit-scrollbar {
+  display: none;
+}
+.modal-main-body .modal-dialog .modal-content {
+  background-color: #ebebfc;
+  top: -96px;
+  left: -73px;
+  border: none !important;
+  width: 1076px !important;
+
+  /* overflow-y: hidden !important; */
+}
+.modal-body-container {
+  height: 821px !important;
+}
+.modal-backdrop {
+  display: none !important;
+}
+.headingWrapper {
+  height: 15%;
+  z-index: 2;
+  width: inherit;
+}
+.logo {
+  background-color: #fff;
+}
+.rounded-xl {
+  border-radius: 0.8rem;
+}
+#calendar {
+  width: 400px;
+}
+.calendar-container{
+    background: white !important;
+    border-radius: 0.8rem;
+    padding: 13px;
+    margin: 10px 0px;
+    height: 446px;
+    }
+#caledarBody .fc {
+  height: 400px;
+}
+#caledarBody .fc-scroller {
+  overflow: hidden !important;
+}
+.round-indication-green {
+  background-color: #2ab92a !important;
+}
+.round-indication-orange {
+    background-color: #e4a532!important;
+}
+.round-indication-red {
+    background-color: #f34242!important;
+}
+.round-indication {
+  height: 20px;
+  width: 20px;
+}
+.color-indicater>div{
+    width: max-content !important;
+}
+.color-indicater{
+    background: white !important;
+  border-radius: 0.8rem;
+}
+.fc-scrollgrid{
+    border: none !important;
+}
+.fc-button-primary{
+    color: #212529 !important;
+    background-color: #ffff !important;
+    border: none !important;
+}
+.fc-button-primary:focus{
+    outline: none !important;
+    color: #212529;
+    background-color: #ffff;
+    border: none !important;
+}
+
+.fc-toolbar-chunk:nth-child(3)>button{
+
+    display: none;
+}
+.fc-toolbar-chunk:nth-child(2){
+
+    display: none;
+}
+.fc-toolbar{
+    justify-content: flex-start !important;
+}
+.fc-toolbar-title{
+    font-size: 1.1rem!important;
+}
+.fc-daygrid-day:hover{
+    background-color: #ebebfc;
+}
+.fc-day-today{
+    background-color: #e8fde7 !important;
+
+}

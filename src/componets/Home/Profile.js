@@ -50,12 +50,14 @@ const Profile = (props) => {
     HttpCall(`${GetUserUrl}`,"GET")
       .then((response) => {
         setUserdata(response.data.data);
+       
         setRemovebutton(
           response.data.data.profileImage !==
             "uploads/1633780506772defaultImage.jpg"
         );
       })
       .catch((error) => {
+        
         handleError(error);
       });
   }, [refresh,token]);

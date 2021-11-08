@@ -1,0 +1,13 @@
+.subscriptionEndDate {
+  border-radius: 1.2rem;
+  background-color: #2f45c5;
+}
+.font-weight-600 {
+  font-weight: 600 !important;
+}
+.subscribeButton {
+  font-size: 0.8rem !important;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #fff;
+}

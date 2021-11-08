@@ -12,17 +12,22 @@ export const HttpCall = async (method, type, body) => {
       data: body,
     })
       .then((response) => {
-        if (response.status === 200) {
-          Swal.fire({
-            position: "center",
-            type: "error",
-            title: response.data.message,
-          });
+        if (response.status === 200 ) {
+          if (!(response.config.method==="get")) {
+           
+            Swal.fire({
+              position: "center",
+              type: "error",
+              title: response.data.message,
+            });
+          }
+         
           return resolve(response);
         }
         return resolve(response);
       })
       .catch((err) => {
+        
         return reject(err);
       });
   });
@@ -128,8 +133,8 @@ axios.interceptors.response.use(
 //for delete
 
 //For Api Error Handling Globaly
-export const handleError = (errResponse) => {
-  if (errResponse.status === 403) {
+export const handleError = (error) => {
+  if (error.response.status === 403) {
     localStorage.clear();
     return Swal.fire({
       position: "center",
@@ -138,29 +143,29 @@ export const handleError = (errResponse) => {
     }).then((ok) => {
       window.location.assign("/");
     });
-  } else if (errResponse.status === 404) {
+  } else if (error.response.status === 404) {
     Swal.fire({
       position: "center",
       type: "error",
-      title: errResponse.data.message,
+      title: error.data.message,
     });
-  } else if (errResponse.status === 500) {
+  } else if (error.response.status === 500) {
     Swal.fire({
       position: "center",
       type: "error",
-      title: errResponse.data.message,
+      title: error.data.message,
     });
-  } else if (errResponse.status === 400) {
+  } else if (error.response.status === 400) {
     Swal.fire({
       position: "center",
       type: "error",
-      title: errResponse.data.message,
+      title: error.data.message,
     });
-  } else if (errResponse.status === 401) {
+  } else if (error.response.status === 401) {
     Swal.fire({
       position: "center",
       type: "error",
-      title: errResponse.data.message,
+      title: error.data.message,
     });
   }
 };

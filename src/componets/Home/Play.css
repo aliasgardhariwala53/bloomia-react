@@ -1,85 +1,83 @@
-.play-container{
-    height: 500px;
-    /* background-color:#000; */
+.play-container {
+  height: 500px;
+  /* background-color:#000; */
 }
-.logo-play{
-    float: left;
-    position: absolute;
-    top: 20px;
-    background: white;
-    padding: 8px;
-    margin: 37px;
-    border-radius: .8rem;
-    z-index: 9999;
+.logo-play {
+
+  position: absolute;
+  top: 52px;
+  left: 25px;
+  background: white;
+  padding: 10px 22px;
+  border-radius: 0.8rem;
+/* z-index: 9999; */
 }
-#myVideo{
-    width: 100%;
-    object-fit: contain;
-    transform: scale(2.1);
-    height: 100vh;
-    }
-.w-100
-{
-    width: 100%;
+#myVideo {
+  width: 100%;
+  object-fit: contain;
+  transform: scale(2.1);
+  height: 100vh;
 }
-.display-time{
-    position: absolute;
-    top: 100px;
-    left: 250px;
+.w-100 {
+  width: 100%;
+}
+.display-time {
+  position: absolute;
+  top: 100px;
+  left: 250px;
 }
 @keyframes buttonTransition {
-    100% {
-      r: 35% ;
-    }
-    50% {
-      r: 25%;
-    }
-    25% {
-      r: 15%;
-    }
-    0% {
-      r: 35%;
-    }
+  100% {
+    r: 25%;
   }
-
+  75% {
+    r: 35%;
+  }
+  50% {
+    r: 25%;
+  }
+  25% {
+    r: 15%;
+  }
+  0% {
+    r: 25%;
+  }
+}
 
 @keyframes buttonTransition2 {
-    from {
-        stroke-dashoffset: 1256 ;
-    }
-    to {
-        stroke-dashoffset: 0;
-    }
+  from {
+    stroke-dashoffset: 0;
   }
-  
-  
-  .innerCircle {
-    /* animation-duration: 4s; */
-    transition: all ease-in-out;
-    /* animation-name: buttonTransition; */
-    animation-duration: unset;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-   
+  to {
+    stroke-dashoffset: 1256;
   }
-  .innercircle-two{
-    /* animation-duration: 4s; */
-    transition: all ease-in-out;
-    animation-name: buttonTransition;
-    animation-duration: unset;
-   
-  }
-  #shape {
-    transform: rotate(-90deg);
-    transition: 0s;
-    transform-origin: center;
-    animation-delay: 0s;
-    animation-duration: unset;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-  }
+}
 
-  .shape-two {
+.innerCircle {
+  /* animation-duration: 4s; */
+  transition: all ease-in-out;
+  /* animation-name: buttonTransition; */
+  animation-duration: unset;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.innercircle-two {
+  /* animation-duration: 4s; */
+  transition: all ease-in-out;
+  animation-name: buttonTransition;
+  animation-duration: unset;
+}
+#shape {
+  /* transform: rotate(-90deg); */
+  transition: 0s;
+  transform-origin: center;
+  animation-delay: 0s;
+  animation-duration: unset;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+/* .shape-two {
     transform: rotate(-90deg);
 
     transition: 0s;
@@ -88,27 +86,79 @@
     
     animation-timing-function: linear;
     animation-name: buttonTransition2;
-  }
-.play-button{
-    cursor: pointer;
-    position: absolute;
-    top: 236px;
-    left: 246px;
-    z-index: 999;
-
+  } */
+.play-button {
+  cursor: pointer;
+  position: absolute;
+  top: 236px;
+  left: 246px;
+  z-index: 999;
 }
-.timer-type{
+.timer-type {
   position: absolute;
   top: 306px;
   left: 195px;
   color: white;
   font-size: larger;
 }
-.timer{
+.timer {
   position: absolute;
   top: 258px;
   left: 494px;
   color: white;
   font-size: larger;
   z-index: 999;
+}
+.start-over {
+  position: absolute;
+  top: 530px;
+  left: 44%;
+  border-radius: 0.8rem;
+  z-index: 9999;
+  background-color: #fd7279 !important;
+}
+.Reps-count {
+  position: absolute;
+  top: 580px;
+  left: 37%;
+
+  z-index: 9999;
+}
+
+/* new css for outercircle */
+@keyframes buttonTransition1 {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 1256;
+  }
+}
+@keyframes buttonTransition2 {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 1256;
+  }
+}
+
+#shape {
+  transition: 0s;
+  transform-origin: center;
+  transform:rotate(90deg) scaleX(-1) !important;
+  /* transform: rotate(-90deg); */
+  stroke: #fd7279;
+  stroke-width: 15;
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: 1256;
+  stroke-dashoffset: 0;
+  animation-timing-function: linear;
+}
+.shape-one {
+  animation-name: buttonTransition1;
+}
+.shape-two {
+  animation-name: buttonTransition2;
 }

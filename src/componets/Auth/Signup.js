@@ -28,6 +28,7 @@ const Signup = () => {
   };
 
   const submitForm = (e) => {
+    
     e.preventDefault();
     console.log(usersignup);
     setErrors(Validate(usersignup));
@@ -55,7 +56,7 @@ const Signup = () => {
         <p className="para-create-account">
           Please enter your details to create your account.
         </p>
-        <div className="form-group">
+        <div className="form-group d-flex">
           {/* <label htmlFor="exampleInputFirstName">First Name</label> */}
           <input
             type="text"
@@ -73,7 +74,7 @@ const Signup = () => {
             </div>
         </div>
         {errors.first_name && <p className="error-message-signup">{errors.first_name}</p>}
-        <div className="form-group">
+        <div className="form-group d-flex">
           {/* <label htmlFor="exampleInputLastName"></label> */}
           <input
             type="text"
@@ -91,7 +92,7 @@ const Signup = () => {
             </div>
         </div>
             {errors.last_name && <p className="error-message-signup">{errors.last_name}</p>}
-        <div className="form-group">
+        <div className="form-group d-flex">
           {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
           <input
             type="email"
@@ -111,7 +112,7 @@ const Signup = () => {
         </div>
             {errors.email && <p className="error-message-signup">{errors.email}</p>}
 
-        <div className="form-group ">
+        <div className="form-group d-flex">
           {/* <label htmlFor="exampleInputPassword1">Password</label> */}
           <input
             type="text"
@@ -129,7 +130,7 @@ const Signup = () => {
             </div>
         </div>
             {errors.contact  && <p className="error-message-signup">{errors.contact}</p>}
-        <div className="form-group ">
+        <div className="form-group d-flex">
           {/* <label htmlFor="exampleInputPassword1">Password</label> */}
           <input
             type="password"

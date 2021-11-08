@@ -1,14 +1,15 @@
-import {React ,useState} from 'react';
+import {React,useContext } from 'react';
 import { Route, Redirect } from "react-router-dom";
 
+import AuthContext from "../../store/auth-context";
 
-const GuardedRoute = ({ component: Component,authVerify, auth, ...rest }) => {
-const [authrization, setauthrization] = useState(false)
+const GuardedRoute = ({ component: Component,authVerify, ...rest }) => {
+    const context = useContext(AuthContext)
    
-// console.log("auth:" + auth)
+// console.log("auth:9587878758718787" ,context)
     return(
         <Route {...rest} render={(props) => (
-            auth === authrization
+            context.isAutheticated 
                 ? <Component {...props} onchangheaderuser={authVerify}/>
                 : <Redirect to='/' />
         )} />
@@ -16,3 +17,24 @@ const [authrization, setauthrization] = useState(false)
 }
 
 export default GuardedRoute;
+
+//redux example 
+// import {React,useContext } from 'react';
+// import { Route, Redirect } from "react-router-dom";
+// // import AuthContext from "../../store/auth-context";
+// import { useSelector } from 'react-redux';
+// const GuardedRoute = ({ component: Component,authVerify, ...rest }) => {
+//     const auth = useSelector(state => state.auth.auth)
+//     // const context = useContext(AuthContext)
+   
+// // console.log("auth:9587878758718787" ,context)
+//     return(
+//         <Route {...rest} render={(props) => (
+//             auth
+//                 ? <Component {...props} onchangheaderuser={authVerify}/>
+//                 : <Redirect to='/' />
+//         )} />
+//     )
+// }
+
+// export default GuardedRoute;

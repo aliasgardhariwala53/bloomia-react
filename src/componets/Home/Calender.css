@@ -1,0 +1,16 @@
+.bg-custom{
+    background-color: #ebebfc;
+    border-radius: 0.8rem !important;
+}
+.fc-theme-standard td, .fc-theme-standard th{
+    border: none;
+}
+.fc-daygrid-day-number{
+    margin: auto;
+}
+.fc-media-screen::-webkit-scrollbar{
+   display: none;
+}
+FullCalendar::-webkit-scrollbar{
+    display: none !important;
+}

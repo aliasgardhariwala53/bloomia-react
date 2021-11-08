@@ -1,19 +1,24 @@
-import {React} from "react";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import {React,useContext} from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../../store/auth-context";
 
 import "./Header.css";
 
 const Header = (props) => { 
+  const context = useContext(AuthContext)
   
   const logOut = () => {
     localStorage.removeItem("token");
-    
+    context.isAutheticated= false;
     window.location.assign("../login");
   };
+  
   return (
+    
     <div className="container header-container">
       
-      { !props.onloggedincheck && <div className="row mt-3 ml-3 mr-3">
+      { !context.isAutheticated && <div className="row mt-3 ml-3 mr-3">
                 <div className="col-3 offset-5 ">
                 <Link to="/login" style={{ textDecoration: 'none' }}>
                 
@@ -35,13 +40,13 @@ const Header = (props) => {
         
        
       </div>}
-      { props.onloggedincheck && <div className="row mt-3 ml-3 mr-3">
+      { context.isAutheticated && <div className="row mt-3 ml-3 mr-3">
       { window.location.href==="http://localhost:3000/profile"  && <div className="col-1 mt-3 backbutton">
             <Link to="/">
               <i className="fa fa-arrow-left "></i>
             </Link>
           </div>}
-        <div className="col-5 offset-4 text-right">
+        <div className="col-8 text-right pr-0">
           Welcome,
           <span>
             <br />
@@ -52,10 +57,10 @@ const Header = (props) => {
             </h4>
           </span>
         </div>
-        <div className="col-2">
-          <div className="dropdown show">
+        <div className="col-3 px-0">
+          <div className="dropdown show px-0">
             <div
-              className="btn  dropdown-toggle"
+              className="btn  dropdown-toggle px-0"
               role="button"
               id="dropdownMenuLink"
               data-toggle="dropdown"

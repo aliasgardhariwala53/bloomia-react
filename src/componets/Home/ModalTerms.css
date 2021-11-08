@@ -1,0 +1,40 @@
+  .fade{
+      transition: none !important;
+  }
+  .modal-backdrop{
+    display: none !important;
+  }
+  
+  .modal-backdrop {
+    opacity: 0 !important;
+  }
+  .modal-terms-body {
+    width: 1030px;
+    transition: none !important;
+    right: 100px;
+    bottom: 0;
+    left: 0;
+    z-index: 10040;
+    overflow: auto;
+    overflow-y: auto;
+  }
+  .my-modal {
+    width: 90vw;
+    max-width: 90vw;
+  }
+  .modal-content {
+    padding: 1.5rem !important;
+    width: 962px !important;
+    border-radius: 0.8rem !important;
+  }
+  .modal-body {
+    padding-top: 0px !important;
+    height: 480px;
+    overflow-y: scroll;
+  }
+  .modal-dialog {
+    margin: 85px 45px 0px 45px !important;
+    z-index: 9999999;
+    transition: none !important;
+  }
+  
