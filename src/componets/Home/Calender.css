@@ -14,3 +14,6 @@
 FullCalendar::-webkit-scrollbar{
     display: none !important;
 }
+.fc-daygrid-day-events{
+    display: none;
+}

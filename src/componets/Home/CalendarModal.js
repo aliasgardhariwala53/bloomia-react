@@ -10,15 +10,16 @@ import FullCalendar from "@fullcalendar/react";
 import "@fullcalendar/daygrid/main.css";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import ProgressReport from "../ProgressReport/ProgressReport";
 const events = [{ title: "Today", date: new Date() }];
 const CalendarModal = () => {
   const dispatch = useDispatch();
   const showCalendar = useSelector((state) => state.modal.calendar);
   return (
     <Modal className="modal-main-body" show={showCalendar}>
-      <Modal.Header className="header-container container  ">
+      <Modal.Header className="header-container-calendar container  ">
         <div className="headingWrapper row m-0 align-items-center">
-          <span className=" col-3 px-1 py-2 text-center logo rounded-xl font-weight-600">
+          <span className=" col-3 col-lg-2 px-1 py-2 text-center logo rounded-xl font-weight-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="130"
@@ -129,7 +130,7 @@ const CalendarModal = () => {
           </div>
         </div>
         <div className="row calendar-container ">
-            <div className="col-12 h4 p-0">Calendar</div>
+            <div className="col-12 h4 ">Calendar</div>
           <div id="caledarBody" className="col-lg-9 col-md-6">
             <FullCalendar
               plugins={[dayGridPlugin, interactionPlugin]}
@@ -154,7 +155,7 @@ const CalendarModal = () => {
               </div>
             </div>
           </div>
-       
+       <ProgressReport/>
       </Modal.Body>
     </Modal>
   );

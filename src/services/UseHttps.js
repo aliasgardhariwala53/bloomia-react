@@ -6,11 +6,11 @@ const axios = require("axios");
 export const HttpCall = async (method, type, body) => {
   return new Promise(async function (resolve, reject) {
     const url = BaseUrl + method;
-    axios({
-      method: type,
-      url: url,
-      data: body,
-    })
+      axios({
+        method: type,
+        url: url,
+        data: body,
+      })
       .then((response) => {
         if (response.status === 200 ) {
           if (!(response.config.method==="get")) {
