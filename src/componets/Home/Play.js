@@ -9,6 +9,7 @@ import ProgressBar from "./ProgressBar";
 import { HttpCall } from "../../services/UseHttps";
 import { updateReportUrl ,getReportDateUrl} from "../../services/Network";
 import CalendarModal from "./CalendarModal";
+import BloomiaLogo from "../../assets/BloomiaLogo";
 const Play = (props) => {
   const [newTime, setnewTime] = useState({});
   const [leftTime, setLeftTime] = useState({});
@@ -450,7 +451,7 @@ const Play = (props) => {
         </div>
 
         <div className="logo-play">
-          <img src={img} alt="hello" width="140px" />
+          <BloomiaLogo/>
         </div>
       </div>
       <ProgressBar taskdone={saveProgress.setCount} totaltask={props.totaltask} />

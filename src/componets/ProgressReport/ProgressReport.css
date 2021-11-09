@@ -1,0 +1,15 @@
+.graph-header {
+  border-bottom: 1px solid #dee2e6 !important;
+}
+.chartjs-render-monitor{
+    width: inherit !important;
+    height: inherit !important;
+}
+.sets-graph-container{
+    width: 928px ;
+    height: 300px ;
+}
+.Time-graph-container{
+    width: 928px ;
+    height: 300px ;
+}

@@ -16,16 +16,16 @@ const Calender = () => {
   return (
     <>
      
-      <div class="row m-0 align-items-center mb-3">
-        <span class="h5 m-0 width-fit-content m-2">Track Your Progress</span>
-        <span id="some" class="ml-auto"></span>
+      <div className="row m-0 align-items-center mb-3">
+        <span className="h5 m-0 width-fit-content m-2">Track Your Progress</span>
+        <span id="some" className="ml-auto"></span>
       </div>
-      <div class="bg-custom rounded-xl p-3 m-2">
-        <div class="row m-0 mt-2 ">
-          <div class="col-6 text-center">
+      <div className="bg-custom rounded-xl p-3 m-2">
+        <div className="row m-0 mt-2 ">
+          <div className="col-6 text-center">
             <div>Current Streak : 0</div>
           </div>
-          <div class="col-6 text-center">
+          <div className="col-6 text-center">
             <div>Longest Streak : 3</div>
           </div>
         </div>
@@ -36,11 +36,11 @@ const Calender = () => {
         dateClick={handleDateClick}
       />
        
-        <div class="row m-0 mt-2 align-items-center justify-content-center ">
-          <span class="width-fit-content w-auto" >For more details</span>
-          <span class="ml-2 w-auto">
-            <span class="round-bottons ">
-              <i onClick={()=>dispatch(modalActions.calendarHandler())} class="fas fa-chevron-right fa-sm"></i>
+        <div className="row m-0 mt-2 align-items-center justify-content-center ">
+          <span className="width-fit-content w-auto" >For more details</span>
+          <span className="ml-2 w-auto">
+            <span className="round-bottons ">
+              <i onClick={()=>dispatch(modalActions.calendarHandler())} className="fas fa-chevron-right fa-sm"></i>
             </span>
           </span>
         </div>

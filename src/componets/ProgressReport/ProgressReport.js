@@ -10,9 +10,15 @@ import {
   getLastDaysUrl,
 } from "../../services/Network";
 const ProgressReport = () => {
+  //sets
   const [ThreeMonth, setThreeMonth] = useState({});
   const [lastYear, setlastYear] = useState({});
   const [Days30, setDays30] = useState({});
+  //Time
+  const [ThreeMonthTime, setThreeMonthTime] = useState({});
+  const [lastYearTime, setlastYearTime] = useState({});
+  const [Days30Time, setDays30Time] = useState({});
+  //option select
   const [optionSelect, setOptionSelect] = useState(1);
 
   const dataYear = {
@@ -28,7 +34,8 @@ const ProgressReport = () => {
   useEffect(() => {
     HttpCall(`${getReportLastYearUrl}`, "POST", dataYear)
       .then((response) => {
-        let empAge = [];
+        let dataYearSets = [];
+        let dataYearTime = [];
         let labels = Object.keys(response.data.data[0]).sort(function (
           dateA,
           dateB
@@ -37,7 +44,8 @@ const ProgressReport = () => {
         });
 
         for (const iterator of Object.values(response.data.data[0])) {
-          empAge.push(iterator.setCount);
+          dataYearSets.push(iterator.setCount);
+          dataYearTime.push(iterator.setTime);
         }
 
         setlastYear({
@@ -45,8 +53,22 @@ const ProgressReport = () => {
           labels: labels,
           datasets: [
             {
-              label: "Sales of 2020",
-              data: empAge,
+              
+              data: dataYearSets,
+              fill: true,
+              backgroundColor: "#a7dbfa ",
+              borderColor: "#8da8c6",
+              borderWidth: 1,
+            },
+          ],
+        });
+        setlastYearTime({
+          ...lastYearTime,
+          labels: labels,
+          datasets: [
+            {
+              
+              data: dataYearTime,
               fill: true,
               backgroundColor: "#a7dbfa ",
               borderColor: "#8da8c6",
@@ -65,7 +87,8 @@ const ProgressReport = () => {
           "geeeeeeeeeeeeeeeeetttttttttttttt report",
           response.data.data[0]
         );
-        let empAge2 = [];
+        let data3MonthSets = [];
+        let data3MonthTime = [];
         let labels = Object.keys(response.data.data[0]).sort(function (
           dateA,
           dateB
@@ -74,7 +97,8 @@ const ProgressReport = () => {
         });
 
         for (const iterator of Object.values(response.data.data[0])) {
-          empAge2.push(iterator.setCount);
+          data3MonthSets.push(iterator.setCount);
+          data3MonthTime.push(iterator.setTime);
         }
 
         setThreeMonth({
@@ -82,8 +106,22 @@ const ProgressReport = () => {
           labels: labels,
           datasets: [
             {
-              label: "Sales of 2020",
-              data: empAge2,
+             
+              data: data3MonthSets,
+              fill: true,
+              backgroundColor: "#a7dbfa ",
+              borderColor: "#8da8c6",
+              borderWidth: 1,
+            },
+          ],
+        });
+        setThreeMonthTime({
+          ...ThreeMonthTime,
+          labels: labels,
+          datasets: [
+            {
+             
+              data: data3MonthTime,
               fill: true,
               backgroundColor: "#a7dbfa ",
               borderColor: "#8da8c6",
@@ -102,24 +140,41 @@ const ProgressReport = () => {
           "geeeeeeeeeeeeeeeeettttttttttt92468489489418948924894ttt report",
           response.data.data
         );
-        let empAge3 = [];
-        let labels2 = [];
+        let data30DaysSets = [];
+        let data30DaysTime = [];
+        let labels = [];
 
         for (const iterator of Object.values(response.data.data)) {
           console.log("helllloooo dostod3", iterator.setCount);
-          empAge3.push(iterator.setCount);
-          labels2.push(iterator.date);
+          data30DaysSets.push(iterator.setCount);
+          data30DaysTime.push(iterator.setTime);
+          labels.push(iterator.date);
         }
 
         setDays30({
           ...Days30,
-          labels: labels2,
+          labels: labels,
           datasets: [
             {
-              label: "Sales of 2020",
-              data: empAge3,
+             
+              data: data30DaysSets,
               fill: true,
               backgroundColor: "#a7dbfa ",
+              borderColor: "#8da8c6",
+              borderWidth: 1,
+            },
+          ],
+        });
+        setDays30Time({
+          ...Days30Time,
+          labels: labels,
+          datasets: [
+            {
+              
+              data: data30DaysTime,
+              fill: true,
+              backgroundColor: "#a7dbfa ",
+
               borderColor: "#8da8c6",
               borderWidth: 1,
             },
@@ -132,25 +187,74 @@ const ProgressReport = () => {
   }, []);
 
   const legend = {
-    display: true,
-    position: "bottom",
-    labels: {
-      fontColor: "#323130",
-      fontSize: 14,
-    },
+    display: false,
   };
-  const options = {
+  const optionsSets = {
     scales: {
+      xAxes: [
+        {
+          ticks: {
+            fontColor: "#000",
+            fontSize:16
+          },
+          gridLines: {
+            display: true,
+          },
+        },
+      ],
       yAxes: [
         {
           ticks: {
             min: 0,
             max: 3000,
-            stepSize: 100,
+            fontColor: "#000",
+            stepSize: 200,
+            fontSize:18
           },
           gridLines: {
-            display: false
-        }
+            display: false,
+          },
+          scaleLabel: {
+            display: true,
+            fontColor: "#000",
+            fontSize:16,
+            labelString: "Number of Sets",
+          },
+        },
+      ],
+    },
+  };
+  const optionsTime = {
+    scales: {
+      xAxes: [
+        {
+          ticks: {
+            fontColor: "#000",
+            fontSize: 16,
+          },
+          gridLines: {
+            display: true,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          ticks: {
+            min: 0,
+            max: 500,
+            fontColor: "#000",
+            stepSize: 50,
+            fontSize:16
+          },
+          gridLines: {
+            display: false,
+          },
+          scaleLabel: {
+            display: true,
+            fontSize:18,
+            fontColor: "#000",
+            labelString: "Time of Exercise(seconds)",
+          },
         },
       ],
     },
@@ -166,8 +270,8 @@ const ProgressReport = () => {
   };
   return (
     <Card>
-      <div className="d-flex justify-content-between">
-        <div>Progress Report</div>
+      <div className="d-flex justify-content-between graph-header pb-2">
+        <div className="h4">Progress Report</div>
         <div className="dropdown">
           <button
             class="btn btn-light border  dropdown-toggle"
@@ -189,15 +293,28 @@ const ProgressReport = () => {
           </ul>
         </div>
       </div>
-      <Line
-        data={
-          (optionSelect === 1 && Days30) ||
-          (optionSelect === 2 && ThreeMonth) ||
-          (optionSelect === 3 && lastYear)
-        }
-        legend={legend}
-        options={options}
-      />
+      <div className="sets-graph-container my-2">
+        <Line
+          data={
+            (optionSelect === 1 && Days30Time) ||
+            (optionSelect === 2 && ThreeMonthTime) ||
+            (optionSelect === 3 && lastYearTime)
+          }
+          legend={legend}
+          options={optionsTime}
+        />
+      </div>
+      <div  className="Time-graph-container my-3">
+        <Line
+          data={
+            (optionSelect === 1 && Days30) ||
+            (optionSelect === 2 && ThreeMonth) ||
+            (optionSelect === 3 && lastYear)
+          }
+          legend={legend}
+          options={optionsSets}
+        />
+      </div>
     </Card>
   );
 };
