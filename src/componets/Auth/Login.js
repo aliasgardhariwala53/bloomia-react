@@ -64,7 +64,7 @@ const Login = (props) => {
         <p className="para-create-account">
           Please enter your address and password to login
         </p>
-        <div className="form-group">
+        <div className="form-group d-flex">
           <input
             ref={emailref}
             type="email"
@@ -82,7 +82,7 @@ const Login = (props) => {
         </div>
         {errors.email && <p className="error-message-login">{errors.email}</p>}
 
-        <div className="form-group ">
+        <div className="form-group d-flex">
           <input
             ref={passwordref}
             type="password"

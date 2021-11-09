@@ -40,7 +40,7 @@ const onsetGoal = (e) => {
     props.onGetSets(settingGoal.set);//gettings sets
   }, [goalseted])
 
-  let A =new Date(props.onGoaltime * 1000).toISOString().substr(14, 5).replace(":"," Min " )
+  let A =new Date(props.onGoaltime*settingGoal.set * 1000).toISOString().substr(14, 5).replace(":"," Min " )
   return (
     <div className="p-3 Your-goal row align-items-center m-2">
       <span className="h5 m-0 w-auto text-left">Your Goal</span>
