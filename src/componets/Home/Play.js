@@ -62,6 +62,7 @@ const Play = (props) => {
         // handleError(error);
       });
     }, 1000);
+    
   }, [saveProgress])
 
   const date={
@@ -427,7 +428,7 @@ const Play = (props) => {
             />
           </svg>
         </div>
-        <div>
+        <div className="start-over-section">
           {isActive && (
             <button
               className="start-over btn bg-pink text-light rounded-xl btn-sm "
@@ -437,7 +438,7 @@ const Play = (props) => {
             </button>
           )}
           {isActive && (
-            <div className="Reps-count text-light ">
+            <div className="Reps-count text-light h5 mt-3">
               {Squeeze === 1 &&
                 `${leftTime.a3} Reps more to go of Long Squeeze`}
               {Squeeze === 2 &&
@@ -454,7 +455,7 @@ const Play = (props) => {
           <BloomiaLogo/>
         </div>
       </div>
-      <ProgressBar taskdone={saveProgress.setCount} totaltask={props.totaltask} />
+      <ProgressBar taskdone={saveProgress.setTime} totaltask={100} />
       <CalendarModal/>
     </>
   );

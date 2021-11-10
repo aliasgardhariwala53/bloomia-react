@@ -13,7 +13,8 @@ const CompleteGoalNotify = (props) => {
           <div class="col-12">
             <img src={Logo} alt="hello" class="roundFinishPopImage" />
             <div class="w-100 py-4 m-0">
-              You have completed 10 secs out of 20 goal secs.
+            { props.CompletedGoalTime<props.TotalGoalTIme &&<p>You have completed {props.CompletedGoalTime} secs out of {props.TotalGoalTIme} goal secs.</p>}
+            { props.CompletedGoalTime>=props.TotalGoalTIme &&<p>You have completed your daily goal, you can take rest now.</p>}
             </div>
             <span onClick={props.onClick} class="custom-button-sign-up px-4 py-2 text-light">Ok</span>
           </div>

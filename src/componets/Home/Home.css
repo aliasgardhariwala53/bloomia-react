@@ -1,40 +1,92 @@
-.home-container{
-    overflow-x: hidden;
-    overflow-y   : hidden;
-    overflow: hidden;
-    
-
+.home-container {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  overflow: hidden;
 }
 
-.action-container{
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: 100vh;
-    
-  
-    background-color: white;
-}
-::-webkit-scrollbar{
-   
-        width: 10px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #a5a5a5;
-    border-radius: 10px;
+.action-container {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+
+  background-color: white;
 }
 ::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #a5a5a5;
-    border-radius: 10px;
+  background: #a5a5a5;
+  border-radius: 10px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #a5a5a5;
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background: #e7e7e7;
+  border-radius: 10px;
+  background: #e7e7e7;
 }
-.video-overflow{
+
+/* /canvas css start */
+.canvas-button {
+  position: absolute;
+  right: 25px;
+  top: 45px;
+  width: fit-content;
+  cursor: pointer;
+}
+.cnavas-new {
+  visibility: hidden !important;
+  transform: translateX(100%) !important;
+  transition: transform 1s ease-in-out;
+}
+
+.offcanvas-end {
+  width: 400px;
+  border: none;
+  transform: translateX(100%);
+}
+@media (min-width: 960px) {
+  .cnavas-new {
+    visibility: visible !important;
+  }
+  .offcanvas-end {
+    top: 0;
+    right: 0px;
+    width: 510px;
+    transition: transform 0s ease-in-out !important;
+    transform: none !important;
+  }
+  .offcanvas-header {
+    display: none;
+  }
+  .video-overflow {
     overflow: hidden;
     border-top-right-radius: 70px;
     border-bottom-right-radius: 70px;
-    }
+  }
+}
+
+.offcanvas-header {
+  position: fixed;
+  height: 36px;
+  margin: 33px 0 0 33px;
+  z-index: 9999999;
+  width: 36px;
+  padding: 2px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: #ebebfc;
+}
+.offcanvas-body {
+  padding: 0px 18px;
+}
+.offcanvas-header .btn-close {
+  padding: 20px;
+  margin: 0px;
+  outline: none;
+}

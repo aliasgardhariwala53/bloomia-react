@@ -8,20 +8,23 @@ import { GetUserUrl } from "../../services/Network";
 import GuardedRoute from "../Auth/GuardedRoute";
 import "./Home.css";
 import Settings from "./settings";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import Button from "react-bootstrap/Button";
 
 import { getGoalData } from "../../services/Network";
 const Home = (props) => {
   const [passtime, setPasstime] = useState({});
   const [setchange, setSetschanges] = useState();
   const [totaltask, settotaltask] = useState();
+  const [showCanvas, setShowCanvas] = useState(false);
   useEffect(() => {
     HttpCall(`${GetUserUrl}`, "GET")
       .then((response) => {
         setUserdata(response.data.data);
-        console.log(response,"response aiiiiiiiiiiiiiii  profile ");
+        console.log(response, "response aiiiiiiiiiiiiiii  profile ");
       })
       .catch((error) => {
-        if (error.response.status===401) {
+        if (error.response.status === 401) {
           localStorage.removeItem("token");
           window.location.assign("../login");
         }
@@ -30,61 +33,74 @@ const Home = (props) => {
   }, []);
 
   useEffect(() => {
-    HttpCall(`${getGoalData}`,"GET")
+    HttpCall(`${getGoalData}`, "GET")
       .then((response) => {
         // setTotalsettime(response)
-        console.log("helloooooooooooooo response from set golass",response.data.data[0].set);
-        settotaltask(response.data.data[0].set)
+        console.log(
+          "helloooooooooooooo response from set golass",
+          response.data.data[0].set
+        );
+        settotaltask(response.data.data[0].set);
       })
-      .catch((error) => {
-        
-      });
+      .catch((error) => {});
   }, [setchange]);
   // console.log("auth in home",props.profileView);
   const [userdata, setUserdata] = useState({
     first_name: "",
     last_name: "",
     profileImage: "",
-    totalGoalTime:"",
+    totalGoalTime: "",
   });
 
   const changeusername = (change) => {
     setUserdata(change);
   };
 
-
   const submitFormHandler = (value) => {
     setPasstime(value);
     return value;
   };
   const setchangeHandler = (value) => {
-    setSetschanges(value)
+    setSetschanges(value);
   };
   // console.log(passtime);
-
+  const handleClose = () => setShowCanvas(true);
+  const handleShow = () => setShowCanvas(false);
   return (
     <div className="container-fluid home-container p-0">
       <div className="row m-0 p-0">
-        <div className="col-8  m-0 p-0 video-overflow">
+        <div className="col-12 col-lg-8 m-0 p-0 video-overflow">
           <Play time={passtime} time2={passtime} totaltask={totaltask} />
         </div>
-        <div className="col-4  m-0 p-0 action-container" >
-          <Header username={userdata} />
-
-          <GuardedRoute
-            path="/profile"
-            component={Profile}
-            authVerify={changeusername}
-          />
-
-          <Route exact path="/">
-            <Settings
-              selected={submitFormHandler}
-              onSubmitForm={submitFormHandler}
-              setchange={setchangeHandler}
-            />
-          </Route>
+        
+        <div className="canvas-button">
+        
+        <i className="fa fa-bars h1" aria-hidden="true" variant="primary btn" onClick={handleShow} ></i>
+        
         </div>
+        <Offcanvas className={showCanvas?'cnavas-new':''} show={true}  onHide={handleClose}  {...props} placement="end">
+          <Offcanvas.Header closeButton>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+          <Header username={userdata} />
+          
+
+            <GuardedRoute
+              path="/profile"
+              component={Profile}
+              authVerify={changeusername}
+            />
+
+            <Route exact path="/">
+              <Settings
+                selected={submitFormHandler}
+                onSubmitForm={submitFormHandler}
+                setchange={setchangeHandler}
+              />
+            </Route>
+          </Offcanvas.Body>
+        </Offcanvas>
+        
       </div>
     </div>
   );

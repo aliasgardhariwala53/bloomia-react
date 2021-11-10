@@ -1,22 +1,28 @@
 .play-container {
-  height: 500px;
   /* background-color:#000; */
 }
 .logo-play {
-
   position: absolute;
   top: 52px;
   left: 25px;
   background: white;
   padding: 8px 24px;
   border-radius: 0.8rem;
-/* z-index: 9999; */
+  /* z-index: 9999; */
 }
 #myVideo {
   width: 100%;
   object-fit: contain;
-  transform: scale(2.1);
+  transform: scale(1.9);
   height: 100vh;
+}
+@media (max-width:920px) {
+  #myVideo {
+    width: 100%;
+    object-fit: contain;
+    transform: scale(2.5);
+    height: 100vh;
+  }
 }
 .w-100 {
   width: 100%;
@@ -24,7 +30,9 @@
 .display-time {
   position: absolute;
   top: 100px;
-  left: 250px;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 @keyframes buttonTransition {
   100% {
@@ -89,40 +97,37 @@
   } */
 .play-button {
   cursor: pointer;
-  position: absolute;
-  top: 236px;
-  left: 246px;
+  position: relative;
+  top: 260px;
   z-index: 999;
 }
 .timer-type {
   position: absolute;
-  top: 306px;
-  left: 195px;
+  top: 328px;
+  left: 0;
+  right: 0;
   color: white;
   font-size: larger;
 }
 .timer {
   position: absolute;
-  top: 258px;
-  left: 494px;
+  top: 283px;
+  left: 0;
+  right: 0;
   color: white;
   font-size: larger;
   z-index: 999;
 }
-.start-over {
+.start-over-section {
   position: absolute;
-  top: 530px;
-  left: 44%;
-  border-radius: 0.8rem;
+  top: 540px;
+  left: 0;
+  right: 0;
   z-index: 9999;
-  background-color: #fd7279 !important;
 }
-.Reps-count {
-  position: absolute;
-  top: 580px;
-  left: 37%;
 
-  z-index: 9999;
+.start-over {
+  background-color: #fd7279 !important;
 }
 
 /* new css for outercircle */
@@ -146,7 +151,7 @@
 #shape {
   transition: 0s;
   transform-origin: center;
-  transform:rotate(90deg) scaleX(-1) !important;
+  transform: rotate(90deg) scaleX(-1) !important;
   /* transform: rotate(-90deg); */
   stroke: #fd7279;
   stroke-width: 15;

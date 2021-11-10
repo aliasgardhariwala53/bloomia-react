@@ -16,11 +16,12 @@ const ProgressBar = (props) => {
   if ((progressPercentage%100)===0 && (progressPercentage>100)) {
    i++;
    }
+   
   useEffect(() => {
   
     setDisable(true);
    
-  }, [i])
+  }, [props.taskdone])
   return (
     <>
    
@@ -42,12 +43,12 @@ const ProgressBar = (props) => {
         </div>
         <div className="mt-2 w-75">
             <div className="text-center">
-           { progressPercentage===100?"Goal Achieved!":`${progressPercentage} % Completed `}
+           { progressPercentage>=100?"Goal Achieved!":`${progressPercentage} % Completed `}
             </div>
         </div>
       </div>
     </div>
- { disable && ((progressPercentage%100)===0 && <CompleteGoalNotify onClick={HandleNotification}/>)}
+ { disable && <CompleteGoalNotify TotalGoalTIme={100} CompletedGoalTime={props.taskdone}  onClick={HandleNotification}/>}
     </>
   );
 };
