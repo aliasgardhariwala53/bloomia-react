@@ -117,6 +117,7 @@
 }
 .save-button{
     width: 71px;
+    text-align: center;
 }
 .select-image{
     position: absolute;

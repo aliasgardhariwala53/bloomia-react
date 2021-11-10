@@ -403,7 +403,7 @@ const Play = (props) => {
             className="button svgcircle"
             expanded="true"
             height="500px"
-            width="500px"
+            
           >
             <circle
               id="shape"
@@ -438,7 +438,7 @@ const Play = (props) => {
             </button>
           )}
           {isActive && (
-            <div className="Reps-count text-light h5 mt-3">
+            <div className="Reps-count text-light h5 mt-1">
               {Squeeze === 1 &&
                 `${leftTime.a3} Reps more to go of Long Squeeze`}
               {Squeeze === 2 &&

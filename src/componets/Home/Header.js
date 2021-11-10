@@ -41,12 +41,11 @@ const Header = (props) => {
        
       </div>}
       { context.isAutheticated && <div className="row mt-3 ml-3 mr-3">
-      { window.location.href==="http://localhost:3000/profile"  && <div className="col-1 mt-3 backbutton">
-            <Link to="/">
-              <i className="fa fa-arrow-left "></i>
-            </Link>
-          </div>}
-        <div className="col-8 text-right pr-0">
+        <div className="col-9 mt-3 backbutton text-right pr-0">
+     { window.location.href==="http://localhost:3000/profile"  &&   <Link to="/">
+              <i className="fa fa-arrow-left float-left "></i>
+            </Link>}
+         
           Welcome,
           <span>
             <br />

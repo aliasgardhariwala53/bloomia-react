@@ -78,7 +78,7 @@ const Home = (props) => {
         <i className="fa fa-bars h1" aria-hidden="true" variant="primary btn" onClick={handleShow} ></i>
         
         </div>
-        <Offcanvas className={showCanvas?'cnavas-new':''} show={true}  onHide={handleClose}  {...props} placement="end">
+        <Offcanvas className={showCanvas?'cnavas-new':'canvas-new-remove'} show={true}  onHide={handleClose}  {...props} placement="end">
           <Offcanvas.Header closeButton>
           </Offcanvas.Header>
           <Offcanvas.Body>

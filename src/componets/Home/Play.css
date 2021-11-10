@@ -16,11 +16,19 @@
   transform: scale(1.9);
   height: 100vh;
 }
-@media (max-width:920px) {
+@media only screen and (min-width:576px)and (max-width:920px) {
   #myVideo {
     width: 100%;
     object-fit: contain;
     transform: scale(2.5);
+    height: 100vh;
+  }
+}
+@media (max-width:576px) {
+  #myVideo {
+    width: 100%;
+    object-fit: contain;
+    transform: scale(4);
     height: 100vh;
   }
 }
@@ -29,7 +37,7 @@
 }
 .display-time {
   position: absolute;
-  top: 100px;
+  top: 70px;
   left: 0;
   right: 0;
   margin: auto;
@@ -111,7 +119,7 @@
 }
 .timer {
   position: absolute;
-  top: 283px;
+  top: 250px;
   left: 0;
   right: 0;
   color: white;
@@ -123,7 +131,7 @@
   top: 540px;
   left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 999;
 }
 
 .start-over {
@@ -166,4 +174,12 @@
 }
 .shape-two {
   animation-name: buttonTransition2;
+}
+.svgcircle{
+  width:-webkit-fill-available;
+}
+@media (min-width:770px) {
+  .svgcircle{
+    width:600px;
+  }
 }

@@ -49,7 +49,7 @@
   border: none;
   transform: translateX(100%);
 }
-@media (min-width: 960px) {
+@media (min-width: 992px) {
   .cnavas-new {
     visibility: visible !important;
   }
@@ -68,6 +68,18 @@
     border-top-right-radius: 70px;
     border-bottom-right-radius: 70px;
   }
+}
+@media (max-width: 992px) {
+
+  .offcanvas-end {
+    top: 0;
+    right: 0px;
+    visibility: hidden ;
+    width: 510px;
+    transition: transform 0s ease-in-out !important;
+    transform: none !important;
+  }
+  
 }
 
 .offcanvas-header {
