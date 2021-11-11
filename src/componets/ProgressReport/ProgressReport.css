@@ -13,3 +13,29 @@
     width: 928px ;
     height: 300px ;
 }
+
+
+  @media only screen and (min-width:576px){
+    .sets-graph-container{
+        width: 100% !important;
+        height: 50vh ;
+      
+    }
+    .Time-graph-container{
+        width: 100% !important;
+        height: 50vh ;
+    }
+  }
+
+@media only screen and (max-width: 576px) {
+    .sets-graph-container{
+        width: 80vw ;
+        height: 50vh ;
+      
+    }
+    .Time-graph-container{
+        width: 80vw ;
+        height: 50vh ;
+    }
+  
+  }

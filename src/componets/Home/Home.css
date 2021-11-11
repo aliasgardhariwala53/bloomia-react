@@ -31,6 +31,9 @@
 }
 
 /* /canvas css start */
+.offcanvas{
+  z-index: 9999;
+}
 .canvas-button {
   position: absolute;
   right: 25px;

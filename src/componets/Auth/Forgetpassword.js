@@ -61,7 +61,7 @@ const Forgetpassword = () => {
           <p className="para-create-account">
           Please enter your email address assosiated with bloomia account
           </p>
-          <div className="form-group">
+          <div className="form-group d-flex">
             {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
             <input
               type="email"

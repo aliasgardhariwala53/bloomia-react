@@ -190,6 +190,7 @@ const ProgressReport = () => {
     display: false,
   };
   const optionsSets = {
+    maintainAspectRatio : false,
     scales: {
       xAxes: [
         {
@@ -208,7 +209,7 @@ const ProgressReport = () => {
             min: 0,
             max: 3000,
             fontColor: "#000",
-            stepSize: 200,
+            stepSize: 500,
             fontSize:18
           },
           gridLines: {
@@ -225,6 +226,7 @@ const ProgressReport = () => {
     },
   };
   const optionsTime = {
+    maintainAspectRatio : false,
     scales: {
       xAxes: [
         {

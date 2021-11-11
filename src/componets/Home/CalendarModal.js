@@ -20,13 +20,13 @@ const CalendarModal = () => {
     <Modal className="modal-main-body" show={showCalendar}>
       <Modal.Header className="header-container-calendar container  ">
         <div className="headingWrapper row m-0 align-items-center">
-          <span className=" col-3 col-lg-2 px-1 py-2 text-center logo rounded-xl font-weight-600">
+          <span className=" col-11 col-sm-3 col-lg-2 px-0 py-2 text-center logo rounded-xl font-weight-600">
            <BloomiaLogo/>
           </span>
-          <span className=" col-1 round-bottons">
+          <span className=" col-2 col-sm-1 my-3 round-bottons">
             <i className="fa fa-arrow-left fa-sm" onClick={()=>dispatch(modalActions.calendarHandler())} ></i>
           </span>
-          <span className="col-4  ">Tuesday, November 2, 2021</span>
+          <span className="col-10 col-sm-4 text-center text-sm-left">Tuesday, November 2, 2021</span>
         </div>
       </Modal.Header>
       <Modal.Body className="modal-body-container">

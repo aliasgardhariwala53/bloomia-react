@@ -1,8 +1,8 @@
 .modal-main-body {
   width: 1030px;
   background-color: #ebebfc;
-  border-top-right-radius: 76px;
-  border-bottom-right-radius: 76px;
+  border-top-right-radius: 56px;
+  border-bottom-right-radius: 56px;
   /* overflow-y: hidden !important; */
 }
 .modal-main-body::-webkit-scrollbar {
@@ -13,7 +13,7 @@
   top: -2px;
   left: -23px;
   border: none !important;
-  width: 1076px !important;
+  /* width: 1076px !important; */
   position: fixed;
   overflow: hidden;
   height: 740px;
@@ -21,6 +21,32 @@
 .modal-body-container {
   height: 821px !important;
   padding: 0px 20px;
+}
+@media (min-width: 1492px) {
+  .modal-main-body .modal-dialog .modal-content {
+    width: 1076px !important;
+  }
+ 
+}
+@media only screen and (min-width: 1175px) and (max-width: 1492px) {
+  .modal-main-body .modal-dialog .modal-content {
+    width: 70% !important;
+  }
+  
+}
+@media only screen and (min-width:992px) and (max-width: 1175px) {
+  .modal-main-body .modal-dialog .modal-content {
+    width: 60% !important;
+  }
+
+}
+@media only screen and (max-width: 992px) {
+  .modal-body-container {
+    width: 100vw !important;
+  }
+  .header-container-calendar {
+    width: 100vw !important;
+  }
 }
 .modal-body::-webkit-scrollbar {
   display: none;
@@ -50,6 +76,25 @@
   height: 366px;
 }
 
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .calendar-container {
+    height: 420px;
+  }
+    .color-indicater{
+      display: -webkit-inline-box;
+    }
+
+}
+@media only screen and (max-width: 576px) {
+  .calendar-container {
+    height: 453px;
+  }
+    .color-indicater{
+      display: block;
+    }
+  
+
+}
 #caledarBody .fc {
   height: 300px;
 }
