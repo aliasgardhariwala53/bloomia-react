@@ -272,7 +272,7 @@ const Profile = (props) => {
                           >
                             back
                           </div>
-                          <button className="bg-success rounded m-1 save-button">
+                          <button className="bg-success rounded mt-1 save-button d-flex mx-auto justify-content-center">
                             Save
                           </button>
                         </div>

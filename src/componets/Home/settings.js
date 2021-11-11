@@ -5,6 +5,7 @@ import "./settings.css";
 import Footer from "./Footer";
 import Subscription from "./Subscription";
 import EmailNotification from "./EmailNotification";
+import Select from "react-select";
 
 import ModalTerms from './ModelTerms'
 
@@ -58,15 +59,15 @@ const Settings = (props) => {
 
   return (
     <div className="container mt-5">
-      <div className="row">
+      <div className="row px-2 justify-content-evenly">
         <ModalTerms onenable={aboutApp} setAboutApp={setAboutApp}/>
       
 
 
-        <div className="col-4 ">
+        <div className="col-12 col-sm-8  text-center text-sm-start">
           
 
-          <div className="h6 d-flex w-100">Kegel Exercise
+          <div className="h6 d-flex w-100 justify-content-center justify-content-sm-start">Kegel Exercise
           <span className=" round-bottons round-bottons-sm p-1">
             <i onClick={()=>setAboutApp(true)} className="fa fa-question-circle fa-sm"></i>
           </span>
@@ -82,8 +83,8 @@ const Settings = (props) => {
             </h4>
           </span>
         </div>
-        <div className="col-1 "></div>
-        <div className="col-1 button-color fa-icon offset-3 d-flex justify-content-center align-items-center rounded-circle">
+        
+        <div className="col-1 button-color fa-icon  d-flex justify-content-center align-items-center rounded-circle">
           <i className="fas  fa-sm">W</i>
         </div>
         <div className="col-1 fa-icon d-flex justify-content-center align-items-center  rounded-circle">

@@ -25,7 +25,7 @@ select {
   height: 36px;
   width: 36px;
   padding: 2px;
-  margin-right: 4px;
+  margin: auto 4px;
   border-radius: 20px;
   display: flex;
   justify-content: center;
