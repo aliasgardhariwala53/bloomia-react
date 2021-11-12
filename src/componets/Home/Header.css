@@ -14,17 +14,12 @@
         font-family: Gilroy!important;
         border-radius: .6em;
     }
-    /* .backbutton{
-        height: 36px;
-        width: 36px;
-        padding: 2px;
-        border-radius: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #ebebfc;
-        cursor: pointer;
-    } */
+    @media screen and (min-width:352px) and (max-width:500px){
+        .backbutton>span>h4{
+            padding-left: 50%;
+        }
+        
+    }
     .signin-header{
         
         border-radius: 10px;

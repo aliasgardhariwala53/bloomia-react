@@ -1,6 +1,6 @@
 import React from "react";
-import "./Subscription.css";
-const Subscription = () => {
+import "./UnSubscribe.css"
+const UnSubscribe = () => {
     
   return (
     <div className="mt-4 mx-3 ng-star-inserted">
@@ -21,4 +21,4 @@ const Subscription = () => {
   );
 };
 
-export default Subscription;
+export default UnSubscribe;

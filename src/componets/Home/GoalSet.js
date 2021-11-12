@@ -37,14 +37,14 @@ const GoalSet = (props) => {
   };
 
   useEffect(() => {
-    props.onGetSets(settingGoal.set); //gettings sets
+    props.onGetSets(settingGoal); //gettings sets
   }, [goalseted]);
 
 
   useEffect(() => {
     setSettingGoal({
       ...settingGoal,
-      totalGoalTime: props.onGoaltime * settingGoal.set,
+      totalGoalTime: setGoalTime * settingGoal.set,
     });
   switch (settingGoal.setType) {
     case "Beginner":
@@ -63,7 +63,7 @@ const GoalSet = (props) => {
     default:
       break;
   }
-  }, [settingGoal.set,props.onGoaltime,settingGoal.setType]);
+  }, [settingGoal.set,setGoalTime,settingGoal.setType]);
 
   let A = new Date(setGoalTime * settingGoal.set * 1000)
     .toISOString()

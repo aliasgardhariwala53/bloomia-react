@@ -40,7 +40,7 @@ axios.interceptors.request.use(
       Accept: "application/json",
       Authorization: "Bearer " + token,
     });
-    console.log(config);
+    
     return config;
   },
   function (error) {
@@ -51,7 +51,7 @@ axios.interceptors.request.use(
 // Add a response interceptor
 axios.interceptors.response.use(
   function (response) {
-    console.log("INTERCEPTORS response", response.data.token);
+   
 
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data

@@ -69,7 +69,7 @@ const Changepassword = () => {
               </div>
             )}</h5>
               </div>
-              <div className="col-6  form-group ">
+              <div className="col-12 col-sm-6  form-group ">
                 <label htmlFor="exampleInputPassword2">Current Password</label>
                 <input
                   type="password"
@@ -84,8 +84,8 @@ const Changepassword = () => {
                   <p className="error-messege">Current password is Required</p>
                 )}
               </div>
-              <div className="col-6 form-group"></div>
-              {editpassword &&<><div className="col-6 form-group ">
+              <div className="d-none d-sm-block col-6 form-group"></div>
+              {editpassword &&<><div className="col-12 col-sm-6 form-group ">
                 <label htmlFor="exampleInputPassword1">new Password</label>
                 <input
                   type="password"
@@ -101,7 +101,7 @@ const Changepassword = () => {
                 )}
               </div>
 
-              <div className="col-6 form-group ">
+              <div className="col-12 col-sm-6 form-group ">
                 <label htmlFor="exampleInputPassword2">confirm Password</label>
                 <input
                   type="password"
@@ -117,7 +117,7 @@ const Changepassword = () => {
                   <p className="error-messege">confirm password is Required</p>
                 )}
               </div>
-              <div className="col-4 ">
+              <div className="col-12 col-sm-4 ">
                 <button type="submit" className="change-password px-2 py-2">
                 change password
                 </button>

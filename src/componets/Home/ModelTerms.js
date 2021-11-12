@@ -15,7 +15,7 @@ const ModelTerms = (props) => {
           </span>
         </div>
       </Modal.Header>
-      <Modal.Body className="p-0">
+      <Modal.Body className="modal-terms-container p-0">
         <div className="w-100  rounded-xl tooltipBox">
           <div className="w-100 tooltipContentMobile ">
             <p>

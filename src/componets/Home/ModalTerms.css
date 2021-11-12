@@ -9,7 +9,7 @@
     opacity: 0 !important;
   }
   .modal-terms-body {
-    width: 1030px;
+    width: 100vw;
     transition: none !important;
     right: 100px;
     bottom: 0;
@@ -37,4 +37,25 @@
     z-index: 9999999;
     transition: none !important;
   }
+
+
   
+  
+  @media only screen and (min-width: 1392px) and (max-width: 1540px) {
+    .modal-terms-body .modal-dialog .modal-content {
+      width: 57vw !important;
+    }
+    
+  }
+
+
+
+  @media only screen and (max-width: 1392px) {
+    .modal-terms-body .modal-dialog .modal-content {
+      width: 100vw !important;
+    }
+    .modal-terms-body .modal-dialog{
+      margin: 85px 20px  0px 0 !important;
+    }
+   
+  }

@@ -15,4 +15,6 @@ export const getReportDateUrl = 'report/getReportDate'
 export const getReportLastYearUrl = 'report/getLastYear'
 export const getReportMonthUrl = 'report/getReportMonth'
 export const getLastDaysUrl = 'report/getLastDays'
-export const getGoalStreakUrl = 'goal/streak'
+export const PutGoalPresetUrl = 'goal/createPreset'
+export const getGoalPresetUrl = 'goal/getcreatePreset'
+

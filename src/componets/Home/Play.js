@@ -25,9 +25,12 @@ const Play = (props) => {
     a3: props.time.a3,
     b1: props.time.b1,
     b2: props.time.b2,
+    c1: props.time.c1,
+    c2: props.time.c2,
+    c3: props.time.c3,
     b3: props.time.b3,
   };
-
+  console.log("settingTimesettingTimesettingTimesettingTime", settingTime);
 
   useEffect(() => {
     HttpCall(`${getReportDateUrl}`,"POST", date)
@@ -46,10 +49,12 @@ const Play = (props) => {
   }, [])
 
 
+
   useEffect(() => {
     setLeftTime(settingTime);
     setnewTime(settingTime);
-  }, [props.time,taskdone,]);
+  }, [props.time,taskdone]);
+
 
   let TotalSetTime =((settingTime.a1+settingTime.a2)*settingTime.a3+(settingTime.b1+settingTime.b2)*settingTime.b3)
   // // const [totaltask, settotaltask] = useState();
@@ -271,6 +276,7 @@ const Play = (props) => {
     }, n * 1000);
   };
   const handleStart = () => {
+    console.log("start ke andar",settingTime);
     long(settingTime);
     setIsActive(true);
     setIsPaused(true);
@@ -461,7 +467,7 @@ const Play = (props) => {
           <BloomiaLogo/>
         </div>
       </div>
-      <ProgressBar taskdone={saveProgress.setTime} totaltask={100} />
+      <ProgressBar taskdone={saveProgress.setTime} totalGoaltime={props.totalGoaltime} />
       <CalendarModal/>
     </>
   );

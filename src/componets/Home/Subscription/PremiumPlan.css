@@ -1,0 +1,20 @@
+.bg-blue {
+  background-color: #2f45c5;
+}
+.upgrade-plan {
+  border-radius: 20px;
+}
+.subscribeButton {
+  font-size: 0.8rem !important;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #fff;
+}
+.plan-time {
+    
+    color: hsla(0,0%,100%,.616);
+}
+.plan-price {
+    
+    line-height: 44px;
+}

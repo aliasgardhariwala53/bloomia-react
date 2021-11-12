@@ -1,12 +1,13 @@
 
-import {React,useContext} from "react";
+import {React,useContext,useState} from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 
 import "./Header.css";
 
 const Header = (props) => { 
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
+  const [shoArrow, setshoArrow] = useState(false)
   
   const logOut = () => {
     localStorage.removeItem("token");
@@ -41,9 +42,9 @@ const Header = (props) => {
        
       </div>}
       { context.isAutheticated && <div className="row mt-3 px-2">
-        <div className="col-10 mt-3 backbutton text-right pr-2">
-     { window.location.href==="http://localhost:3000/profile"  &&   <Link  to="/">
-              <i className="fa fa-arrow-left float-left ml-5 ml-lg-0"></i>
+        <div className="col-8 col-sm-10 mt-3 backbutton text-right pr-2">
+     {shoArrow  &&   <Link  to="/">
+              <i className="fa fa-arrow-left float-left ml-5 ml-lg-0" onClick={()=>setshoArrow(false)}></i>
             </Link>}
          
           Welcome,
@@ -56,7 +57,7 @@ const Header = (props) => {
             </h4>
           </span>
         </div>
-        <div className="col-2 mt-2 px-0">
+        <div className="col-4 col-sm-2 mt-2 px-0">
           <div className="dropdown show px-0">
             <div
               className="btn float-right dropdown-toggle px-0"
@@ -78,7 +79,7 @@ const Header = (props) => {
 
             <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <Link to="/profile" style={{ textDecoration: 'none' }}>
-                <div className="dropdown-item">
+                <div className="dropdown-item" onClick={()=>setshoArrow(true)}>
                   <i className="far fa-user-circle"> </i>
                   Profile
                 </div>

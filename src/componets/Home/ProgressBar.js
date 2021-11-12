@@ -9,9 +9,9 @@ const ProgressBar = (props) => {
     setDisable(false);
   }
   let taskdone =props.taskdone;
-  let totaltask =props.totaltask;
+  let totalGoaltime =props.totalGoaltime;
  
-  const progressPercentage=Math.floor((taskdone/totaltask)*100);
+  const progressPercentage=Math.floor((taskdone/totalGoaltime)*100);
   let i=0;
   if ((progressPercentage%100)===0 && (progressPercentage>100)) {
    i++;
@@ -48,7 +48,7 @@ const ProgressBar = (props) => {
         </div>
       </div>
     </div>
- { disable && <CompleteGoalNotify TotalGoalTIme={100} CompletedGoalTime={props.taskdone}  onClick={HandleNotification}/>}
+ { disable && <CompleteGoalNotify TotalGoalTIme={totalGoaltime} CompletedGoalTime={props.taskdone}  onClick={HandleNotification}/>}
     </>
   );
 };

@@ -261,15 +261,7 @@ const ProgressReport = () => {
       ],
     },
   };
-  const handlechange1 = () => {
-    setOptionSelect(1);
-  };
-  const handlechange2 = () => {
-    setOptionSelect(2);
-  };
-  const handlechange3 = () => {
-    setOptionSelect(3);
-  };
+ 
   return (
     <Card>
       <div className="d-flex justify-content-between graph-header pb-2">
@@ -279,17 +271,18 @@ const ProgressReport = () => {
             class="btn btn-light border  dropdown-toggle"
             type="button"
             data-toggle="dropdown"
+            
           >
-            Last One Year
+            {optionSelect===1?"Last 30 days":(optionSelect===2?"Last 3 Month":"Last One Year")}
           </button>
           <ul className="dropdown-menu">
-            <li className="btn" onClick={handlechange1}>
+            <li className="btn" onClick={()=>setOptionSelect(1)}>
               Last 30 days
             </li>
-            <li className="btn" onClick={handlechange2}>
+            <li className="btn" onClick={()=>setOptionSelect(2)}>
               Last 3 Month
             </li>
-            <li className="btn" onClick={handlechange3}>
+            <li className="btn" onClick={()=>setOptionSelect(3)}>
               Last One Year
             </li>
           </ul>

@@ -14,7 +14,7 @@ import { getGoalData } from "../../services/Network";
 const Home = (props) => {
   const [passtime, setPasstime] = useState({});
   const [setchange, setSetschanges] = useState();
-  const [totaltask, settotaltask] = useState();
+  const [totalGoaltime, settotalGoaltime] = useState();
   const [showCanvas, setShowCanvas] = useState(false);
   useEffect(() => {
     HttpCall(`${GetUserUrl}`, "GET")
@@ -37,9 +37,9 @@ const Home = (props) => {
         // setTotalsettime(response)
         console.log(
           "helloooooooooooooo response from set golass",
-          response.data.data[0].set
+          response.data.data[0].totalTime
         );
-        settotaltask(response.data.data[0].set);
+        settotalGoaltime(response.data.data[0].totalTime);
       })
       .catch((error) => {});
   }, [setchange]);
@@ -70,7 +70,7 @@ const Home = (props) => {
     <div className="container-fluid home-container p-0">
       <div className="row m-0 p-0">
         <div className="col-12 col-lg-8 m-0 p-0 video-overflow">
-          <Play time={passtime} time2={passtime} totaltask={totaltask} />
+          <Play time={passtime}  totalGoaltime={totalGoaltime} />
         </div>
         
         <div className="canvas-button">

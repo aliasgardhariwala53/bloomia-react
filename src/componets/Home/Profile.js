@@ -50,7 +50,7 @@ const Profile = (props) => {
     HttpCall(`${GetUserUrl}`,"GET")
       .then((response) => {
         setUserdata(response.data.data);
-       
+       console.log(response.data.data.profileImage,"new aeeeeh");
         setRemovebutton(
           response.data.data.profileImage !==
             "uploads/1633780506772defaultImage.jpg"
@@ -159,6 +159,7 @@ const Profile = (props) => {
   const backPreview = () => {
     setcropbox(true);
   };
+  console.log("profile image of the ",userdata.profileImage);
   return (
     <>
       <div className="container profile-container ml-2">
@@ -181,7 +182,7 @@ const Profile = (props) => {
           {removebutton && (
             <span
               onClick={onremoveimage}
-              className="col-4 text-danger remove-image text-left"
+              className="col-4 pl-4 text-danger remove-image text-left"
             >
               Remove image
             </span>
@@ -202,7 +203,7 @@ const Profile = (props) => {
           <label
             className="select-image"
             htmlFor="imagefile"
-            style={{ margin: "2px 6px 0px", width: "20px", cursor: "pointer" }}
+            
           >
             {removebutton ? (
               <i id="image-fa-pen" className="fas fa-pen image-fa-icon"></i>
@@ -213,7 +214,7 @@ const Profile = (props) => {
           <div className="col-12">
             {/* image form started */}
             {modelbox && (
-              <div className="col-8 model-box">
+              <div className="col-12 col-sm-8 model-box">
                 <form
                   className="row position-relative"
                   method="POST"
@@ -230,7 +231,7 @@ const Profile = (props) => {
                   />
                   {cropbox && (
                     <div className="app crop-box">
-                      <h4>Adjust the image</h4>
+                      <h5 className="text-center">Adjust the image</h5>
                       <div>
                         <ImageCropper
                           imageToCrop={imageToCrop}
@@ -284,7 +285,7 @@ const Profile = (props) => {
             )}
 
             <form className="row" onSubmit={handleSubmit(onSubmit)}>
-              <div className="col-6 form-group">
+              <div className="col-12 col-sm-6 form-group">
                 <label htmlFor="exampleInputFirstName">First Name</label>
                 <input
                   ref={register}
@@ -299,7 +300,7 @@ const Profile = (props) => {
                   <p className="error-messege">firstname is Required</p>
                 )}
               </div>
-              <div className="col-6 form-group">
+              <div className="col-12 col-sm-6 form-group">
                 <label htmlFor="exampleInputLastName">Last Name</label>
                 <input
                   type="text"
@@ -312,7 +313,7 @@ const Profile = (props) => {
                   <p className="error-messege">lastname is Required</p>
                 )}
               </div>
-              <div className="col-6 form-group">
+              <div className="col-12 col-sm-6 form-group">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input
                   style={{ cursor: "not-allowed" }}
@@ -323,9 +324,9 @@ const Profile = (props) => {
                   disabled={true}
                 />
               </div>
-              <div className="col-6 form-group"></div>
+              <div className="d-none d-sm-block col-6 form-group"></div>
 
-              <div className="col-6 form-group">
+              <div className="col-12 col-sm-6 form-group">
                 <label htmlFor="exampleInputPassword1">Phone Number</label>
                 <input
                   type="tel"
