@@ -317,6 +317,14 @@ const Play = (props) => {
   };
 
   const handleReset = () => {
+    document.getElementById("shape").style.animationDuration = `${0}s`;
+    document.getElementById("innercircle").style.animationDuration = `${0}s`;
+    document.getElementById("shape").classList.remove("shape-one");
+    document.getElementById("shape").classList.remove("shape-two");
+
+    document.getElementById("innercircle").classList.remove("innercircle-two");
+    setLeftTime(settingTime);
+    setnewTime(settingTime);
     clearInterval(incrementa1.current);
     clearInterval(incrementa2.current);
     clearInterval(incrementb1.current);
@@ -328,8 +336,6 @@ const Play = (props) => {
 
     setIsActive(false);
     setIsPaused(false);
-    document.getElementById("shape").style.animationDuration = `${0}s`;
-    document.getElementById("innercircle").style.animationDuration = `${0}s`;
     setSqueeze(0);
   };
 

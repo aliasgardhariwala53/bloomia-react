@@ -6,7 +6,7 @@ const Subscription = () => {
     <div className="mt-4 mx-3 ng-star-inserted">
       <div className="p-3 subscriptionEndDate">
         <div className="row m-0 align-items-center text-left">
-          <span className="col-6 p-0">
+          <span className="col-12 col-sm-6 p-0">
             <div className="font-weight-600 text-light">Subscribed User</div>
             <div className="text-light resizeForSmall">Valid till </div>
           </span>

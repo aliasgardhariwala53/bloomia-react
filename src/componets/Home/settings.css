@@ -13,12 +13,12 @@ select {
   font-family: Gilroy-Bold;
 }
 .fieldsettoggle {
-  position: absolute;
-  right: 45px;
-  justify-content: end;
-  display: flex;
-  z-index: 99;
-  bottom: 122px;
+  position: relative;
+  right: 0;
+  top: 55px;
+  left: 0;
+  padding-right: 8px;
+  text-align: right;
 }
 .fa-icon {
   background-color: #ebebfc;
@@ -38,6 +38,7 @@ select {
 }
 .form-check-input {
   margin: 15px 10px 0 0;
+  z-index: 99;
 }
 .title-section {
   width: auto;

@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import Play from "./Play";
 import Profile from "./Profile";
 import Header from "./Header";
-import { Route, useRouteMatch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { handleError, HttpCall } from "../../services/UseHttps";
 import { GetUserUrl } from "../../services/Network";
 import GuardedRoute from "../Auth/GuardedRoute";
 import "./Home.css";
 import Settings from "./settings";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import Button from "react-bootstrap/Button";
 
 import { getGoalData } from "../../services/Network";
 const Home = (props) => {
@@ -57,6 +56,7 @@ const Home = (props) => {
   };
 
   const submitFormHandler = (value) => {
+    
     setPasstime(value);
     return value;
   };

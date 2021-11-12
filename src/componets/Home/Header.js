@@ -1,4 +1,4 @@
-import { fas } from "@fortawesome/free-solid-svg-icons";
+
 import {React,useContext} from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
@@ -42,8 +42,8 @@ const Header = (props) => {
       </div>}
       { context.isAutheticated && <div className="row mt-3 px-2">
         <div className="col-10 mt-3 backbutton text-right pr-2">
-     { window.location.href==="http://localhost:3000/profile"  &&   <Link to="/">
-              <i className="fa fa-arrow-left float-left "></i>
+     { window.location.href==="http://localhost:3000/profile"  &&   <Link  to="/">
+              <i className="fa fa-arrow-left float-left ml-5 ml-lg-0"></i>
             </Link>}
          
           Welcome,

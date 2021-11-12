@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Button, Modal } from "react-bootstrap";
+import React from "react";
+import { Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./ModalTerms.css";
 import "./CalendarModal.css";
@@ -18,7 +18,7 @@ const CalendarModal = () => {
   const showCalendar = useSelector((state) => state.modal.calendar);
   return (
     <Modal className="modal-main-body" show={showCalendar}>
-      <Modal.Header className="header-container-calendar container  ">
+      <Modal.Header className="header-container-calendar container pt-0 pt-sm-4 ">
         <div className="headingWrapper row m-0 align-items-center">
           <span className=" col-11 col-sm-3 col-lg-2 px-0 py-2 text-center logo rounded-xl font-weight-600">
            <BloomiaLogo/>

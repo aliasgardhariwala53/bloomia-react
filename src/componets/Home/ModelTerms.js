@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Button, Modal } from "react-bootstrap";
+import React from "react";
+import{ Modal } from "react-bootstrap";
 import "./ModalTerms.css";
 const ModelTerms = (props) => {
   return (

@@ -1,10 +1,8 @@
-import React,{useState} from "react";
+import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction" 
-import Calendar from 'react-calendar'
 import "./Calender.css";
-import CalendarModal from './CalendarModal'
 import { useDispatch } from "react-redux";
 import { modalActions } from "../../store/index";
 const Calender = () => {

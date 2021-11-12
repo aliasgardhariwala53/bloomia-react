@@ -40,4 +40,5 @@
     border: 1px solid #ced4da !important;
     border-radius: 2.25rem;
     padding: 4px;
+    width: -webkit-fill-available;
 }
