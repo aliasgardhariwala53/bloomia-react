@@ -1,0 +1,76 @@
+.__PrivateStripeElement-input {
+  border: none !important;
+  display: block !important;
+  position: absolute !important;
+  height: 1px !important;
+  top: -1px !important;
+  left: 0px !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  width: 100% !important;
+  opacity: 0 !important;
+  background: transparent !important;
+  pointer-events: none !important;
+  font-size: 16px !important;
+}
+.__privateStripeFrame6585 {
+  border: none !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  width: 1px !important;
+  min-width: 100% !important;
+  overflow: hidden !important;
+  display: block !important;
+  user-select: none !important;
+  transform: translate(0px) !important;
+  height: 21.6px;
+}
+.__PrivateStripeElement {
+  margin: 0px !important;
+  padding: 0px !important;
+  border: none !important;
+  display: block !important;
+  background: transparent !important;
+  position: relative !important;
+  opacity: 1 !important;
+}
+.tooltipContent {
+  height: 65vh;
+  overflow: auto;
+}
+.toolTipWrapper {
+ 
+  background-color: rgba(44, 66, 188, 0.30196078431372547);
+
+}
+.modal-paymentDetails-container {
+  width: 100vw;
+  transition: none !important;
+  right: 100px;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  overflow: auto;
+  overflow-y: auto;
+}
+@media only screen and (min-width: 1392px) and (max-width: 1540px) {
+  .modal-paymentDetails-container .modal-dialog .modal-content {
+    width: 57vw !important;
+  }
+  
+}
+
+
+
+@media only screen and (max-width: 1392px) {
+  .modal-paymentDetails-container .modal-dialog .modal-content {
+    width: 100vw !important;
+  }
+  .modal-paymentDetails-container .modal-dialog{
+    margin: 85px 20px  0px 0 !important;
+  }
+  .modal-paymentDetails-container{
+    z-index: 99999;
+  }
+}
+

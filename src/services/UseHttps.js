@@ -13,14 +13,14 @@ export const HttpCall = async (method, type, body) => {
       })
       .then((response) => {
         if (response.status === 200 ) {
-          if (!(response.config.method==="get")) {
+          // if (!(response.config.method==="get")) {
            
-            Swal.fire({
-              position: "center",
-              type: "error",
-              title: response.data.message,
-            });
-          }
+          //   Swal.fire({
+          //     position: "center",
+          //     type: "error",
+          //     title: response.data.message,
+          //   });
+          // }
          
           return resolve(response);
         }

@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Calender from "./Calender";
-import GoalSet from "./GoalSet";
 import "./settings.css";
 import Footer from "./Footer";
-
-import EmailNotification from "./EmailNotification";
+import { useDispatch,useSelector } from 'react-redux'
+import { modalActions } from "../../store";
 import ModalTerms from "./ModelTerms";
 import { PutGoalPresetUrl,getGoalPresetUrl } from "../../services/Network";
 import { HttpCall } from "../../services/UseHttps";
-import UnSubscribe from "./Subscription/UnSubscribe";
 import PremiumPlan from "./Subscription/PremiumPlan";
+import SubscriptionWrapper from "../UI/SubscriptionWrapper";
+import useAvoidFirstExecution from "../../CustomHooks/useAvoidFirstExecution";
 
 const Settings = (props) => {
-  const [aboutApp, setAboutApp] = useState(false);
+  const dispatch = useDispatch();
+  const Theme = useSelector(state => state.modal.theme)
   var arr = [...Array(60)].map((item, index) => index + 1);
   var arr2 = [...Array(20)].map((item, index) => index + 1);
   const [disabledreverse, setDisabledreverse] = useState(true);
@@ -23,30 +24,8 @@ const Settings = (props) => {
 
   const [selectedOption, setselectedOption] = useState([
     {
-      a1: 18,
-      a2: 15,
-      a3: 19,
-      b1: 12,
-      b2: 12,
-      b3: 1,
-      c1: 0,
-      c2: 0,
-      c3: 0,
-    },
-    {
-      a1: 30,
-      a2: 18,
-      a3: 18,
-      b1: 18,
-      b2: 1,
-      b3: 1,
-      c1: 0,
-      c2: 0,
-      c3: 0,
-    },
-    {
-      a1: 39,
-      a2: 16,
+      a1: 1,
+      a2: 1,
       a3: 1,
       b1: 1,
       b2: 1,
@@ -56,42 +35,66 @@ const Settings = (props) => {
       c3: 0,
     },
     {
+      a1: 2,
+      a2: 2,
+      a3: 2,
+      b1: 2,
+      b2: 2,
+      b3: 2,
+      c1: 0,
+      c2: 0,
+      c3: 0,
+    },
+    {
+      a1: 3,
+      a2: 3,
+      a3: 3,
+      b1: 3,
+      b2: 3,
+      b3: 3,
+      c1: 0,
+      c2: 0,
+      c3: 0,
+    },
+    {
       //Quiq
-      a1: 15,
-      a2: 31,
-      a3: 9,
-      b1: 12,
-      b2: 17,
-      b3: 1,
+      a1: 4,
+      a2: 4,
+      a3: 4,
+      b1: 4,
+      b2: 4,
+      b3: 4,
       c1: 0,
       c2: 0,
       c3: 0,
     },
   ]);
 
-  const obj = {
-    setting: JSON.stringify({ ...selectedOption }),
-  };
+  
   let labels=[];
   useEffect(() => {
     HttpCall(`${getGoalPresetUrl}`, "GET")
       .then((response) => {
         
         for (const iterator of Object.values(JSON.parse(response.data.data[0].setting))) {
-          console.log("helllloooo i am commimng dostod3", iterator);
           labels.push(iterator);
         }
         setselectedOption(labels)
-        console.log("labellllllllllllll",labels);
       })
       .catch((error) => {});
   }, []);
-  useEffect(() => {
+  
+  useAvoidFirstExecution(() => {
+    
+    const obj = {
+      setting: JSON.stringify({ ...selectedOption }),
+    };
     HttpCall(`${PutGoalPresetUrl}`, "PUT", obj)
       .then((response) => {
         // console.log(response);
       })
       .catch((error) => {});
+
   }, [selectedOption]);
 
   let newArr = [...selectedOption];
@@ -125,14 +128,14 @@ const Settings = (props) => {
     
     <div className="container mt-3">
       <div className="row px-2 justify-content-evenly">
-        <ModalTerms onenable={aboutApp} setAboutApp={setAboutApp} />
+        <ModalTerms />
 
         <div className="col-12 col-sm-8  text-center text-sm-start">
           <div className="h6 d-flex w-100 justify-content-center justify-content-sm-start">
             Kegel Exercise
             <span className=" round-bottons round-bottons-sm p-1">
               <i
-                onClick={() => setAboutApp(true)}
+                onClick={() => dispatch(modalActions.termHandler())}
                 className="fa fa-question-circle fa-sm"
               ></i>
             </span>
@@ -158,8 +161,8 @@ const Settings = (props) => {
         <div className="col-1 button-color fa-icon  d-flex justify-content-center align-items-center rounded-circle">
           <i className="fas  fa-sm">W</i>
         </div>
-        <div className="col-1 fa-icon d-flex justify-content-center align-items-center  rounded-circle">
-          <i className="fas fa-fill-drip fa-sm"></i>
+        <div className={` ${Theme?'':'bg-blue'} col-1 fa-icon d-flex justify-content-center align-items-center  rounded-circle`}>
+          <i className={` ${Theme?'':'text-light'} fas fa-fill-drip fa-sm`} onClick={()=>dispatch(modalActions.themeHandler())}></i>
         </div>
         <div className="col-1 fa-icon d-flex justify-content-center align-items-center rounded-circle ">
           <i className="fas fa-volume-up fa-sm"></i>
@@ -325,10 +328,9 @@ const Settings = (props) => {
         </fieldset>
       </form>
       <Calender />
-      <GoalSet selecttime={selectedOption} onGetSets={onGetSets} />
-      <EmailNotification />
-      <UnSubscribe />
      <PremiumPlan/>
+     
+     <SubscriptionWrapper selecttime={selectedOption} onGetSets={onGetSets}/>
       <Footer />
     </div>
   );

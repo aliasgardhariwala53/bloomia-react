@@ -1,8 +1,14 @@
 import React from "react";
 import './PremiumPlan.css'
+import { useDispatch } from "react-redux";
+import { modalActions } from "../../../store/index";
+import PaymentDetails from "./PaymentDetails";
 const PremiumPlan = () => {
+  const dispatch = useDispatch()
   return (
+
     <div>
+      <PaymentDetails/>
       <div className="px-3 ">
         <div className="h5 m-0 mb-3">
           Upgrade Your Plan
@@ -33,7 +39,7 @@ const PremiumPlan = () => {
             </span>
           </div>
           <span
-            
+            onClick={()=>dispatch(modalActions.paymentModalHandler())}
            className="subscribeButton text-center px-4 py-2 text-dark mt-3"
           >
             Subscribe

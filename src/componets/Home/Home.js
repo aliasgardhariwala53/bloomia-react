@@ -11,7 +11,10 @@ import Settings from "./settings";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 import { getGoalData } from "../../services/Network";
+import { useDispatch } from "react-redux";
+import { emailActions } from "../../store";
 const Home = (props) => {
+ const dispatch = useDispatch()
   const [passtime, setPasstime] = useState({});
   const [setchange, setSetschanges] = useState();
   const [totalGoaltime, settotalGoaltime] = useState();
@@ -20,6 +23,7 @@ const Home = (props) => {
     HttpCall(`${GetUserUrl}`, "GET")
       .then((response) => {
         setUserdata(response.data.data);
+        dispatch(emailActions.emailHandler(true))  
         console.log(response, "response aiiiiiiiiiiiiiii  profile ");
       })
       .catch((error) => {

@@ -1,23 +1,28 @@
 import React from "react";
 import{ Modal } from "react-bootstrap";
 import "./ModalTerms.css";
+import { useDispatch,useSelector } from 'react-redux'
+import { modalActions } from "../../store";
+
 const ModelTerms = (props) => {
+  const dispatch = useDispatch()
+  const showTerms = useSelector(state => state.modal.terms)
   return (
-    <Modal className="modal-terms-body" show={props.onenable}>
+    <Modal className="modal-terms-body" show={showTerms}>
       <Modal.Header className="p-0">
         <div className="w-100 pb-3 row m-0">
           <span className="h3 m-0  w-auto">Guide To Kegel Exercises</span>
           <span className="ml-auto w-auto round-bottons round-bottons-border bg-white round-bottons-sm">
             <i
               className="fas fa-times fa-sm"
-              onClick={() => props.setAboutApp(false)}
+              onClick={() => dispatch(modalActions.termHandler())}
             ></i>
           </span>
         </div>
       </Modal.Header>
       <Modal.Body className="modal-terms-container p-0">
-        <div className="w-100  rounded-xl tooltipBox">
-          <div className="w-100 tooltipContentMobile ">
+        <div className="w-100  rounded-xl ">
+          <div className="w-100  ">
             <p>
               Kegel Exercises (also known as pelvic floor exercises) are
               designed to strengthen your pelvic floor muscles. The pelvic floor

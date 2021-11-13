@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Play.css";
-import Logo from "../../assets/images/Logov1.png";
-import img from '../../assets/images/Logov1.png'
-
 import LightMode from "../../video/LightMode.mp4";
+import DarkMode from "../../video/Dark Mode.mp4";
 import ProgressBar from "./ProgressBar";
-
+import { useSelector } from 'react-redux'
 import { HttpCall } from "../../services/UseHttps";
 import { updateReportUrl ,getReportDateUrl} from "../../services/Network";
 import CalendarModal from "./CalendarModal";
 import BloomiaLogo from "../../assets/BloomiaLogo";
 const Play = (props) => {
+  const Theme = useSelector(state => state.modal.theme)
   const [newTime, setnewTime] = useState({});
   const [leftTime, setLeftTime] = useState({});
   const [setDone, setsetDone] = useState(0);
@@ -262,6 +261,7 @@ const Play = (props) => {
           "innercircle"
         ).style.animationDuration = `${0}s`;
         clearInterval(settimeoutb2.current);
+        handleReset()
         setIsActive(false);
         setIsPaused(false);
         settaskdone(taskdone+1)
@@ -339,7 +339,6 @@ const Play = (props) => {
     clearInterval(settimeouta2.current);
     clearInterval(settimeoutb1.current);
     clearInterval(settimeoutb2.current);
-
     setIsActive(false);
     setIsPaused(false);
     setSqueeze(0);
@@ -349,10 +348,14 @@ const Play = (props) => {
     <>
       {/* <CompleteGoalNotify/> */}
       <div className="play-container">
-        <video autoPlay loop muted id="myVideo">
+    {Theme && <video autoPlay loop muted id="myVideo">
           <source src={LightMode} type="video/mp4" />
           Your browser does not support HTML 5 video.
-        </video>
+        </video> }
+    { !Theme &&   <video autoPlay loop muted id="myVideo">
+          <source src={DarkMode} type="video/mp4" />
+          Your browser does not support HTML 5 video.
+        </video>}
         <div className="timer" id="demo">
           {Squeeze === 1 && <div>{leftTime.a1}s</div>}
           {Squeeze === 2 && <div>{leftTime.a2}s</div>}

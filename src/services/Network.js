@@ -17,4 +17,5 @@ export const getReportMonthUrl = 'report/getReportMonth'
 export const getLastDaysUrl = 'report/getLastDays'
 export const PutGoalPresetUrl = 'goal/createPreset'
 export const getGoalPresetUrl = 'goal/getcreatePreset'
+export const putEmailReminderUrl = 'users/reminder'
 

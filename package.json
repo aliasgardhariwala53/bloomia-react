@@ -38,6 +38,7 @@
     "react-utils": "^1.0.0",
     "redux": "^4.1.2",
     "slim-select": "^1.27.0",
+    "styled-components": "^5.3.3",
     "sweetalert2": "^11.1.7",
     "utils": "^0.3.1",
     "web-vitals": "^1.1.2"

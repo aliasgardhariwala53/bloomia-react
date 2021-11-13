@@ -1,6 +1,7 @@
 import {createSlice ,configureStore } from '@reduxjs/toolkit'
 const initialAuthState={auth:false};
-const initialModalState={terms:false,calendar:false};
+const initialModalState={terms:false,calendar:false,payment:false,theme:true};
+const initialEmailState={email:true};
 const authSlice=createSlice({
     name:"authentication",
     initialState:initialAuthState,
@@ -22,15 +23,33 @@ const modalSlice=createSlice({
             },
             calendarHandler(state){
                 state.calendar=!state.calendar;
+            },
+            paymentModalHandler(state){
+                state.payment=!state.payment;
+            },
+            themeHandler(state){
+                state.theme=!state.theme;
             }
     }
 })
+const emailSlice=createSlice({
+    name:"emailHandler",
+    initialState:initialEmailState,
+    reducers:{
+            emailHandler(state,action){
+                state.email=action.payload;
+            }
+    }
+})
+
 export const authActions=authSlice.actions;
 export const modalActions=modalSlice.actions;
+export const emailActions=emailSlice.actions;
 
 const store =configureStore({
     reducer:{auth:authSlice.reducer,
-        modal:modalSlice.reducer
+        modal:modalSlice.reducer,
+        email:emailSlice.reducer
     }
 })
 export default store ;
