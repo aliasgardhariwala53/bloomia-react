@@ -1,7 +1,7 @@
 import {createSlice ,configureStore } from '@reduxjs/toolkit'
 const initialAuthState={auth:false};
 const initialModalState={terms:false,calendar:false,payment:false,theme:true};
-const initialEmailState={email:true};
+const initialEmailState={email:true,time:""};
 const authSlice=createSlice({
     name:"authentication",
     initialState:initialAuthState,
@@ -38,6 +38,9 @@ const emailSlice=createSlice({
     reducers:{
             emailHandler(state,action){
                 state.email=action.payload;
+            },
+            reminderTimeHandler(state,action){
+                state.time=action.payload;
             }
     }
 })

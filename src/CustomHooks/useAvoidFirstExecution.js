@@ -9,4 +9,4 @@ const useAvoidFirstExecution = (func,deps) => {
     }, deps);
 }
 
-export default useAvoidFirstExecution
+export default useAvoidFirstExecution;

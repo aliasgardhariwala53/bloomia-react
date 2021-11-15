@@ -8,6 +8,7 @@ import { HttpCall } from "../../services/UseHttps";
 import { updateReportUrl ,getReportDateUrl} from "../../services/Network";
 import CalendarModal from "./CalendarModal";
 import BloomiaLogo from "../../assets/BloomiaLogo";
+import useAvoidFirstExecution from '../../CustomHooks/useAvoidFirstExecution'
 const Play = (props) => {
   const Theme = useSelector(state => state.modal.theme)
   const [newTime, setnewTime] = useState({});
@@ -57,7 +58,7 @@ const Play = (props) => {
 
   let TotalSetTime =((settingTime.a1+settingTime.a2)*settingTime.a3+(settingTime.b1+settingTime.b2)*settingTime.b3)
   // // const [totaltask, settotaltask] = useState();
-  useEffect(() => {
+  useAvoidFirstExecution(() => {
     setTimeout(() => {
       
       HttpCall(`${updateReportUrl}`,"PUT", saveProgress)

@@ -23,8 +23,9 @@ const Home = (props) => {
     HttpCall(`${GetUserUrl}`, "GET")
       .then((response) => {
         setUserdata(response.data.data);
-        dispatch(emailActions.emailHandler(true))  
-        console.log(response, "response aiiiiiiiiiiiiiii  profile ");
+        dispatch(emailActions.emailHandler(JSON.parse(response.data.data.dailyReminder)))  
+        dispatch(emailActions.reminderTimeHandler(response.data.data.reminderTime))  
+        console.log("response aiiiiiiiiiiiiiii  profile ",(JSON.parse(response.data.data.dailyReminder)));
       })
       .catch((error) => {
         if (error.response.status === 401) {

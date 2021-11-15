@@ -1,20 +1,25 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putEmailReminderUrl } from "../../services/Network";
 import { HttpCall } from "../../services/UseHttps";
 import { emailActions } from "../../store";
+import useAvoidFirstExecution from '../../CustomHooks/useAvoidFirstExecution'
 import "./EmailNotification.css";
 const EmailNotification = () => {
 const dispatch = useDispatch()
-const showEmail = useSelector(state => state.email.email)
+const showEmail = useSelector(state => state.email.email);
+const reminderTime = useSelector(state => state.email.time);
+console.log("show email  ",JSON.stringify(showEmail),"showEmailshowEmailshowEmailshowEmailshowEmail");
+console.log("show email  ",reminderTime,"initialEmailStateinitialEmailStateinitialEmailState");
 const [emaildata, setEmaildata] = useState({
   subject:"testing email",
   text:"hello user",
   timezone:"Asia/Kolkata",
-  reminderTime:"00:00",
-  dailyReminder:showEmail,
+  reminderTime:reminderTime,
+  dailyReminder:JSON.stringify(showEmail)
 })
- useEffect(() => {
+
+useAvoidFirstExecution(() => {
   HttpCall(`${putEmailReminderUrl}`, "PUT", emaildata)
       .then((response) => {
         // console.log(response);
@@ -34,11 +39,12 @@ const [emaildata, setEmaildata] = useState({
               className="form-check-input mt-1"
               type="checkbox"
               id="flexSwitchCheckDefault"
-              
+             
               onClick={()=>dispatch(emailActions.emailHandler(!showEmail))}
               onChange={()=>setEmaildata({
                 ...emaildata,
-                dailyReminder:!emaildata.dailyReminder,
+                reminderTime,
+                dailyReminder:JSON.stringify(!showEmail),
               })}
               checked={showEmail}
             />
@@ -57,6 +63,7 @@ const [emaildata, setEmaildata] = useState({
             type="time"
             style={{background:"#ebebeb"}}
             id=""
+            defaultValue={reminderTime}
             className="timeSlot form-control "
             onChange={(e)=>setEmaildata({
               ...emaildata,
